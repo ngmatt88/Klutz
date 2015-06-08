@@ -1,4 +1,4 @@
-package com.duckwarlocks.klutz;
+package com.duckwarlocks.klutz.constants;
 
 /**
  * Created by ngmat_000 on 6/7/2015.

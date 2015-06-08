@@ -3,6 +3,7 @@ package com.duckwarlocks.klutz;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,6 +30,11 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
     }
 
+    public void sendToSavedLocations(View view){
+        Intent intent = new Intent(this,SavedLocationsActivity.class);
+        startActivity(intent);
+    }
+
 
     /**
      * Grabs the current GPS coordinates and saves them to external file.
@@ -41,7 +47,6 @@ public class MainActivity extends ActionBarActivity {
             latitude = gps.getLatitude();
             longitude = gps.getLongitude();
 
-//            String nameTitle = promptCoordinateName(MainActivity.this);
             promptCoordinateName(MainActivity.this);
 
         }else{
@@ -49,15 +54,17 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    /**
+     * Writes given data to location.xml file
+     * @param name
+     * @param latitude
+     * @param longitude
+     */
     private void saveToFile(String name,double latitude, double longitude){
         if(name.equals("")){
             Toast.makeText(
                     getApplicationContext(),"Invalid Name",Toast.LENGTH_LONG).show();
         }else{
-//            StringBuilder sb = new StringBuilder();
-//            sb.append(name);
-//            sb.append(latitude);
-//            sb.append(longitude);
             try{
                 FileHelper.writeToFile(MainActivity.this,name,latitude,longitude);
                 Toast.makeText(
@@ -97,8 +104,8 @@ public class MainActivity extends ActionBarActivity {
 
                     saveToFile(nameTitle.toString(),latitude,longitude);
 
-                    Toast.makeText(getApplicationContext(),"Your location is : Latitude - " + latitude +
-                            "and Longitude - " + longitude,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Your location is - Latitude : " + latitude +
+                            "and Longitude : " + longitude,Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -110,7 +117,6 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         alertDialog.show();
-//        return nameTitle.toString();
     }
 
 

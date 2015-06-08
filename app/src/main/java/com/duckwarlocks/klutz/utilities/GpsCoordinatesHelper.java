@@ -12,6 +12,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.widget.Toast;
 
 /**
  * Created by ngmat_000 on 6/7/2015.
@@ -46,7 +47,7 @@ public class GpsCoordinatesHelper extends Service implements LocationListener {
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if(!isGpsEnabled && !isNetworkEnabled){
-                //TODO turn the damn gps on.
+                Toast.makeText(context,"GPS and Network is turned off!",Toast.LENGTH_LONG);
             }else{
                 canGetLocation = true;
 

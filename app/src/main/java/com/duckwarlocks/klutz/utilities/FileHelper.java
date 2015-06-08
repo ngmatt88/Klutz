@@ -1,13 +1,12 @@
 package com.duckwarlocks.klutz.utilities;
 
 import android.content.Context;
-import android.location.Location;
 import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
 import android.widget.Toast;
 
-import com.duckwarlocks.klutz.CommonConstants;
+import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
 import com.duckwarlocks.klutz.vo.LocationVO;
 
@@ -15,7 +14,6 @@ import org.xmlpull.v1.XmlSerializer;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -55,14 +53,11 @@ public class FileHelper {
 
 
             Toast.makeText(context,root.getAbsolutePath(),Toast.LENGTH_LONG).show();
-//            FileOutputStream fos = new FileOutputStream(root,true);
             XmlSerializer serializer = Xml.newSerializer();
             StringWriter writer = new StringWriter();
             serializer.setOutput(writer);
 
             XmlHelper xmlHelper = new XmlHelper();
-//            List<LocationVO> locationVOList = //new ArrayList<LocationVO>();
-//                    xmlHelper.parseListOfLocations(root.getAbsolutePath());
             List<LocationVO> locationVOList = (root.length() > 0) ?  xmlHelper.parseListOfLocations(root.getAbsolutePath()) : new ArrayList<LocationVO>();
             locationVOList.add(newLocation);
 

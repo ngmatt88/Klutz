@@ -8,10 +8,13 @@
 
     <string name="grabCoordinatesBtnTxt">Grab Coordinates</string>
     <string name="locationListBtnTxt">List of Locations</string>
+
     <string name="title_activity_grab_coordinates">GrabCoordinatesActivity</string>
 
     <string name="coordinateNameTitle">"Location Name"</string>
     <string name="coordinateNameMsg">"Enter a name for this location"</string>
+    <string name="title_activity_saved_locations">SavedLocationsActivity</string>
 
+    <string name="searchHint">Search...</string>
 
 </resources>
