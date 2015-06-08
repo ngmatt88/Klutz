@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+     >
 
     <!-- Location -->
-    <TextView android:id="@+id/locationListItem"
+    <TextView
+        android:id="@+id/locationListItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="10dip"
         android:textSize="16dip"
         android:textStyle="bold"/>
-
-</LinearLayout>
+    <TextView
+        android:id="@+id/locationListLongitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:textSize="16dip"
+        android:layout_alignParentRight="true"
+        />
+    <TextView
+        android:id="@+id/locationListLatitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:textSize="16dip"
+        android:layout_toLeftOf="@id/locationListLongitude"
+        />
+    <!--<TextView-->
+        <!--android:id="@+id/locationListCityName"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="5dip"-->
+        <!--android:textSize="10dip"-->
+        <!--android:textColor="@color/grey"-->
+        <!--android:layout_below="@id/locationListItem"/>-->
+</RelativeLayout>

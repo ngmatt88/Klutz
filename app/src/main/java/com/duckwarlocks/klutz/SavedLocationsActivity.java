@@ -15,6 +15,7 @@ import android.widget.ListView;
 
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
 import com.duckwarlocks.klutz.constants.CommonConstants;
+import com.duckwarlocks.klutz.utilities.LocationAdapter;
 import com.duckwarlocks.klutz.utilities.XmlHelper;
 import com.duckwarlocks.klutz.vo.LocationVO;
 
@@ -44,31 +45,25 @@ public class SavedLocationsActivity extends Activity {
             Log.e(SavedLocationsActivity.class.getName(),e.toString());
             //TODO force it to crash?
         }
+
+        final LocationAdapter adapter = new LocationAdapter(this,locationList);
+
         locationView = (ListView) findViewById(R.id.recordList);
         inputSearch = (EditText)findViewById(R.id.inputSearch);
-
         //Add search functionality to editText
         inputSearch.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {SavedLocationsActivity.this.adapter.getFilter().filter(s);}
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.getFilter().filter(s);
+            }
 
             @Override
             public void afterTextChanged(Editable s) {}
         });
 
-        //TODO try to abstract this part
-        String[] locationArray = new String[locationList.size()];
-        for(int i = 0; i<locationList.size();i++){
-            locationArray[i] = locationList.get(i).getName();
-            //TODO expand on the info and show coordinates/city?
-        }
-
-        //add items to list now
-        adapter = new ArrayAdapter<String>
-                (this,R.layout.list_piece,R.id.locationListItem,locationArray);
         locationView.setAdapter(adapter);
     }
 
