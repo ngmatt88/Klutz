@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Klutz</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="mainTitle">Klutz</string>
+    <string name="subTitle">Location Reminder</string>
+
+    <string name="grabCoordinatesBtnTxt">Grab Coordinates</string>
+    <string name="locationListBtnTxt">List of Locations</string>
+    <string name="title_activity_grab_coordinates">GrabCoordinatesActivity</string>
+
+    <string name="coordinateNameTitle">"Location Name"</string>
+    <string name="coordinateNameMsg">"Enter a name for this location"</string>
+
+
+</resources>
