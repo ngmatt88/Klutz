@@ -41,7 +41,7 @@ public class XmlHelper {
     }
 
     /**
-     * Reads from the locations.xml file and returns a list of location VO's
+     * Reads from the locations.xml file and returns an arraylist of location VO's
      * @param filePath
      * @return
      * @throws StopProcessingException
@@ -58,15 +58,16 @@ public class XmlHelper {
             NodeList nodeList = doc.getElementsByTagName(CommonConstants.LOCATION_VO_TAG);
 
             LocationVO location;
-            for (int i = 0; i < nodeList.getLength(); i++) {
+            //loop through every Location aggregate
+            for (int aggregate = 0; aggregate < nodeList.getLength(); aggregate++) {
                 location = new LocationVO();
-                Node item = nodeList.item(i);
+                Node item = nodeList.item(aggregate);
                 NodeList properties = item.getChildNodes();
-                for (int j = 0; j < properties.getLength(); j++) {
-                    Node property = properties.item(j);
+                //loop through every element within the Location Aggregate ie name, latitude, etc
+                for (int element = 0; element < properties.getLength(); element++) {
+                    Node property = properties.item(element);
                     String name = property.getNodeName();
                     if (name.equalsIgnoreCase(CommonConstants.LOCATION_VO_NAME)) {
-                        // Store it where you want
                         location.setName(property.getFirstChild().getNodeValue());
                     }
                     if (name.equalsIgnoreCase(CommonConstants.LOCATION_VO_LATITUDE)) {

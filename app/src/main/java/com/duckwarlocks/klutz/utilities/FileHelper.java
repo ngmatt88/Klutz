@@ -50,9 +50,7 @@ public class FileHelper {
                 Toast.makeText(context,root.getAbsolutePath(),Toast.LENGTH_LONG).show();
             }
 
-
-
-            Toast.makeText(context,root.getAbsolutePath(),Toast.LENGTH_LONG).show();
+//            Toast.makeText(context,root.getAbsolutePath(),Toast.LENGTH_LONG).show();
             XmlSerializer serializer = Xml.newSerializer();
             StringWriter writer = new StringWriter();
             serializer.setOutput(writer);
@@ -66,6 +64,7 @@ public class FileHelper {
             fos.close();
             fos = new FileOutputStream(root, true);
 
+            //Loop through and create the aggregates
             serializer.startDocument("UTF-8", true);
                 serializer.startTag(null, CommonConstants.LOCATION_VO_DOC);
                 for(LocationVO record : locationVOList) {
@@ -107,7 +106,7 @@ public class FileHelper {
             if(inputStream != null){
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-                String record = "";
+                String record;
                 StringBuilder sb = new StringBuilder();
 
                 while((record = bufferedReader.readLine()) != null){

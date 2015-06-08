@@ -1,5 +1,6 @@
 package com.duckwarlocks.klutz;
 
+import android.app.Activity;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -20,11 +21,11 @@ import com.duckwarlocks.klutz.vo.LocationVO;
 import java.util.ArrayList;
 
 
-public class SavedLocationsActivity extends ActionBarActivity {
+public class SavedLocationsActivity extends Activity {
     private ListView locationView;
     private ArrayAdapter<String> adapter;
     private EditText inputSearch;
-    private ArrayList<LocationVO> locationList;//TODO should be changed to acceptvo
+    private ArrayList<LocationVO> locationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,20 +50,13 @@ public class SavedLocationsActivity extends ActionBarActivity {
         //Add search functionality to editText
         inputSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // When user changed the Text
-                SavedLocationsActivity.this.adapter.getFilter().filter(s);
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {SavedLocationsActivity.this.adapter.getFilter().filter(s);}
 
             @Override
-            public void afterTextChanged(Editable s) {
-
-            }
+            public void afterTextChanged(Editable s) {}
         });
 
         //TODO try to abstract this part
@@ -96,7 +90,6 @@ public class SavedLocationsActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }
