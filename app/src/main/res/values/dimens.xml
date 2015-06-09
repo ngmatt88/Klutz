@@ -9,4 +9,7 @@
     <dimen name="savedListLatLongPaddingSize">10dip</dimen>
     <dimen name="savedListItemNameFontSize">16dip</dimen>
     <dimen name="savedListItemNamePaddingSize">10dip</dimen>
+    <dimen name="savedListCityNameFontSize">16dip</dimen>
+    <dimen name="savedListRightMargin">5dp</dimen>
+    <dimen name="savedListLeftMargin">5dp</dimen>
 </resources>

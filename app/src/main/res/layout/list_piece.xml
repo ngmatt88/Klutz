@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/savedListItemNameFontSize"
         android:textStyle="bold"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="@dimen/savedListLeftMargin"
         />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/savedListLatLongFontSize"
         android:layout_below="@id/locationListItem"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="@dimen/savedListLeftMargin"
         />
     <TextView
         android:id="@+id/locationListLongitude"
@@ -28,17 +28,15 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/savedListLatLongFontSize"
         android:layout_below="@id/locationListItem"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="@dimen/savedListLeftMargin"
         android:layout_toRightOf="@id/locationListLatitude"
         />
     <TextView
         android:id="@+id/locationListCityName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16dip"
+        android:textSize="@dimen/savedListCityNameFontSize"
         android:textColor="@color/grey"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
-
         />
 </RelativeLayout>

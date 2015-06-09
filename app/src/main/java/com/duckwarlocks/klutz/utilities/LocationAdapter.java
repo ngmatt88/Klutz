@@ -68,6 +68,23 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
         holder.latitude.setText(CommonConstants.LATITUDE_ABBREV + ":" + Double.toString(mLocationList.get(position).getmLatitude()));
         holder.longitude.setText(CommonConstants.LONGITUDE_ABBREV + ":" + Double.toString(mLocationList.get(position).getmLongitude()));
         holder.cityName.setText(mLocationList.get(position).getmCity());
+
+        View.OnClickListener clickHandler = new View.OnClickListener(){
+            public void onClick(View view){
+                //TODO code to map with google maps API
+            }
+        };
+
+        View.OnLongClickListener longClickHandler = new View.OnLongClickListener(){
+            public boolean onLongClick(View view){
+                //TODO logic to show delete menu
+
+                return true;//return true to not do onClick(the short click) method as well
+            }
+        };
+        holder.name.setOnClickListener(clickHandler);
+        holder.name.setOnLongClickListener(longClickHandler);
+
         return convertView;
     }
 
