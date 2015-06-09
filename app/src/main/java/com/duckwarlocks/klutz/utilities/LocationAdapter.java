@@ -21,20 +21,20 @@ import java.util.ArrayList;
  */
 public class LocationAdapter extends BaseAdapter implements Filterable{
 
-    private LayoutInflater inflater;
-    private ArrayList<LocationVO> locationList = new ArrayList<LocationVO>();;
-    private ArrayList<LocationVO> originalList;
+    private LayoutInflater mInflater;
+    private ArrayList<LocationVO> mLocationList = new ArrayList<LocationVO>();;
+    private ArrayList<LocationVO> mOriginalList;
 
 
-    public LocationAdapter(Context context,ArrayList<LocationVO> locationList){
-        inflater = LayoutInflater.from(context);
-        this.locationList.addAll(locationList);
-        this.originalList = locationList;
+    public LocationAdapter(Context context,ArrayList<LocationVO> mLocationList){
+        mInflater = LayoutInflater.from(context);
+        this.mLocationList.addAll(mLocationList);
+        this.mOriginalList = mLocationList;
     }
 
 
     public LocationVO getItem(int position){
-        return locationList.get(position);
+        return mLocationList.get(position);
     }
 
     public long getItemId(int position){
@@ -42,11 +42,11 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
     }
 
     /**
-     * Updated the filtered locationList with the original list
+     * Updated the filtered mLocationList with the original list
      * Used to make the onTextChange search bar work for backspaces
      */
     public void updateList(){
-        locationList = originalList;
+        mLocationList = mOriginalList;
     }
 
     @Override
@@ -54,30 +54,26 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
         LocationViewHolder holder = null;
         if(convertView == null){
             holder = new LocationViewHolder();
-            convertView = inflater.inflate(R.layout.list_piece,null);
+            convertView = mInflater.inflate(R.layout.list_piece,null);
             holder.name = (TextView) convertView.findViewById(R.id.locationListItem);
             holder.latitude = (TextView) convertView.findViewById(R.id.locationListLatitude);
             holder.longitude = (TextView) convertView.findViewById(R.id.locationListLongitude);
+            holder.cityName = (TextView) convertView.findViewById(R.id.locationListCityName);
             convertView.setTag(holder);
         }else{
             holder = (LocationViewHolder) convertView.getTag();
         }
-        String name = locationList.get(position).getName();
-        String latitude = String.format(
-                CommonConstants.LATITUDE_LONGITUDE_ROUND_PLACES,
-                locationList.get(position).getLatitude());
-        String longitude = String.format(
-                CommonConstants.LATITUDE_LONGITUDE_ROUND_PLACES,
-                locationList.get(position).getLongitude());
-        holder.name.setText(name);
-        holder.latitude.setText(CommonConstants.LATITUDE_ABBREV + ":" + latitude);
-        holder.longitude.setText(CommonConstants.LONGITUDE_ABBREV + ":" + longitude);
+
+        holder.name.setText(mLocationList.get(position).getmName());
+        holder.latitude.setText(CommonConstants.LATITUDE_ABBREV + ":" + Double.toString(mLocationList.get(position).getmLatitude()));
+        holder.longitude.setText(CommonConstants.LONGITUDE_ABBREV + ":" + Double.toString(mLocationList.get(position).getmLongitude()));
+        holder.cityName.setText(mLocationList.get(position).getmCity());
         return convertView;
     }
 
     @Override
     public int getCount(){
-        return locationList.size();
+        return mLocationList.size();
     }
 
     @Override
@@ -93,20 +89,18 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
                 //If there's nothing to filter on, return the original data for your list
                 if(charSequence == null || charSequence.length() == 0)
                 {
-//                    results.values = locationList;
-//                    results.count = locationList.size();
-                    results.values = originalList;
-                    results.count = originalList.size();
+                    results.values = mOriginalList;
+                    results.count = mOriginalList.size();
                 }
                 else
                 {
                     ArrayList<LocationVO> filterResultsData = new ArrayList<LocationVO>();
 
-                    for(LocationVO data : locationList)
+                    for(LocationVO data : mLocationList)
                     {
                         //In this loop, you'll filter through originalData and compare each item to charSequence.
                         //If you find a match, add it to your new ArrayList
-                        String name = data.getName().toUpperCase();
+                        String name = data.getmName().toUpperCase();
                         String searchString = charSequence.toString().toUpperCase();
                         if(name.contains(searchString))
                         {
@@ -123,7 +117,7 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults)
             {
-                locationList = (ArrayList<LocationVO>)filterResults.values;
+                mLocationList = (ArrayList<LocationVO>)filterResults.values;
                 notifyDataSetChanged();
             }
         };

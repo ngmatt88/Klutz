@@ -1,11 +1,12 @@
 package com.duckwarlocks.klutz.utilities;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -14,72 +15,86 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import com.duckwarlocks.klutz.constants.CommonConstants;
+
+import java.util.List;
+import java.util.Locale;
+
 /**
  * Created by ngmat_000 on 6/7/2015.
  */
 public class GpsCoordinatesHelper extends Service implements LocationListener {
 
-    private final Context context;
+    private final Context mContext;
 
-    boolean isGpsEnabled = false;
-    boolean isNetworkEnabled = false;
-    boolean canGetLocation = false;
+    private boolean mIsGpsEnabled = false;
+    private boolean mIsNetworkEnabled = false;
+    private boolean mCanGetLocation = false;
 
-    Location location;
+    private Location mLocation;
 
-    double latitude;
-    double longitude;
+    private double mLatitude;
+    private double mLongitude;
+    private String mCityName;
 
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
-    private static final long MIN_TIME_BTWN_UPDATES = 1000 * 60 * 1;
+    protected LocationManager mLocationManager;
 
-    protected LocationManager locationManager;
-
-    public GpsCoordinatesHelper(Context context){
-        this.context = context;
-        getLocation();
+    public GpsCoordinatesHelper(Context mContext){
+        this.mContext = mContext;
+        getmLocation();
     }
 
-    public Location getLocation(){
+    public Location getmLocation(){
         try{
-            locationManager = (LocationManager)context.getSystemService(LOCATION_SERVICE);
-            isGpsEnabled = locationManager.isProviderEnabled((LocationManager.GPS_PROVIDER));
-            isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            mLocationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
+            mIsGpsEnabled = mLocationManager.isProviderEnabled((LocationManager.GPS_PROVIDER));
+            mIsNetworkEnabled = mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
-            if(!isGpsEnabled && !isNetworkEnabled){
-                Toast.makeText(context,"GPS and Network is turned off!",Toast.LENGTH_LONG);
+            if(!mIsGpsEnabled && !mIsNetworkEnabled){
+                Toast.makeText(mContext,"GPS and Network is turned off!",Toast.LENGTH_LONG);
             }else{
-                canGetLocation = true;
+                mCanGetLocation = true;
 
-                if(isNetworkEnabled){
-                    locationManager.requestLocationUpdates(
+                if(mIsNetworkEnabled){
+                    mLocationManager.requestLocationUpdates(
                             LocationManager.NETWORK_PROVIDER,
-                            MIN_TIME_BTWN_UPDATES,
-                            MIN_DISTANCE_CHANGE_FOR_UPDATES,this);
+                           CommonConstants.MIN_TIME_BTWN_UPDATES,
+                            CommonConstants.MIN_DISTANCE_CHANGE_FOR_UPDATES,this);
 
-                    if(locationManager != null){
-                        location  = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    if(mLocationManager != null){
+                        mLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-                        if(location != null){
-                            latitude = location.getLatitude();
-                            longitude = location.getLongitude();
+                        if(mLocation != null){
+                            mLatitude = mLocation.getLatitude();
+                            mLongitude = mLocation.getLongitude();
+
+                            //get city name
+                            Geocoder gcd = new Geocoder(mContext, Locale.getDefault());
+                            //only need the first result
+                            List<Address> addresses = gcd.getFromLocation(mLatitude, mLongitude,1);
+                            mCityName = addresses.get(0).getLocality();
                         }
                     }
                 }
 
-
-                if(isGpsEnabled){
-                    locationManager.requestLocationUpdates(
+                if(mIsGpsEnabled){
+                    mLocationManager.requestLocationUpdates(
                             LocationManager.GPS_PROVIDER,
-                            MIN_TIME_BTWN_UPDATES,
-                            MIN_DISTANCE_CHANGE_FOR_UPDATES,this);
+                            CommonConstants.MIN_TIME_BTWN_UPDATES,
+                            CommonConstants.MIN_DISTANCE_CHANGE_FOR_UPDATES,this);
 
-                    if(locationManager != null){
-                        location  = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if(mLocationManager != null){
+                        mLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
-                        if(location != null){
-                            latitude = location.getLatitude();
-                            longitude = location.getLongitude();
+                        if(mLocation != null){
+                            mLatitude = mLocation.getLatitude();
+                            mLongitude = mLocation.getLongitude();
+
+                            //get city name
+                            Geocoder gcd = new Geocoder(mContext, Locale.getDefault());
+                            //only need the first result
+                            List<Address> addresses = gcd.getFromLocation(mLatitude, mLongitude,1);
+                            mCityName = addresses.get(0).getLocality();
                         }
                     }
                 }
@@ -88,36 +103,40 @@ public class GpsCoordinatesHelper extends Service implements LocationListener {
             //TODO effectively catch exception later.
             e.printStackTrace();
         }
-        return location;
+        return mLocation;
     }
 
 
     public void stopUsingGPS(){
-        if(locationManager != null){
-            locationManager.removeUpdates(GpsCoordinatesHelper.this);
+        if(mLocationManager != null){
+            mLocationManager.removeUpdates(GpsCoordinatesHelper.this);
         }
     }
 
-    public double getLatitude(){
-        if(location != null){
-            latitude = location.getLatitude();
+    public double getmLatitude(){
+        if(mLocation != null){
+            mLatitude = mLocation.getLatitude();
         }
-        return latitude;
+        return mLatitude;
     }
 
-    public double getLongitude(){
-        if(location != null){
-            longitude = location.getLongitude();
+    public double getmLongitude(){
+        if(mLocation != null){
+            mLongitude = mLocation.getLongitude();
         }
-        return longitude;
+        return mLongitude;
     }
 
-    public boolean isCanGetLocation(){
-        return canGetLocation;
+    public String getmCityName(){
+        return mCityName;
+    }
+
+    public boolean ismCanGetLocation(){
+        return mCanGetLocation;
     }
 
     public void showSettingsAlert(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
         alertDialog.setTitle("GPS is settings");
 
@@ -127,7 +146,7 @@ public class GpsCoordinatesHelper extends Service implements LocationListener {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                context.startActivity(intent);
+                mContext.startActivity(intent);
             }
         });
         alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){

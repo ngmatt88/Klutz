@@ -16,13 +16,14 @@ import android.widget.Toast;
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
 import com.duckwarlocks.klutz.utilities.FileHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
+import com.duckwarlocks.klutz.vo.LocationVO;
 
 
 public class MainActivity extends ActionBarActivity {
-    GpsCoordinatesHelper gps;
-    String nameTitle;
-    double latitude;
-    double longitude;
+    private GpsCoordinatesHelper gps;
+    private String mCityName;
+    private double mLatitude;
+    private double mLongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +44,10 @@ public class MainActivity extends ActionBarActivity {
     public void getCoordinates(View view){
         gps = new GpsCoordinatesHelper(this);
 
-        if(gps.isCanGetLocation()){
-            latitude = gps.getLatitude();
-            longitude = gps.getLongitude();
+        if(gps.ismCanGetLocation()){
+            mLatitude = gps.getmLatitude();
+            mLongitude = gps.getmLongitude();
+            mCityName = gps.getmCityName();
 
             promptCoordinateName(MainActivity.this);
 
@@ -55,18 +57,16 @@ public class MainActivity extends ActionBarActivity {
     }
 
     /**
-     * Writes given data to location.xml file
-     * @param name
-     * @param latitude
-     * @param longitude
+     *
+     * @param locationVO
      */
-    private void saveToFile(String name,double latitude, double longitude){
-        if(name.equals("")){
+    private void saveToFile(LocationVO locationVO){
+        if(locationVO.getmName().equals("")){
             Toast.makeText(
                     getApplicationContext(),"Invalid Name",Toast.LENGTH_LONG).show();
         }else{
             try{
-                FileHelper.writeToFile(MainActivity.this,name,latitude,longitude);
+                FileHelper.writeToFile(MainActivity.this,locationVO);
                 Toast.makeText(
                         getApplicationContext(),"Coordinates Saved",Toast.LENGTH_LONG).show();
             }catch (StopProcessingException e){
@@ -75,13 +75,22 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
+    private LocationVO createLocationVO(String nameTitle){
+        LocationVO locationVO = new LocationVO();
+        locationVO.setmName(nameTitle);
+        locationVO.setmLatitude(mLatitude);
+        locationVO.setmLongitude(mLongitude);
+        locationVO.setmCity(mCityName);
+
+        return locationVO;
+    }
+
     /**
      * Prompt for the name to be given to these coordinates
      * @param context
      * @return
      */
     private void promptCoordinateName(Context context){
-        final StringBuilder nameTitle = new StringBuilder("");
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         alertDialog.setTitle(R.string.coordinateNameTitle);
         alertDialog.setMessage(R.string.coordinateNameMsg);
@@ -94,18 +103,18 @@ public class MainActivity extends ActionBarActivity {
         input.setLayoutParams(layoutParams);
         alertDialog.setView(input);
 
+        //"SAVE" done in here because NOT Synchronous
         alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String title = input.getText().toString();
 
                 if (title != null && !title.equals("")) {
-                    nameTitle.append(title);
 
-                    saveToFile(nameTitle.toString(),latitude,longitude);
+                    saveToFile(createLocationVO(title));
 
-                    Toast.makeText(getApplicationContext(),"Your location is - Latitude : " + latitude +
-                            "and Longitude : " + longitude,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Your location is - Latitude : " + mLatitude +
+                            "and Longitude : " + mLongitude, Toast.LENGTH_LONG).show();
                 }
             }
         });

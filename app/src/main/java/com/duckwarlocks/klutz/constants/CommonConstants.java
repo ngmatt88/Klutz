@@ -18,4 +18,8 @@ public class CommonConstants {
     public static final String LOCATION_VO_NAME = "NAME";
     public static final String LOCATION_VO_LATITUDE = "LATITUDE";
     public static final String LOCATION_VO_LONGITUDE = "LONGITUDE";
+    public static final String LOCATION_VO_CITYNAME = "CITY";
+
+    public static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
+    public static final long MIN_TIME_BTWN_UPDATES = 1000 * 60 * 1;
 }

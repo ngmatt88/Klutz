@@ -9,31 +9,36 @@
         android:id="@+id/locationListItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/savedListItemNamePaddingSize"
         android:textSize="@dimen/savedListItemNameFontSize"
-        android:textStyle="bold"/>
-    <TextView
-        android:id="@+id/locationListLongitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/savedListLatLongPaddingSize"
-        android:textSize="@dimen/savedListLatLongFontSize"
-        android:layout_alignParentRight="true"
+        android:textStyle="bold"
+        android:layout_marginLeft="5dp"
         />
+
     <TextView
         android:id="@+id/locationListLatitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/savedListLatLongPaddingSize"
         android:textSize="@dimen/savedListLatLongFontSize"
-        android:layout_toLeftOf="@id/locationListLongitude"
+        android:layout_below="@id/locationListItem"
+        android:layout_marginLeft="5dp"
         />
-    <!--<TextView-->
-        <!--android:id="@+id/locationListCityName"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:padding="5dip"-->
-        <!--android:textSize="10dip"-->
-        <!--android:textColor="@color/grey"-->
-        <!--android:layout_below="@id/locationListItem"/>-->
+    <TextView
+        android:id="@+id/locationListLongitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/savedListLatLongFontSize"
+        android:layout_below="@id/locationListItem"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/locationListLatitude"
+        />
+    <TextView
+        android:id="@+id/locationListCityName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16dip"
+        android:textColor="@color/grey"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+
+        />
 </RelativeLayout>

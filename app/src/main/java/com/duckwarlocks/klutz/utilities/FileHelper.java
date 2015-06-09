@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 import android.util.Xml;
-import android.widget.Toast;
 
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
@@ -27,13 +26,8 @@ import java.util.List;
  * Created by ngmat_000 on 6/7/2015.
  */
 public class FileHelper {
-    private static boolean standAlone = true;
-    private static LocationVO newLocation = new LocationVO();
 
-    public static void writeToFile(Context context,String name, double latitude, double longitude) throws StopProcessingException{
-        newLocation.setName(name);
-        newLocation.setLatitude(latitude);
-        newLocation.setLongitude(longitude);
+    public static void writeToFile(Context context,LocationVO locationVO) throws StopProcessingException{
         try{
             File folder = new File(
                     Environment.getExternalStorageDirectory().toString() +
@@ -47,17 +41,14 @@ public class FileHelper {
 
             if(!root.exists()){
                 root.createNewFile();
-                Toast.makeText(context,root.getAbsolutePath(),Toast.LENGTH_LONG).show();
             }
 
-//            Toast.makeText(context,root.getAbsolutePath(),Toast.LENGTH_LONG).show();
             XmlSerializer serializer = Xml.newSerializer();
             StringWriter writer = new StringWriter();
             serializer.setOutput(writer);
 
-            XmlHelper xmlHelper = new XmlHelper();
-            List<LocationVO> locationVOList = (root.length() > 0) ?  xmlHelper.parseListOfLocations(root.getAbsolutePath()) : new ArrayList<LocationVO>();
-            locationVOList.add(newLocation);
+            List<LocationVO> locationVOList = (root.length() > 0) ?  XmlHelper.parseListOfLocations(root.getAbsolutePath()) : new ArrayList<LocationVO>();
+            locationVOList.add(locationVO);
 
             //delete contents of file first after reading it!
             FileOutputStream fos = new FileOutputStream(root,false);
@@ -70,14 +61,17 @@ public class FileHelper {
                 for(LocationVO record : locationVOList) {
                     serializer.startTag(null, CommonConstants.LOCATION_VO_TAG);
                         serializer.startTag(null, CommonConstants.LOCATION_VO_NAME);
-                            serializer.text(record.getName());
+                            serializer.text(record.getmName());
                         serializer.endTag(null, CommonConstants.LOCATION_VO_NAME);
                         serializer.startTag(null, CommonConstants.LOCATION_VO_LATITUDE);
-                            serializer.text(Double.toString(record.getLatitude()));
+                            serializer.text(Double.toString(record.getmLatitude()));
                         serializer.endTag(null, CommonConstants.LOCATION_VO_LATITUDE);
                         serializer.startTag(null, CommonConstants.LOCATION_VO_LONGITUDE);
-                            serializer.text(Double.toString(record.getLongitude()));
+                            serializer.text(Double.toString(record.getmLongitude()));
                         serializer.endTag(null, CommonConstants.LOCATION_VO_LONGITUDE);
+                        serializer.startTag(null, CommonConstants.LOCATION_VO_CITYNAME);
+                            serializer.text(record.getmCity());
+                        serializer.endTag(null, CommonConstants.LOCATION_VO_CITYNAME);
                     serializer.endTag(null, CommonConstants.LOCATION_VO_TAG);
                 }
                 serializer.endTag(null,CommonConstants.LOCATION_VO_DOC);

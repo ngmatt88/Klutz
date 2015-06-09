@@ -18,7 +18,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -28,17 +27,7 @@ import javax.xml.parsers.ParserConfigurationException;
  * Created by ngmat_000 on 6/7/2015.
  */
 public class XmlHelper {
-    private ArrayList<LocationVO> locations;
-    private LocationVO location;
-    private String value;
-
-    public XmlHelper(){
-        locations = new ArrayList<LocationVO>();
-    }
-
-    public ArrayList<LocationVO> getAllLocations(){
-        return locations;
-    }
+    private XmlHelper(){}
 
     /**
      * Reads from the locations.xml file and returns an arraylist of location VO's
@@ -46,7 +35,8 @@ public class XmlHelper {
      * @return
      * @throws StopProcessingException
      */
-    public ArrayList<LocationVO> parseListOfLocations(String filePath) throws StopProcessingException{
+    public static ArrayList<LocationVO> parseListOfLocations(String filePath) throws StopProcessingException{
+        ArrayList<LocationVO> locations = new ArrayList<LocationVO>();
         try {
             File file = new File(filePath);
             InputStream is = new FileInputStream(file.getPath());
@@ -68,13 +58,16 @@ public class XmlHelper {
                     Node property = properties.item(element);
                     String name = property.getNodeName();
                     if (name.equalsIgnoreCase(CommonConstants.LOCATION_VO_NAME)) {
-                        location.setName(property.getFirstChild().getNodeValue());
+                        location.setmName(property.getFirstChild().getNodeValue());
                     }
                     if (name.equalsIgnoreCase(CommonConstants.LOCATION_VO_LATITUDE)) {
-                        location.setLatitude(Double.parseDouble(property.getFirstChild().getNodeValue()));
+                        location.setmLatitude(Double.parseDouble(property.getFirstChild().getNodeValue()));
                     }
                     if (name.equalsIgnoreCase(CommonConstants.LOCATION_VO_LONGITUDE)) {
-                        location.setLongitude(Double.parseDouble(property.getFirstChild().getNodeValue()));
+                        location.setmLongitude(Double.parseDouble(property.getFirstChild().getNodeValue()));
+                    }
+                    if (name.equalsIgnoreCase(CommonConstants.LOCATION_VO_CITYNAME)) {
+                        location.setmCity(property.getFirstChild().getNodeValue());
                     }
                 }
                 locations.add(location);

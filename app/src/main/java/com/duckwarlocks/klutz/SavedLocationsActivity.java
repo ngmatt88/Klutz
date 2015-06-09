@@ -2,14 +2,12 @@ package com.duckwarlocks.klutz;
 
 import android.app.Activity;
 import android.os.Environment;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
@@ -23,36 +21,36 @@ import java.util.ArrayList;
 
 
 public class SavedLocationsActivity extends Activity {
-    private ListView locationView;
-    private EditText inputSearch;
-    private ArrayList<LocationVO> locationList;
+    private ListView mLocationView;
+    private EditText mInputSearch;
+    private ArrayList<LocationVO> mLocationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_locations);
 
-        XmlHelper xmlHelper = new XmlHelper();
         StringBuilder fileLoc =
                 new StringBuilder(Environment.getExternalStorageDirectory().getAbsolutePath());
         fileLoc.append("/"+CommonConstants.KLUTZ.toLowerCase()+"/");
         fileLoc.append(CommonConstants.FILE_LOCATION);
 
         try{
-           locationList =  xmlHelper.parseListOfLocations(fileLoc.toString());
+           mLocationList =  XmlHelper.parseListOfLocations(fileLoc.toString());
         }catch(StopProcessingException e){
             Log.e(SavedLocationsActivity.class.getName(),e.toString());
             //TODO force it to crash?
         }
 
-        final LocationAdapter adapter = new LocationAdapter(this,locationList);
+        final LocationAdapter adapter = new LocationAdapter(this, mLocationList);
 
-        locationView = (ListView) findViewById(R.id.recordList);
-        inputSearch = (EditText)findViewById(R.id.inputSearch);
+        mLocationView = (ListView) findViewById(R.id.recordList);
+        mInputSearch = (EditText)findViewById(R.id.inputSearch);
         //Add search functionality to editText
-        inputSearch.addTextChangedListener(new TextWatcher() {
+        mInputSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -61,10 +59,11 @@ public class SavedLocationsActivity extends Activity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {}
+            public void afterTextChanged(Editable s) {
+            }
         });
 
-        locationView.setAdapter(adapter);
+        mLocationView.setAdapter(adapter);
     }
 
     @Override
