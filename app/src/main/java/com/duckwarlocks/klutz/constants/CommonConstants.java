@@ -9,6 +9,10 @@ public class CommonConstants {
 
     public static final String KLUTZ = "Klutz";
 
+    public static final String LATITUDE_ABBREV = "Lat";
+    public static final String LONGITUDE_ABBREV = "Lon";
+    public static final String LATITUDE_LONGITUDE_ROUND_PLACES = "%.2f";
+
     public static final String LOCATION_VO_DOC = "LOCATIONDOC";
     public static final String LOCATION_VO_TAG = "LOCATION";
     public static final String LOCATION_VO_NAME = "NAME";

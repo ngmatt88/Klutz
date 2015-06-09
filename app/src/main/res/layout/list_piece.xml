@@ -9,23 +9,23 @@
         android:id="@+id/locationListItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:textSize="16dip"
+        android:padding="@dimen/savedListItemNamePaddingSize"
+        android:textSize="@dimen/savedListItemNameFontSize"
         android:textStyle="bold"/>
     <TextView
         android:id="@+id/locationListLongitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:textSize="16dip"
+        android:padding="@dimen/savedListLatLongPaddingSize"
+        android:textSize="@dimen/savedListLatLongFontSize"
         android:layout_alignParentRight="true"
         />
     <TextView
         android:id="@+id/locationListLatitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dip"
-        android:textSize="16dip"
+        android:padding="@dimen/savedListLatLongPaddingSize"
+        android:textSize="@dimen/savedListLatLongFontSize"
         android:layout_toLeftOf="@id/locationListLongitude"
         />
     <!--<TextView-->

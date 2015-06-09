@@ -4,4 +4,9 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="mainMenuBtnMargins">20dp</dimen>
+
+    <dimen name="savedListLatLongFontSize">10dip</dimen>
+    <dimen name="savedListLatLongPaddingSize">10dip</dimen>
+    <dimen name="savedListItemNameFontSize">16dip</dimen>
+    <dimen name="savedListItemNamePaddingSize">10dip</dimen>
 </resources>

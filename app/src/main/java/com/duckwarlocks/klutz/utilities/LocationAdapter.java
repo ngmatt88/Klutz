@@ -10,6 +10,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.duckwarlocks.klutz.R;
+import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.vo.LocationVO;
 import com.duckwarlocks.klutz.vo.LocationViewHolder;
 
@@ -61,9 +62,16 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
         }else{
             holder = (LocationViewHolder) convertView.getTag();
         }
-        holder.name.setText(locationList.get(position).getName());
-        holder.latitude.setText(Double.toString(locationList.get(position).getLatitude()));
-        holder.longitude.setText(Double.toString(locationList.get(position).getLongitude()));
+        String name = locationList.get(position).getName();
+        String latitude = String.format(
+                CommonConstants.LATITUDE_LONGITUDE_ROUND_PLACES,
+                locationList.get(position).getLatitude());
+        String longitude = String.format(
+                CommonConstants.LATITUDE_LONGITUDE_ROUND_PLACES,
+                locationList.get(position).getLongitude());
+        holder.name.setText(name);
+        holder.latitude.setText(CommonConstants.LATITUDE_ABBREV + ":" + latitude);
+        holder.longitude.setText(CommonConstants.LONGITUDE_ABBREV + ":" + longitude);
         return convertView;
     }
 
