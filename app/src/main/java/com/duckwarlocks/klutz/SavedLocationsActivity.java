@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 public class SavedLocationsActivity extends Activity {
     private ListView locationView;
-    private ArrayAdapter<String> adapter;
     private EditText inputSearch;
     private ArrayList<LocationVO> locationList;
 

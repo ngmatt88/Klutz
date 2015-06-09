@@ -27,7 +27,6 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
 
     public LocationAdapter(Context context,ArrayList<LocationVO> locationList){
         inflater = LayoutInflater.from(context);
-//        this.locationList = locationList;
         this.locationList.addAll(locationList);
         this.originalList = locationList;
     }
@@ -41,6 +40,10 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
         return position;
     }
 
+    /**
+     * Updated the filtered locationList with the original list
+     * Used to make the onTextChange search bar work for backspaces
+     */
     public void updateList(){
         locationList = originalList;
     }
@@ -112,12 +115,8 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults)
             {
-//                if(filterResults.count == 0){
-//                    notifyDataSetInvalidated();
-//                }else{
-                    locationList = (ArrayList<LocationVO>)filterResults.values;
-                    notifyDataSetChanged();
-//                }
+                locationList = (ArrayList<LocationVO>)filterResults.values;
+                notifyDataSetChanged();
             }
         };
     }
