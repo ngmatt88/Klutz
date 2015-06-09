@@ -32,12 +32,17 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
         this.originalList = locationList;
     }
 
+
     public LocationVO getItem(int position){
         return locationList.get(position);
     }
 
     public long getItemId(int position){
         return position;
+    }
+
+    public void updateList(){
+        locationList = originalList;
     }
 
     @Override
@@ -107,12 +112,12 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults)
             {
-                if(filterResults.count == 0){
-                    notifyDataSetInvalidated();
-                }else{
+//                if(filterResults.count == 0){
+//                    notifyDataSetInvalidated();
+//                }else{
                     locationList = (ArrayList<LocationVO>)filterResults.values;
                     notifyDataSetChanged();
-                }
+//                }
             }
         };
     }

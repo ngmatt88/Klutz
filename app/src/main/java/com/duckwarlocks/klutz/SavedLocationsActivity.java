@@ -57,6 +57,7 @@ public class SavedLocationsActivity extends Activity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                adapter.updateList();
                 adapter.getFilter().filter(s);
             }
 
