@@ -18,6 +18,8 @@ import com.duckwarlocks.klutz.utilities.FileHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.vo.LocationVO;
 
+import java.io.File;
+
 
 public class MainActivity extends ActionBarActivity {
     private GpsCoordinatesHelper gps;
@@ -29,6 +31,13 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try {
+            //create the directory if it doesn't exist.
+            FileHelper.createDir();
+        } catch (StopProcessingException e) {
+            e.printStackTrace();
+            //TODO should plan out some sort of fail-safe
+        }
     }
 
     public void sendToSavedLocations(View view){
@@ -66,7 +75,7 @@ public class MainActivity extends ActionBarActivity {
                     getApplicationContext(),"Invalid Name",Toast.LENGTH_LONG).show();
         }else{
             try{
-                FileHelper.writeToFile(MainActivity.this,locationVO);
+                FileHelper.writeNewRecordToFile(locationVO);
                 Toast.makeText(
                         getApplicationContext(),"Coordinates Saved",Toast.LENGTH_LONG).show();
             }catch (StopProcessingException e){

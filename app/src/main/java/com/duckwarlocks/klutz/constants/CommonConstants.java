@@ -22,4 +22,6 @@ public class CommonConstants {
 
     public static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
     public static final long MIN_TIME_BTWN_UPDATES = 1000 * 60 * 1;
+
+    public static final String DELETE_CONTEXT_MENU = "Delete";
 }

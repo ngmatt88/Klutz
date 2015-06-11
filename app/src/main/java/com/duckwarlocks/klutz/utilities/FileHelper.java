@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,7 +28,7 @@ import java.util.List;
  */
 public class FileHelper {
 
-    public static void writeToFile(Context context,LocationVO locationVO) throws StopProcessingException{
+    public static void createDir() throws StopProcessingException{
         try{
             File folder = new File(
                     Environment.getExternalStorageDirectory().toString() +
@@ -42,18 +43,50 @@ public class FileHelper {
             if(!root.exists()){
                 root.createNewFile();
             }
+        }catch(IOException e){
+            Log.e(FileHelper.class.getName(),e.toString());
+            throw new StopProcessingException(e.toString());
+        }
 
-            XmlSerializer serializer = Xml.newSerializer();
-            StringWriter writer = new StringWriter();
-            serializer.setOutput(writer);
+    }
+
+
+    /**
+     * Appends the new VO to the file
+     * @param locationVO
+     * @throws StopProcessingException
+     */
+    public static void writeNewRecordToFile(LocationVO locationVO) throws StopProcessingException{
+        try{
+            File folder = new File(
+                    Environment.getExternalStorageDirectory().toString() +
+                            File.separator +CommonConstants.KLUTZ.toLowerCase());
+
+//            if(!folder.exists()){
+//                folder.mkdir();
+//            }
+
+            File root = new File(folder,CommonConstants.FILE_LOCATION);
+
+//            if(!root.exists()){
+//                root.createNewFile();
+//            }
+
+
 
             List<LocationVO> locationVOList = (root.length() > 0) ?  XmlHelper.parseListOfLocations(root.getAbsolutePath()) : new ArrayList<LocationVO>();
-            locationVOList.add(locationVO);
+            if(locationVO!=null){
+                locationVOList.add(locationVO);
+            }
 
             //delete contents of file first after reading it!
             FileOutputStream fos = new FileOutputStream(root,false);
             fos.close();
             fos = new FileOutputStream(root, true);
+
+            XmlSerializer serializer = Xml.newSerializer();
+            StringWriter writer = new StringWriter();
+            serializer.setOutput(writer);
 
             //Loop through and create the aggregates
             serializer.startDocument("UTF-8", true);
@@ -90,6 +123,68 @@ public class FileHelper {
             throw new StopProcessingException(io.toString());
         }
     }
+
+
+    public static void deleteFromFile(String locationName) throws StopProcessingException{
+        File mFolder = new File(
+                Environment.getExternalStorageDirectory().toString() +
+                        File.separator +CommonConstants.KLUTZ.toLowerCase());
+        File mRoot = new File(mFolder,CommonConstants.FILE_LOCATION);
+
+        ArrayList<LocationVO> mLocationVOList = XmlHelper.parseListOfLocations(mRoot.getAbsolutePath());
+
+        nameCheckLoop:
+        for(LocationVO mLocation : mLocationVOList){
+            if(mLocation.getmName().equalsIgnoreCase(locationName)){
+                mLocationVOList.remove(mLocation);
+                break nameCheckLoop;
+            }
+        }
+        updateFileWithNewList(mLocationVOList,mRoot);
+    }
+
+
+    public static void updateFileWithNewList(ArrayList<LocationVO> newLocationList,File mRoot) throws StopProcessingException{
+        XmlSerializer serializer = Xml.newSerializer();
+        StringWriter writer = new StringWriter();
+        try{
+            FileOutputStream fos = new FileOutputStream(mRoot,false);
+            serializer.setOutput(writer);
+
+            //Loop through and create the aggregates
+            serializer.startDocument("UTF-8", true);
+            serializer.startTag(null, CommonConstants.LOCATION_VO_DOC);
+            for(LocationVO record : newLocationList) {
+                serializer.startTag(null, CommonConstants.LOCATION_VO_TAG);
+                serializer.startTag(null, CommonConstants.LOCATION_VO_NAME);
+                serializer.text(record.getmName());
+                serializer.endTag(null, CommonConstants.LOCATION_VO_NAME);
+                serializer.startTag(null, CommonConstants.LOCATION_VO_LATITUDE);
+                serializer.text(Double.toString(record.getmLatitude()));
+                serializer.endTag(null, CommonConstants.LOCATION_VO_LATITUDE);
+                serializer.startTag(null, CommonConstants.LOCATION_VO_LONGITUDE);
+                serializer.text(Double.toString(record.getmLongitude()));
+                serializer.endTag(null, CommonConstants.LOCATION_VO_LONGITUDE);
+                serializer.startTag(null, CommonConstants.LOCATION_VO_CITYNAME);
+                serializer.text(record.getmCity());
+                serializer.endTag(null, CommonConstants.LOCATION_VO_CITYNAME);
+                serializer.endTag(null, CommonConstants.LOCATION_VO_TAG);
+            }
+            serializer.endTag(null,CommonConstants.LOCATION_VO_DOC);
+            serializer.endDocument();
+            serializer.flush();
+
+            String dataWrite = writer.toString();
+
+            fos.write(dataWrite.getBytes());
+            fos.close();
+        }catch (IOException io){
+            Log.e(FileHelper.class.getName(),io.toString());
+            throw new StopProcessingException(io.toString());
+        }
+
+    }
+
 
 
     public static String readFile(Context context) throws StopProcessingException{

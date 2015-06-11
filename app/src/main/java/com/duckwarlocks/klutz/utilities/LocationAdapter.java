@@ -1,6 +1,7 @@
 package com.duckwarlocks.klutz.utilities;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.vo.LocationVO;
@@ -26,8 +28,11 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
     private ArrayList<LocationVO> mOriginalList;
 
 
-    public LocationAdapter(Context context,ArrayList<LocationVO> mLocationList){
+    public LocationAdapter(Context context){
         mInflater = LayoutInflater.from(context);
+    }
+
+    public void setLocationVOList(ArrayList<LocationVO> mLocationList){
         this.mLocationList.addAll(mLocationList);
         this.mOriginalList = mLocationList;
     }
@@ -86,6 +91,19 @@ public class LocationAdapter extends BaseAdapter implements Filterable{
         holder.name.setOnLongClickListener(longClickHandler);
 
         return convertView;
+    }
+
+
+    public void removeItem(LocationVO locationItem){
+        mLocationList.remove(locationItem);
+        mOriginalList.remove(locationItem);
+
+        try {
+            FileHelper.deleteFromFile(locationItem.getmName());
+        } catch (StopProcessingException e) {
+            Log.e(LocationAdapter.class.getName(),e.toString());
+            e.printStackTrace();
+        }
     }
 
     @Override
