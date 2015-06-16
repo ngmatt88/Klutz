@@ -56,7 +56,7 @@ public class MainActivity extends ActionBarActivity {
      */
     public void getCoordinates(View view){
         gps = new GpsCoordinatesHelper(this);
-
+        gps.getmLocation();
         if(gps.ismCanGetLocation()){
             mLatitude = gps.getmLatitude();
             mLongitude = gps.getmLongitude();

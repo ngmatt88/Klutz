@@ -13,10 +13,13 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
@@ -41,8 +44,28 @@ public class GpsCoordinatesHelper extends Service implements LocationListener {
 
     public GpsCoordinatesHelper(Context mContext){
         this.mContext = mContext;
-        getmLocation();
+//        getmLocation();
     }
+
+    /**
+     * For searched nearby locations
+     * @param context
+     * @param str
+     * @return
+     * @throws StopProcessingException
+     */
+    public List<Address> getSearchedLocation(Context context,String str) throws StopProcessingException{
+        List<Address> address = null;
+        try{
+            Geocoder gc = new Geocoder(context);
+            address = gc.getFromLocationName(str, 1);
+        }catch(IOException e){
+            Log.e(GpsCoordinatesHelper.class.getName(),e.toString());
+            throw new StopProcessingException(e.toString());
+        }
+        return address;
+    }
+
 
     public Location getmLocation(){
         try{

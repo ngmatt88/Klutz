@@ -30,19 +30,23 @@ public class JSONHelper {
             String description =  oneObj.getString("description");
             String[] splitArray = description.split(",");
 
-            GooglePlacesResponseVO location = new GooglePlacesResponseVO();
-            location.setName(splitArray[0]);
-            location.setAddr(splitArray[1]);
-            location.setCity(splitArray[2]);
-            location.setCountry(splitArray[3]);
+            if(splitArray.length > 3){
+                GooglePlacesResponseVO location = new GooglePlacesResponseVO();
+                location.setRawDescription(description);
+                location.setName(splitArray[0]);
+                location.setAddr(splitArray[1]);
+                location.setCity(splitArray[2]);
+                location.setCountry(splitArray[3]);
 
-            mLocationList.add(location);
+                String placeID = oneObj.getString("place_id");
+                location.setPlaceID(placeID);
+
+                mLocationList.add(location);
+            }
         }
     }
-
     public ArrayList<GooglePlacesResponseVO> getLocationList(){
         return mLocationList;
     }
-
 
 }

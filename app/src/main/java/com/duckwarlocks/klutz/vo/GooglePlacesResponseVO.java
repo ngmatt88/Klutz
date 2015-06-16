@@ -9,7 +9,8 @@ public class GooglePlacesResponseVO {
     String city;
     String state;
     String country;
-
+    String placeID;
+    String rawDescription;
 
     public String getName() {
         return name;
@@ -50,4 +51,23 @@ public class GooglePlacesResponseVO {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    public String getPlaceID() {
+        return placeID;
+    }
+
+    public void setPlaceID(String placeID) {
+        this.placeID = placeID;
+    }
+
+
+    public String getRawDescription() {
+        return rawDescription;
+    }
+
+    public void setRawDescription(String rawDescription) {
+        this.rawDescription = rawDescription;
+    }
+
+
 }

@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.duckwarlocks.klutz" >
 
-    <meta-data
-        android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyBBr9gsNuTtEUq1BsenaAuHp6Dw1LF0q34" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -34,6 +30,10 @@
             android:name=".NearbyLocationsActivity"
             android:label="@string/title_activity_nearby_locations" >
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBBr9gsNuTtEUq1BsenaAuHp6Dw1LF0q34" />
     </application>
 
 </manifest>

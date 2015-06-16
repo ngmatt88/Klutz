@@ -7,6 +7,8 @@ public class CommonConstants {
 
     public static final String FILE_LOCATION = "location.xml";
 
+    public static final String API_KEY = "AIzaSyBBr9gsNuTtEUq1BsenaAuHp6Dw1LF0q34";
+
     public static final String KLUTZ = "Klutz";
 
     public static final String LATITUDE_ABBREV = "Lat";
