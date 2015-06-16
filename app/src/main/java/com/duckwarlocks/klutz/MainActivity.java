@@ -45,6 +45,10 @@ public class MainActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    public void sendToNearbyLocationsActivity(View view){
+        Intent intent = new Intent(this,NearbyLocationsActivity.class);
+        startActivity(intent);
+    }
 
     /**
      * Grabs the current GPS coordinates and saves them to external file.

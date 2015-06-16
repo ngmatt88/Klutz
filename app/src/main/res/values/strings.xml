@@ -8,6 +8,7 @@
 
     <string name="grabCoordinatesBtnTxt">Grab Coordinates</string>
     <string name="locationListBtnTxt">List of Locations</string>
+    <string name="nearbySearchBtnTxt">Search Nearby</string>
 
     <string name="title_activity_grab_coordinates">GrabCoordinatesActivity</string>
 
@@ -16,5 +17,8 @@
     <string name="title_activity_saved_locations">SavedLocationsActivity</string>
 
     <string name="searchHint">Search...</string>
+    <string name="title_activity_nearby_locations">NearbyLocationsActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>

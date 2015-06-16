@@ -16,13 +16,11 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
 import com.duckwarlocks.klutz.constants.CommonConstants;
-import com.duckwarlocks.klutz.utilities.FileHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
-import com.duckwarlocks.klutz.utilities.LocationAdapter;
+import com.duckwarlocks.klutz.adapters.LocationAdapter;
 import com.duckwarlocks.klutz.utilities.XmlHelper;
 import com.duckwarlocks.klutz.vo.LocationVO;
 
