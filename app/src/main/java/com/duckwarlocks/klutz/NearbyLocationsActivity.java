@@ -12,11 +12,14 @@ import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +31,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
@@ -42,6 +46,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class NearbyLocationsActivity extends Activity implements OnItemClickListener {
 
@@ -55,6 +60,8 @@ public class NearbyLocationsActivity extends Activity implements OnItemClickList
     private JSONArray mPredsJsonArray;
     private ArrayList<GooglePlacesResponseVO> mPlacesVOList;
     GoogleMap mMap;
+    double mSrchLat;
+    double mSrchLng;
     boolean centerLoc = false;
 
 
@@ -83,90 +90,27 @@ public class NearbyLocationsActivity extends Activity implements OnItemClickList
         }
     }
 
+    private void updateDistanceBox(Location locationA, Location locationB){
+        double distance = locationA.distanceTo(locationB);
+        TextView distanceBox = (TextView)findViewById(R.id.distanceBox);
+
+        distance = (distance / 1609.344);
+        distanceBox.setText(Double.toString(distance) + " Miles");
+    }
+
     /**
      * Plot your searched location on the map fragment.
      */
 //    public void markSrchOnMap(View view){
-    public void markSrchOnMap(){
-        AutoCompleteTextView srchBox = (AutoCompleteTextView)findViewById(R.id.autoCompleteTextView);
-        String srchBoxTxt = srchBox.getText().toString().toUpperCase().replaceAll(" ","");
-        final StringBuilder placeName = new StringBuilder();
-        Log.e(NearbyLocationsActivity.class.getName(), "SRCHBOXTXT TXT is : " + srchBoxTxt);
-        String placeID="";
-        searchForLoop:
-        for(GooglePlacesResponseVO place: mPlacesVOList){
-            String description = place.getRawDescription().toUpperCase().replaceAll(" ","");
-            if(srchBoxTxt.equals(description)){
-                placeID = place.getPlaceID();
-                placeName.append(place.getName());
-                Log.e(NearbyLocationsActivity.class.getName(), "SRCHBOXTXT DESCRIP is : " + description);
-                break searchForLoop;
-            }
-        }
+    public void markSrchOnMap(View view){
+        mGpsHelper.getmLocation();
+        PolylineOptions line =
+                new PolylineOptions().add(
+                  new LatLng(mGpsHelper.getmLatitude(),mGpsHelper.getmLongitude()),
+                        new LatLng(mSrchLat,mSrchLng)
+                ).width(20).color(Color.CYAN);
 
-
-        if(!placeID.equals("")){
-            final StringBuilder jsonResults = new StringBuilder();
-            StringBuilder longLatCall = new StringBuilder(PLACES_API_BASE);
-            longLatCall.append("/details/json?");
-            longLatCall.append("placeid=" + placeID);
-            longLatCall.append("&");
-            longLatCall.append("key="+CommonConstants.API_KEY);
-
-            new JsonRequestTask(getApplicationContext(),this,mMap,longLatCall.toString()).execute();
-//                final URL url = new URL(longLatCall.toString());
-
-//                Thread thread = new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        try{
-//                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                            InputStreamReader in = new InputStreamReader(conn.getInputStream());
-//                            if(conn!=null){
-//                                conn.disconnect();
-//                            }
-//                            // Load the results into a StringBuilder
-//                            int read;
-//                            char[] buff = new char[1024];
-//                            while ((read = in.read(buff)) != -1) {
-//                                jsonResults.append(buff, 0, read);
-//                            }
-//
-//
-//                            String latitude;
-//                            String longitude;
-//                            // Create a JSON object hierarchy from the results
-//                            JSONObject jsonObj = new JSONObject(jsonResults.toString());
-//                            JSONObject resultObj = jsonObj.getJSONObject("result");
-//                            latitude= resultObj.getJSONObject("geometry").getJSONObject("location").getString("lat");
-//                            Log.e(NearbyLocationsActivity.class.getName(),"THE LAT/LON IS: LAT : " + resultObj.getJSONObject("geometry").getJSONObject("location"));
-//                            longitude = resultObj.getJSONObject("geometry").getJSONObject("location").getString("lng");
-//
-//
-//                            LatLng destLoc = new LatLng(Double.parseDouble(latitude),Double.parseDouble(longitude));
-//
-//                            if(mMap!=null){
-//                                Marker mapMarker =
-//                                        mMap.addMarker(new MarkerOptions().position(destLoc).title(placeName.toString()));
-//                                //move camera to where you are
-//                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(destLoc,15));
-//                                // Zoom in, animating the camera.
-////                mMap.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-//                            }
-//                        }catch(IOException e){
-//                            //TODO DO SOMETHING
-//                        }catch(JSONException je){
-//
-//                        }
-//                    }
-//                });
-//                thread.start();
-        }else{
-            Toast.makeText(getApplicationContext(),"Place ID was Null!!!",Toast.LENGTH_LONG).show();
-
-        }
-
-
+        mMap.addPolyline(line);
     }
 
     public void onItemClick(AdapterView adapterView, View view, int position, long id) {
@@ -192,14 +136,23 @@ public class NearbyLocationsActivity extends Activity implements OnItemClickList
                 if(list.size() > 0){
                     Address address = list.get(0);
 
-                    double lat = address.getLatitude();
-                    double lng = address.getLongitude();
+                    mSrchLat = address.getLatitude();
+                    mSrchLng = address.getLongitude();
 
                     tempPosition = new LatLng(address.getLatitude(), address.getLongitude());
 
                     centerLoc = true;
                     tempMarker = mMap.addMarker(new MarkerOptions().position(tempPosition).title(srchBoxTxt));
                     tempMarker.showInfoWindow();
+
+                    Location locationStart = new Location("Starting Point");
+                    mGpsHelper.getmLocation();
+                    locationStart.setLatitude(mGpsHelper.getmLatitude());
+                    locationStart.setLongitude(mGpsHelper.getmLongitude());
+                    Location locationEnd = new Location("Ending Point");
+                    locationEnd.setLatitude(mSrchLat);
+                    locationEnd.setLongitude(mSrchLng);
+                    updateDistanceBox(locationStart,locationEnd);
                 }
                 else{
                     Toast.makeText(this, "Calm!, I'm getting the information",Toast.LENGTH_SHORT).show();

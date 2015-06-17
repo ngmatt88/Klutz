@@ -24,7 +24,12 @@
             android:text="Plot"
             android:onClick="markSrchOnMap"/>
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/distanceBox"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="DIstance"
+        android:gravity="center"/>
     <fragment
         android:id="@+id/mapFragment"
         class="com.google.android.gms.maps.MapFragment"
