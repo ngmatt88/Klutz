@@ -55,7 +55,7 @@ public class NearbyLocationsActivity extends Activity implements OnItemClickList
     private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
     private static final String OUT_JSON = "/json";
     GpsCoordinatesHelper mGpsHelper;
-    private static final String API_KEY = "AIzaSyBBr9gsNuTtEUq1BsenaAuHp6Dw1LF0q34";
+    private static final String API_KEY = "AIzaSyAYFzU7qykyMAU8uJ0pRhk36VCgWfPT2RI";
     LatLng currentLoc;
     private JSONArray mPredsJsonArray;
     private ArrayList<GooglePlacesResponseVO> mPlacesVOList;
