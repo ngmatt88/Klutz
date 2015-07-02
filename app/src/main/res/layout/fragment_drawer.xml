@@ -1,0 +1,31 @@
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.duckwarlocks.klutz.fragments.DrawerFragment">
+
+    <LinearLayout
+        android:id="@+id/bothDrawersContainer"
+        android:background="#111"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:layout_gravity="start"
+        android:dividerHeight="0dp"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <ListView
+        android:id="@+id/left_drawer_top"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content">
+    </ListView>
+
+    <ListView
+        android:id="@+id/left_drawer_bottom"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content">
+    </ListView>
+
+    </LinearLayout>
+</FrameLayout>
