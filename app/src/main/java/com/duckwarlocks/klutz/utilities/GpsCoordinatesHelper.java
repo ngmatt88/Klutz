@@ -13,6 +13,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.duckwarlocks.klutz.constants.CommonConstants;
@@ -101,6 +102,7 @@ public class GpsCoordinatesHelper extends Service implements LocationListener {
             }
         }catch (Exception e){
             //TODO effectively catch exception later.
+            Log.e(GpsCoordinatesHelper.class.getName(),e.toString());
             e.printStackTrace();
         }
         return mLocation;

@@ -1,4 +1,4 @@
-package com.duckwarlocks.klutz.utilities;
+package com.duckwarlocks.klutz.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.constants.CommonConstants;
+import com.duckwarlocks.klutz.utilities.FileHelper;
 import com.duckwarlocks.klutz.vo.LocationVO;
 import com.duckwarlocks.klutz.vo.LocationViewHolder;
 

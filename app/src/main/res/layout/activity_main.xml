@@ -13,9 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"/>
     <TextView
-        android:id="@+id/subTitle"
+        android:id="@+id/currentCoordinates"
         android:text="@string/subTitle"
-        android:textSize="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/mainTitle"
@@ -25,7 +24,7 @@
         android:id="@+id/titleBreak"
         android:layout_width="fill_parent"
         android:layout_height="2dp"
-        android:layout_below="@id/subTitle"
+        android:layout_below="@id/currentCoordinates"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:background="@color/grey"/>
@@ -45,6 +44,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/mainMenuBtnMargins"
             android:onClick="getCoordinates"
+            />
+
+        <Button
+            android:id="@+id/saveCoordinatesBtn"
+            android:text="@string/saveCoordinatesBtnTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/mainMenuBtnMargins"
+            android:onClick="promptCoordinateName"
             />
 
         <Button
