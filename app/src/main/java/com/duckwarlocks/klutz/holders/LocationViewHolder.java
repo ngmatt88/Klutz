@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -27,7 +28,8 @@ import org.w3c.dom.Text;
 /**
  * Created by ngmat_000 on 6/8/2015.
  */
-public class LocationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class LocationViewHolder extends RecyclerView.ViewHolder
+        implements View.OnClickListener,ItemTouchHelperViewHolder{
     public TextView name;
     public TextView latitude;
     public TextView longitude;
@@ -46,27 +48,19 @@ public class LocationViewHolder extends RecyclerView.ViewHolder implements View.
         cityName = (TextView) view.findViewById(R.id.locationListCityName);
         individualItem = (CardView)view.findViewById(R.id.pieceView);
 
-//        view.setOnCreateContextMenuListener(this);
-
         view.setOnClickListener(this);
-
-//        view.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(final View v) {
-////                        LocationAdapter adapter = new LocationAdapter(v.getContext().getApplicationContext(), R.layout.list_piece);
-////                        adapter.removeItemByPosition(getPosition());
-//                return false;
-//            }
-//        });
     }
 
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v,
-//                                    ContextMenu.ContextMenuInfo menuInfo) {
-//        new LocationAdapter().info = menuInfo;
-//        menu.add(0, v.getId(), 0, CommonConstants.DELETE_CONTEXT_MENU);
-//
-//    }
+    @Override
+    public void onItemSelected(){
+        itemView.setBackgroundColor(Color.LTGRAY);
+    }
+
+    @Override
+    public void onItemClear(){
+        itemView.setBackgroundColor(0);
+    }
+
     @Override
     public void onClick(View v) {
         LocationVO currentLoc = getLocation(v);

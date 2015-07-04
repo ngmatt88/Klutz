@@ -22,12 +22,14 @@ import com.duckwarlocks.klutz.vo.LocationVO;
 import com.duckwarlocks.klutz.holders.LocationViewHolder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by ngmat_000 on 6/8/2015.
  */
-public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder> implements Filterable{
+public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder>
+        implements Filterable,ItemTouchHelperAdapter{
 
     private LayoutInflater mInflater;
     private static List<LocationVO> mLocationList = new ArrayList<LocationVO>();;
@@ -43,6 +45,22 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder> im
     }
 
     public LocationAdapter(){}
+
+
+
+    /**
+     * Listener for manual initiation of a drag.
+     */
+    public interface OnStartDragListener {
+
+        /**
+         * Called when a view is requesting a start of a drag.
+         *
+         * @param viewHolder The holder of the view to drag.
+         */
+        void onStartDrag(RecyclerView.ViewHolder viewHolder);
+    }
+
 
     public void setLocationVOList(List<LocationVO> mLocationList){
         this.mLocationList.addAll(mLocationList);
@@ -107,45 +125,6 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder> im
     public int getItemCount(){
         return mLocationList == null? 0 : mLocationList.size();
     }
-//    @Override
-//    public View getView(int position, View convertView,ViewGroup parent){
-//        LocationViewHolder holder = null;
-//        if(convertView == null){
-//            holder = new LocationViewHolder();
-//            convertView = mInflater.inflate(R.layout.list_piece,null);
-//            holder.name = (TextView) convertView.findViewById(R.id.locationListItem);
-//            holder.latitude = (TextView) convertView.findViewById(R.id.locationListLatitude);
-//            holder.longitude = (TextView) convertView.findViewById(R.id.locationListLongitude);
-//            holder.cityName = (TextView) convertView.findViewById(R.id.locationListCityName);
-//            holder.viewItem=(RelativeLayout)convertView.findViewById(R.id.pieceView);
-//            convertView.setTag(holder);
-//        }else{
-//            holder = (LocationViewHolder) convertView.getTag();
-//        }
-//
-//        holder.name.setText(mLocationList.get(position).getmName());
-//        holder.latitude.setText(CommonConstants.LATITUDE_ABBREV + ":" + Double.toString(mLocationList.get(position).getmLatitude()));
-//        holder.longitude.setText(CommonConstants.LONGITUDE_ABBREV + ":" + Double.toString(mLocationList.get(position).getmLongitude()));
-//        holder.cityName.setText(mLocationList.get(position).getmCity());
-//
-//        View.OnClickListener clickHandler = new View.OnClickListener(){
-//            public void onClick(View view){
-//                //TODO code to map with google maps API
-//            }
-//        };
-//
-//        View.OnLongClickListener longClickHandler = new View.OnLongClickListener(){
-//            public boolean onLongClick(View view){
-//                //TODO logic to show delete menu
-//
-//                return true;//return true to not do onClick(the short click) method as well
-//            }
-//        };
-//        holder.name.setOnClickListener(clickHandler);
-//        holder.name.setOnLongClickListener(longClickHandler);
-//
-//        return convertView;
-//    }
 
 
     public  void removeItemByPosition(int position){
@@ -162,18 +141,21 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder> im
 
         locationDAO.deleteLocation(locationItem);
         notifyDataSetChanged();
-//        try {
-//            FileHelper.deleteFromFile(locationItem.getmName());
-//        } catch (StopProcessingException e) {
-//            Log.e(LocationAdapter.class.getName(),e.toString());
-//            e.printStackTrace();
-//        }
     }
 
-//    @Override
-//    public int getCount(){
-//        return mLocationList.size();
-//    }
+
+    @Override
+    public void onItemDismiss(int position){
+        locationDAO.deleteLocation(mLocationList.get(position));
+        mLocationList.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    @Override
+    public void onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(mLocationList, fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
+    }
 
     @Override
     public Filter getFilter()

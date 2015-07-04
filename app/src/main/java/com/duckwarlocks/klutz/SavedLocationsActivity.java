@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -21,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
+import com.duckwarlocks.klutz.callbacks.SimpleItemTouchHelperCallback;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
@@ -33,12 +35,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SavedLocationsActivity extends Activity {
+public class SavedLocationsActivity extends Activity
+        implements LocationAdapter.OnStartDragListener{
     private RecyclerView mLocationView;
     private EditText mInputSearch;
     private LocationAdapter adapter;
     private List<LocationVO> mLocationList;
     private LocationsDAO mLocationDAO;
+    private ItemTouchHelper mItemTouchHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,32 +93,14 @@ public class SavedLocationsActivity extends Activity {
             }
         });
 
+        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
+        mItemTouchHelper = new ItemTouchHelper(callback);
+        mItemTouchHelper.attachToRecyclerView(mLocationView);
+    }
 
-
-        //Creates long-press context-menu for the saved records
-        RecyclerView mLocationItem = (RecyclerView)findViewById(R.id.recordList);
-        registerForContextMenu(mLocationItem);
-        //set onclick listener
-//        mLocationItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//            //current lat, current long, target lat, target lang
-//                LocationVO currentLoc = getLocation();
-//
-//                String lat = ((TextView)view.findViewById(R.id.locationListLatitude)).getText().toString();
-//                String lon = ((TextView)view.findViewById(R.id.locationListLongitude)).getText().toString();
-//
-//                lat = lat.replaceAll(CommonConstants.LATITUDE_ABBREV+":","");
-//                lon = lon.replaceAll(CommonConstants.LONGITUDE_ABBREV+":","");
-//
-//                String url =
-//                        "http://maps.google.com/maps?saddr="+currentLoc.getmLatitude()+","+currentLoc.getmLongitude()+
-//                                "&daddr="+lat+","+lon;
-//                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url));
-//                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-//                startActivity(intent);
-//            }
-//        }) ;
+    @Override
+    public void onStartDrag(RecyclerView.ViewHolder viewHolder){
+        mItemTouchHelper.startDrag(viewHolder);
     }
 
     /**
