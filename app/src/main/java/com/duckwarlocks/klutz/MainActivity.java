@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
 import com.duckwarlocks.klutz.constants.CommonConstants;
+import com.duckwarlocks.klutz.daos.LocationsDAO;
 import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
 import com.duckwarlocks.klutz.utilities.FileHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
@@ -25,6 +27,8 @@ import com.duckwarlocks.klutz.vo.LocationVO;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.sql.SQLException;
+import java.util.List;
 
 
 public class MainActivity extends Activity {
@@ -33,12 +37,14 @@ public class MainActivity extends Activity {
     private double mLatitude;
     private double mLongitude;
     private TextView mCurCoordinateTxtView;
+    private LocationsDAO mLocationDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mLocationDAO = new LocationsDAO(this);
         mCurCoordinateTxtView = (TextView)findViewById(R.id.currentCoordinates);
 
         try {
@@ -146,7 +152,8 @@ public class MainActivity extends Activity {
 
                     if (title != null && !title.equals("")) {
 
-                        saveToFile(createLocationVO(title));
+//                        saveToFile(createLocationVO(title));
+                        saveToDB(createLocationVO(title));
 
                         Toast.makeText(getApplicationContext(), "Your location is - Latitude : " + mLatitude +
                                 "and Longitude : " + mLongitude, Toast.LENGTH_LONG).show();
@@ -162,9 +169,24 @@ public class MainActivity extends Activity {
             });
             theAlert.show();
         }
-
     }
 
+    private void saveToDB(LocationVO location){
+        try{
+            mLocationDAO.open();
+
+            mLocationDAO.createLocationVO(
+                    location.getmName(), Double.toString(location.getmLatitude()),
+                    Double.toString(location.getmLongitude()), location.getmCity());
+            mLocationDAO.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+            System.exit(1);
+        }
+        Toast saveToast = Toast.makeText(this, "Your Searches Have Been Saved",Toast.LENGTH_LONG);
+        saveToast.setGravity(Gravity.CENTER, 0, 0);
+        saveToast.show();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
