@@ -94,9 +94,7 @@ public class SavedLocationsActivity extends Activity {
                 lat = lat.replaceAll(CommonConstants.LATITUDE_ABBREV+":","");
                 lon = lon.replaceAll(CommonConstants.LONGITUDE_ABBREV+":","");
 
-                String url =
-                        "http://maps.google.com/maps?saddr="+currentLoc.getmLatitude()+","+currentLoc.getmLongitude()+
-                                "&daddr="+lat+","+lon;
+                String url = "http://maps.google.com/maps?saddr="+currentLoc.getmLatitude()+","+currentLoc.getmLongitude()+ "&daddr="+lat+","+lon;
                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(url));
                 intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                 startActivity(intent);

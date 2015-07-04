@@ -1,3 +1,5 @@
 <resources>
     <color name="grey">#c0c0c0</color>
+    <color name="ColorPrimary">#ffe4e510</color>
+    <color name="ColorPrimaryDark">#ff187c2a</color>
 </resources>

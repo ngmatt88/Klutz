@@ -17,4 +17,11 @@
 
     <string name="searchHint">Search...</string>
 
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+
+
+    <string name="title_section1">Grab Coordinates !</string>
+    <string name="title_section2">List of locations</string>
 </resources>

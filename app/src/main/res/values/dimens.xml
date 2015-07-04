@@ -12,4 +12,5 @@
     <dimen name="savedListCityNameFontSize">16dip</dimen>
     <dimen name="savedListRightMargin">5dp</dimen>
     <dimen name="savedListLeftMargin">5dp</dimen>
+    <dimen name="navigation_drawer_width">240dp</dimen>
 </resources>
