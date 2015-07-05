@@ -1,10 +1,8 @@
 package com.duckwarlocks.klutz;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -21,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
-import com.duckwarlocks.klutz.adapter.DrawerAdapter;
+import com.duckwarlocks.klutz.adapters.DrawerAdapter;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
 import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
@@ -29,11 +27,7 @@ import com.duckwarlocks.klutz.utilities.FileHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.vo.LocationVO;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
 import java.sql.SQLException;
-import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -237,7 +231,7 @@ public class MainActivity extends ActionBarActivity {
             e.printStackTrace();
             System.exit(1);
         }
-        Toast saveToast = Toast.makeText(this, "Your Searches Have Been Saved",Toast.LENGTH_LONG);
+        Toast saveToast = Toast.makeText(this, "Your Searches Have Been Saved", Toast.LENGTH_LONG);
         saveToast.setGravity(Gravity.CENTER, 0, 0);
         saveToast.show();
     }
