@@ -67,14 +67,6 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/mainMenuBtnMargins"
                     android:onClick="promptCoordinateName"/>
-                <Button
-                    android:id="@+id/locationListBtn"
-                    android:text="@string/locationListBtnTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/mainMenuBtnMargins"
-                    android:onClick="sendToSavedLocations"
-                    />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
