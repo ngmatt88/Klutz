@@ -51,6 +51,8 @@ public class MainActivity extends ActionBarActivity {
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
 
     ActionBarDrawerToggle mDrawerToggle;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,18 +99,6 @@ public class MainActivity extends ActionBarActivity {
         mLocationDAO = new LocationsDAO(this);
         mCurCoordinateTxtView = (TextView)findViewById(R.id.currentCoordinates);
 
-        try {
-            //create the directory if it doesn't exist.
-            FileHelper.createDir();
-        } catch (StopProcessingException e) {
-            e.printStackTrace();
-            //TODO should plan out some sort of fail-safe
-        }
-    }
-
-    public void sendToSavedLocations(View view){
-        Intent intent = new Intent(this,SavedLocationsActivity.class);
-        startActivity(intent);
     }
 
 
@@ -124,7 +114,6 @@ public class MainActivity extends ActionBarActivity {
             mLongitude = gps.getmLongitude();
             mCityName = gps.getmCityName();
 
-//            promptCoordinateName(MainActivity.this);
             displayCurrentCoordinates();
         }else{
             gps.showSettingsAlert();
