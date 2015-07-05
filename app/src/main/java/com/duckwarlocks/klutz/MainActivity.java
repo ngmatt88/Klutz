@@ -52,16 +52,21 @@ public class MainActivity extends ActionBarActivity {
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
-    ImageView image;
+    ImageView pinapple;
+    ImageView car_keys;
 
     ActionBarDrawerToggle mDrawerToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        image = (ImageView)findViewById(R.id.pine);
+        pinapple = (ImageView)findViewById(R.id.pine);
+        car_keys = (ImageView)findViewById(R.id.cark);
 
-        new BounceAnimation(image).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
+
+        new BounceAnimation(pinapple).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
+        new BounceAnimation(car_keys).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
+
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);
@@ -118,7 +123,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void bouncing(View view){
-        new BounceAnimation(image).setBounceDistance(20).setNumOfBounces(2).setDuration(1000).animate();
+        new BounceAnimation(pinapple).setBounceDistance(20).setNumOfBounces(2).setDuration(1000).animate();
+    }
+    public void bouncingcar(View view){
+        new BounceAnimation(car_keys).setBounceDistance(20).setNumOfBounces(2).setDuration(1000).animate();
     }
 
     /**

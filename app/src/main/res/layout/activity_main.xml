@@ -86,9 +86,15 @@
                 <ImageView
                     android:id="@+id/pine"
                     android:onClick="bouncing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
                     android:src="@drawable/pineapple"/>
+                <ImageView
+                    android:id="@+id/cark"
+                    android:onClick="bouncingcar"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/car_keys_icon"/>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
