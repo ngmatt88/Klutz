@@ -39,8 +39,8 @@ public class MainActivity extends ActionBarActivity {
     private TextView mCurCoordinateTxtView;
     private LocationsDAO mLocationDAO;
 
-    String TITLES[] = {"Favorites","Recents"};
-    int ICONS[] = {R.drawable.ic_fav24dp,R.drawable.ic_star24dp};
+    String TITLES[] = {"Saved Locations","Recents"};
+    int ICONS[] = {R.drawable.fish_bowl,R.drawable.ic_star24dp};
 
     String NAME = "User";
     String EMAIL = "email";
@@ -64,8 +64,8 @@ public class MainActivity extends ActionBarActivity {
         mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
 
         mAdapter = new DrawerAdapter(TITLES,ICONS,NAME,EMAIL,PROFILE, this);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        // And passing the titles,icons,header view name, header view email,
-        // and header view profile picture
+        // And passing the titles,icons,drawer_header view name, drawer_header view email,
+        // and drawer_header view profile picture
 
         mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
         mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
