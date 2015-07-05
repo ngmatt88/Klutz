@@ -58,7 +58,7 @@ public class LocationViewHolder extends RecyclerView.ViewHolder
 
     @Override
     public void onItemClear(){
-        itemView.setBackgroundColor(0);
+//        itemView.setBackgroundColor(0);
     }
 
     @Override
