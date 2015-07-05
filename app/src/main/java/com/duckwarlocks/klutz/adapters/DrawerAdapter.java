@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.SavedLocationsActivity;
+import com.duckwarlocks.klutz.fragments.MainFragment;
 import com.duckwarlocks.klutz.fragments.SavedLocationsFragment;
 
 /**
@@ -81,7 +82,9 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 //            setCorrectOnClick(getAdapterPosition());
             Fragment fragment=null;
             switch(getAdapterPosition()){
-                case 1: fragment = new SavedLocationsFragment();
+                case 1: fragment = new MainFragment();
+                    break;
+                case 2: fragment = new SavedLocationsFragment();
                     break;
             }
             FragmentManager fragmentManager = ((Activity) context).getFragmentManager();

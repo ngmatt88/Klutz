@@ -38,8 +38,8 @@ public class MainActivity extends ActionBarActivity {
     private TextView mCurCoordinateTxtView;
     private LocationsDAO mLocationDAO;
 
-    String TITLES[] = {"Saved Locations","Recents"};
-    int ICONS[] = {R.drawable.fish_bowl,R.drawable.ic_star24dp};
+    String TITLES[] = {"Home","Saved Locations","Recent"};
+    int ICONS[] = {R.drawable.home_icon,R.drawable.fish_bowl,R.drawable.ic_star24dp};
 
     String NAME = "User";
     String EMAIL = "email";
