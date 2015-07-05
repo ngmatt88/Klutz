@@ -84,31 +84,14 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder>
         mLocationList = mOriginalList;
     }
 
+
+
     @Override
     public LocationViewHolder onCreateViewHolder(ViewGroup viewGroup, int i){
         View view = LayoutInflater.from(
                 viewGroup.getContext()).inflate(theLayout,viewGroup,false);
 
         return new LocationViewHolder(view);
-    }
-
-
-    /**
-     * Return a locationVO with the data on the current location.
-     * To be used for onCLick to map to saved location
-     * @return
-     */
-    private LocationVO getLocation(View view){
-        GpsCoordinatesHelper gps = new GpsCoordinatesHelper(view.getContext());
-        gps.getmLocation();
-        LocationVO currentLoc = new LocationVO();
-
-        currentLoc.setmLatitude(gps.getmLatitude());
-        currentLoc.setmLongitude(gps.getmLongitude());
-        currentLoc.setmCity(gps.getmCityName());
-        currentLoc.setmName("Current Location");
-
-        return currentLoc;
     }
 
 

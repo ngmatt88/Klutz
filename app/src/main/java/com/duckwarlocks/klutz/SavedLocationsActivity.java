@@ -72,7 +72,7 @@ public class SavedLocationsActivity extends Activity
         }
 
         adapter.setLocationVOList(mLocationList);
-
+        adapter.updateList();
         mLocationView.setAdapter(adapter);
 
         mInputSearch = (EditText)findViewById(R.id.inputSearch);
@@ -141,21 +141,5 @@ public class SavedLocationsActivity extends Activity
         }
         return super.onOptionsItemSelected(item);
     }
-
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v,
-//                                    ContextMenu.ContextMenuInfo menuInfo) {
-//        super.onCreateContextMenu(menu, v, menuInfo);
-//        menu.add(0, v.getId(), 0, CommonConstants.DELETE_CONTEXT_MENU);
-//    }
-
-//    @Override
-//    public boolean onContextItemSelected(MenuItem item) {
-//        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
-//        if (item.getTitle() == CommonConstants.DELETE_CONTEXT_MENU) {
-//            adapter.removeItem(adapter.getItem(info.position));
-//        }
-//        return true;
-//    }
 
 }

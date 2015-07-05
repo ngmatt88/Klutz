@@ -53,7 +53,7 @@ public class LocationViewHolder extends RecyclerView.ViewHolder
 
     @Override
     public void onItemSelected(){
-        itemView.setBackgroundColor(Color.LTGRAY);
+//        itemView.setBackgroundColor(Color.LTGRAY);
     }
 
     @Override
