@@ -68,6 +68,7 @@
                     />
 
                 <Button
+                    android:elevation="20dp"
                     android:id="@+id/saveCoordinatesBtn"
                     android:text="@string/saveCoordinatesBtnTxt"
                     android:layout_width="wrap_content"
@@ -82,14 +83,14 @@
                     android:layout_margin="@dimen/mainMenuBtnMargins"
                     android:onClick="sendToSavedLocations"
                     />
-
-
+                <ImageView
+                    android:id="@+id/pine"
+                    android:onClick="popout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/pineapple"/>
             </LinearLayout>
-
-
         </RelativeLayout>
-
-
     </LinearLayout>
 
 </RelativeLayout>

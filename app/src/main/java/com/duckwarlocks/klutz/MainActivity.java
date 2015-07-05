@@ -14,7 +14,10 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +58,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);
@@ -104,6 +108,12 @@ public class MainActivity extends ActionBarActivity {
             e.printStackTrace();
             //TODO should plan out some sort of fail-safe
         }
+    }
+
+    public void popout(View view){
+        ImageView image = (ImageView)findViewById(R.id.pine);
+        Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.popout);
+        image.startAnimation(animation1);
     }
 
     public void sendToSavedLocations(View view){
