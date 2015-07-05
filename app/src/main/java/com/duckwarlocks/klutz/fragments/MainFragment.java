@@ -3,6 +3,8 @@ package com.duckwarlocks.klutz.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.Gravity;
@@ -100,6 +102,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                     LinearLayout.LayoutParams.MATCH_PARENT
             );
             input.setLayoutParams(layoutParams);
+            input.setTextColor(Color.BLACK);
             theAlert.setView(input);
 
             theAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -109,7 +112,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
                     if (title != null && !title.equals("")) {
 
-//                        saveToFile(createLocationVO(title));
                         saveToDB(createLocationVO(title));
 
                         Toast.makeText(mContext, "Your location is - Latitude : " + mLatitude +

@@ -87,10 +87,13 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                 case 2: fragment = new SavedLocationsFragment();
                     break;
             }
-            FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_place, fragment );
-            fragmentTransaction.commit();
+
+            if(fragment!=null){
+                FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_place, fragment );
+                fragmentTransaction.commit();
+            }
 
             DrawerLayout drawer = (DrawerLayout)(((Activity) context).findViewById(R.id.myDrawerLayout));
             drawer.closeDrawers();
