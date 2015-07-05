@@ -1,6 +1,7 @@
 package com.duckwarlocks.klutz.fragments;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -43,22 +44,19 @@ public class SavedLocationsFragment extends Fragment
     private ItemTouchHelper mItemTouchHelper;
 
     private View rootView;
+    private Context mContext;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                 ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rootView = inflater.inflate(R.layout.fragment_saved_locations,container,false);
+        mContext = rootView.getContext().getApplicationContext();
         mLocationView = (RecyclerView) rootView.findViewById(R.id.recordList);
 
+        adapter = new LocationAdapter(mContext,R.layout.list_piece);
 
-        mLocationView.setLayoutManager(new LinearLayoutManager(rootView.getContext().getApplicationContext()));
-        mLocationView.setItemAnimator(new DefaultItemAnimator());
-
-        adapter = new LocationAdapter(
-                rootView.getContext().getApplicationContext(),R.layout.list_piece);
-
-        mLocationDAO = new LocationsDAO(rootView.getContext().getApplicationContext());
+        mLocationDAO = new LocationsDAO(mContext);
 
         try{
             mLocationDAO.open();
@@ -75,13 +73,14 @@ public class SavedLocationsFragment extends Fragment
         adapter.setLocationVOList(mLocationList);
         adapter.updateList();
         mLocationView.setAdapter(adapter);
+        mLocationView.setLayoutManager(new LinearLayoutManager(mContext));
+        mLocationView.setItemAnimator(new DefaultItemAnimator());
 
         mInputSearch = (EditText)rootView.findViewById(R.id.inputSearch);
         //Add search functionality to editText
         mInputSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -90,16 +89,17 @@ public class SavedLocationsFragment extends Fragment
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) {}
         });
 
         ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(adapter);
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(mLocationView);
 
-       return inflater.inflate(R.layout.fragment_saved_locations,container,false);
+//       return inflater.inflate(R.layout.fragment_saved_locations,container,false);
+        return rootView;
     }
+
 
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
