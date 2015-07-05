@@ -21,11 +21,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SavedLocationsActivity"
-            android:label="@string/title_activity_saved_locations"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
     </application>
 
 </manifest>

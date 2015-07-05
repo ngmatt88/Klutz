@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duckwarlocks.klutz.R;
-import com.duckwarlocks.klutz.SavedLocationsActivity;
 import com.duckwarlocks.klutz.fragments.MainFragment;
 import com.duckwarlocks.klutz.fragments.SavedLocationsFragment;
 
@@ -93,11 +92,10 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_place, fragment );
                 fragmentTransaction.commit();
+
+                DrawerLayout drawer = (DrawerLayout)(((Activity) context).findViewById(R.id.myDrawerLayout));
+                drawer.closeDrawers();
             }
-
-            DrawerLayout drawer = (DrawerLayout)(((Activity) context).findViewById(R.id.myDrawerLayout));
-            drawer.closeDrawers();
-
         }
 
 

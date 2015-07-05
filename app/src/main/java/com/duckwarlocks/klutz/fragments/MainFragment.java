@@ -62,7 +62,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         mSaveCoordinates.setOnClickListener(this);
 
         mLocationDAO = new LocationsDAO(mContext);
-//        return inflater.inflate(R.layout.fragment_main, container, false);
         return mRootView;
     }
 
