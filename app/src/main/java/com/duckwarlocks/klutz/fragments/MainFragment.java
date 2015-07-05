@@ -1,4 +1,4 @@
-package com.duckwarlocks.klutz;
+package com.duckwarlocks.klutz.fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
+import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
 import com.duckwarlocks.klutz.utilities.FileHelper;
@@ -37,7 +38,7 @@ public class MainFragment extends Fragment {
                                 ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        return inflater.inflate(R.layout.fragment_main,container,false);
+        return inflater.inflate(R.layout.fragment_main, container, false);
     }
 
 

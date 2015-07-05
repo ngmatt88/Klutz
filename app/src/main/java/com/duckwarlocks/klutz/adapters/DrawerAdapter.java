@@ -1,7 +1,12 @@
 package com.duckwarlocks.klutz.adapters;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +17,7 @@ import android.widget.Toast;
 
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.SavedLocationsActivity;
+import com.duckwarlocks.klutz.fragments.SavedLocationsFragment;
 
 /**
  * Created by raf0c on 04/07/15.
@@ -72,23 +78,37 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
             Toast.makeText(context,"The Item Clicked is: " + getAdapterPosition(),Toast.LENGTH_SHORT).show();
 
-            setCorrectOnClick(v,getAdapterPosition());
-        }
-
-        /**
-         * This must be updated any time a new item is added to the drawer layout
-         * @param view
-         * @param position
-         */
-        private void setCorrectOnClick(View view,int position){
-            Intent intent = null;
-            switch(position){
-                case 1: intent = new Intent(view.getContext(), SavedLocationsActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            setCorrectOnClick(getAdapterPosition());
+            Fragment fragment=null;
+            switch(getAdapterPosition()){
+                case 1: fragment = new SavedLocationsFragment();
                     break;
             }
-            view.getContext().getApplicationContext().startActivity(intent);
+            FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_place, fragment );
+            fragmentTransaction.commit();
+
+            DrawerLayout drawer = (DrawerLayout)(((Activity) context).findViewById(R.id.myDrawerLayout));
+            drawer.closeDrawers();
         }
+
+
+//        /**
+//         * This must be updated any time a new item is added to the drawer layout
+//         * @param position
+//         */
+//        private void setCorrectOnClick(int position){
+//            Fragment fragment=null;
+//            switch(position){
+//                case 1: fragment = new SavedLocationsFragment();
+//                    break;
+//            }
+//            FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
+//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//            fragmentTransaction.replace(R.id.fragment_place,fragment);
+//            fragmentTransaction.commit();
+//        }
 
     }
 
