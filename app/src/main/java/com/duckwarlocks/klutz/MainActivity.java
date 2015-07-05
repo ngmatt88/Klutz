@@ -12,18 +12,28 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
 import com.duckwarlocks.klutz.adapter.DrawerAdapter;
+import com.duckwarlocks.klutz.constants.CommonConstants;
+import com.duckwarlocks.klutz.daos.LocationsDAO;
+import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
 import com.duckwarlocks.klutz.utilities.FileHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.vo.LocationVO;
 
+import org.w3c.dom.Text;
+
+import java.io.File;
+import java.sql.SQLException;
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -32,6 +42,8 @@ public class MainActivity extends ActionBarActivity {
     private double mLatitude;
     private double mLongitude;
     private Toolbar toolbar;
+    private TextView mCurCoordinateTxtView;
+    private LocationsDAO mLocationDAO;
 
     String TITLES[] = {"Favorites","Recents"};
     int ICONS[] = {R.drawable.ic_fav24dp,R.drawable.ic_star24dp};
@@ -87,6 +99,10 @@ public class MainActivity extends ActionBarActivity {
         mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
 
 
+
+        mLocationDAO = new LocationsDAO(this);
+        mCurCoordinateTxtView = (TextView)findViewById(R.id.currentCoordinates);
+
         try {
             //create the directory if it doesn't exist.
             FileHelper.createDir();
@@ -114,12 +130,21 @@ public class MainActivity extends ActionBarActivity {
             mLongitude = gps.getmLongitude();
             mCityName = gps.getmCityName();
 
-            promptCoordinateName(MainActivity.this);
-
+//            promptCoordinateName(MainActivity.this);
+            displayCurrentCoordinates();
         }else{
             gps.showSettingsAlert();
         }
     }
+
+    /**
+     * Displays Coordinates in the sub-title textview
+     */
+    private void displayCurrentCoordinates(){
+        mCurCoordinateTxtView.setText(CommonConstants.LATITUDE_ABBREV + " : " + mLatitude + " " + CommonConstants.LONGITUDE_ABBREV + " : " + mLongitude);
+    }
+
+
 
     /**
      *
@@ -150,41 +175,71 @@ public class MainActivity extends ActionBarActivity {
 
     /**
      * Prompt for the name to be given to these coordinates
-     * @param context
+     * @param view
      * @return
      */
-    private void promptCoordinateName(Context context){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
-        alertDialog.setTitle(R.string.coordinateNameTitle);
-        alertDialog.setMessage(R.string.coordinateNameMsg);
+    public void promptCoordinateName(View view){
+        String defaultStr = mCurCoordinateTxtView.getText().toString();
+        String subTitleStr = getResources().getString(R.string.subTitle);
+        if(defaultStr.equals(subTitleStr)){
+            AlertDialogHelper.buildWarningAlert(this,
+                    "Current Location Not Found",
+                    "Please Get Current Location Then Try Again",false,"OK").show();
+        }else{
+            String alertTitle = getResources().getString(R.string.coordinateNameTitle);
+            String msg = getResources().getString(R.string.coordinateNameMsg);
 
-        final EditText input = new EditText(MainActivity.this);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        input.setLayoutParams(layoutParams);
-        alertDialog.setView(input);
+            AlertDialog.Builder theAlert = AlertDialogHelper.buildAlert(this,alertTitle,msg,false);
 
-        //"SAVE" done in here because NOT Synchronous
-        alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String title = input.getText().toString();
+            final EditText input = new EditText(MainActivity.this);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT
+            );
+            input.setLayoutParams(layoutParams);
+            theAlert.setView(input);
 
-                if (title != null && !title.equals("")) {
+            theAlert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String title = input.getText().toString();
 
-                    saveToFile(createLocationVO(title));
+                    if (title != null && !title.equals("")) {
 
-                    Toast.makeText(getApplicationContext(), "Your location is - Latitude : " + mLatitude + "and Longitude : " + mLongitude, Toast.LENGTH_LONG).show();
+//                        saveToFile(createLocationVO(title));
+                        saveToDB(createLocationVO(title));
+
+                        Toast.makeText(getApplicationContext(), "Your location is - Latitude : " + mLatitude +
+                                "and Longitude : " + mLongitude, Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
+            });
 
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        alertDialog.show();
+            theAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+            theAlert.show();
+        }
+    }
+
+    private void saveToDB(LocationVO location){
+        try{
+            mLocationDAO.open();
+
+            mLocationDAO.createLocationVO(
+                    location.getmName(), Double.toString(location.getmLatitude()),
+                    Double.toString(location.getmLongitude()), location.getmCity());
+            mLocationDAO.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+            System.exit(1);
+        }
+        Toast saveToast = Toast.makeText(this, "Your Searches Have Been Saved",Toast.LENGTH_LONG);
+        saveToast.setGravity(Gravity.CENTER, 0, 0);
+        saveToast.show();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.duckwarlocks.klutz.adapter;
+package com.duckwarlocks.klutz.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

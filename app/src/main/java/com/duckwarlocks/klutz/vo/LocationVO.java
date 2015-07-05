@@ -8,6 +8,7 @@ public class LocationVO {
     private double mLatitude;
     private double mLongitude;
     private String mCity;
+    private long dbId;
 
 
 
@@ -38,4 +39,11 @@ public class LocationVO {
         this.mLongitude = mLongitude;
     }
 
+    public long getDbId() {
+        return dbId;
+    }
+
+    public void setDbId(long dbId) {
+        this.dbId = dbId;
+    }
 }
