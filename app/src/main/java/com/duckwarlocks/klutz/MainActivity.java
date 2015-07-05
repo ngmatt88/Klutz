@@ -14,8 +14,6 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,6 +27,8 @@ import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
 import com.duckwarlocks.klutz.utilities.FileHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.vo.LocationVO;
+import com.easyandroidanimations.library.*;
+
 
 import java.sql.SQLException;
 
@@ -52,17 +52,19 @@ public class MainActivity extends ActionBarActivity {
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
+    ImageView image;
 
     ActionBarDrawerToggle mDrawerToggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        image = (ImageView)findViewById(R.id.pine);
 
+        new BounceAnimation(image).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);
-
         mRecyclerView = (RecyclerView) findViewById(R.id.RecyclerView); // Assigning the RecyclerView Object to the xml View
 
         mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
@@ -110,17 +112,14 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    public void popout(View view){
-        ImageView image = (ImageView)findViewById(R.id.pine);
-        Animation animation1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.popout);
-        image.startAnimation(animation1);
-    }
-
     public void sendToSavedLocations(View view){
         Intent intent = new Intent(this,SavedLocationsActivity.class);
         startActivity(intent);
     }
 
+    public void bouncing(View view){
+        new BounceAnimation(image).setBounceDistance(20).setNumOfBounces(2).setDuration(1000).animate();
+    }
 
     /**
      * Grabs the current GPS coordinates and saves them to external file.
