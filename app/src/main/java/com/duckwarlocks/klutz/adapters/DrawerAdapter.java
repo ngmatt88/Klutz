@@ -1,6 +1,12 @@
 package com.duckwarlocks.klutz.adapters;
 
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duckwarlocks.klutz.R;
+import com.duckwarlocks.klutz.fragments.MainFragment;
+import com.duckwarlocks.klutz.fragments.SavedLocationsFragment;
 
 /**
  * Created by raf0c on 04/07/15.
@@ -17,15 +25,15 @@ import com.duckwarlocks.klutz.R;
 public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder> {
 
     private static final int TYPE_HEADER = 0;  // Declaring Variable to Understand which View is being worked on
-    // IF the view under inflation and population is header or Item
+    // IF the view under inflation and population is drawer_header or Item
     private static final int TYPE_ITEM = 1;
 
     private String mNavTitles[]; // String Array to store the passed titles Value from MainActivity.java
     private int mIcons[];       // Int Array to store the passed icons resource value from MainActivity.java
 
-    private String name;        //String Resource for header View Name
-    private int profile;        //int Resource for header view profile picture
-    private String email;       //String Resource for header view email
+    private String name;        //String Resource for drawer_header View Name
+    private int profile;        //int Resource for drawer_header view profile picture
+    private String email;       //String Resource for drawer_header view email
     Context context;
 
     // Creating a ViewHolder which extends the RecyclerView View Holder
@@ -58,22 +66,57 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
             else{
 
 
-                Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from header.xml for name
-                email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from header.xml for email
-                profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from header.xml for profile pic
-                Holderid = 0;                                                // Setting holder id = 0 as the object being populated are of type header view
+                Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from drawer_header.xmlder.xml for name
+                email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from drawer_header_header.xml for email
+                profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from drawer_header.xmlder.xml for profile pic
+                Holderid = 0;                                                // Setting holder id = 0 as the object being populated are of type drawer_header view
             }
         }
 
         @Override
         public void onClick(View v) {
 
-            Toast.makeText(context,"The Item Clicked is: " + getPosition(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(context,"The Item Clicked is: " + getAdapterPosition(),Toast.LENGTH_SHORT).show();
 
+//            setCorrectOnClick(getAdapterPosition());
+            Fragment fragment=null;
+            switch(getAdapterPosition()){
+                case 1: fragment = new MainFragment();
+                    break;
+                case 2: fragment = new SavedLocationsFragment();
+                    break;
+            }
+
+            if(fragment!=null){
+                FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_place, fragment );
+                fragmentTransaction.commit();
+
+                DrawerLayout drawer = (DrawerLayout)(((Activity) context).findViewById(R.id.myDrawerLayout));
+                drawer.closeDrawers();
+            }
         }
 
 
+//        /**
+//         * This must be updated any time a new item is added to the drawer layout
+//         * @param position
+//         */
+//        private void setCorrectOnClick(int position){
+//            Fragment fragment=null;
+//            switch(position){
+//                case 1: fragment = new SavedLocationsFragment();
+//                    break;
+//            }
+//            FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
+//            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//            fragmentTransaction.replace(R.id.fragment_place,fragment);
+//            fragmentTransaction.commit();
+//        }
+
     }
+
 
 
 
@@ -94,7 +137,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
 
     //Below first we ovverride the method onCreateViewHolder which is called when the ViewHolder is
-    //Created, In this method we inflate the item_row.xml layout if the viewType is Type_ITEM or else we inflate header.xml
+    //Created, In this method we inflate the item_row.xml layout if the viewType is Type_ITEM or else we inflate drawer_header_header.xml
     // if the viewType is TYPE_HEADER
     // and pass it to the view holder
 
@@ -112,7 +155,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
         } else if (viewType == TYPE_HEADER) {
 
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.header,parent,false); //Inflating the layout
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.drawer_header,parent,false); //Inflating the layout
 
             ViewHolder vhHeader = new ViewHolder(v,viewType, context); //Creating ViewHolder and passing the object of type view
 
@@ -129,14 +172,14 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
     // which view type is being created 1 for item row
     @Override
     public void onBindViewHolder(DrawerAdapter.ViewHolder holder, int position) {
-        if(holder.Holderid ==1) {                              // as the list view is going to be called after the header view so we decrement the
+        if(holder.Holderid ==1) {                              // as the list view is going to be called after the drawer_header view so we decrement the
             // position by 1 and pass it to the holder while setting the text and image
             holder.textView.setText(mNavTitles[position - 1]); // Setting the Text with the array of our Titles
             holder.imageView.setImageResource(mIcons[position -1]);// Settimg the image with array of our icons
         }
         else{
 
-            holder.profile.setImageResource(profile);           // Similarly we set the resources for header view
+            holder.profile.setImageResource(profile);           // Similarly we set the resources for drawer_header view
             holder.Name.setText(name);
             holder.email.setText(email);
         }
@@ -145,7 +188,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
     // This method returns the number of items present in the list
     @Override
     public int getItemCount() {
-        return mNavTitles.length+1; // the number of items in the list will be +1 the titles including the header view.
+        return mNavTitles.length+1; // the number of items in the list will be +1 the titles including the drawer_header view.
     }
 
 
