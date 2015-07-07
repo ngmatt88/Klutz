@@ -1,7 +1,5 @@
 package com.duckwarlocks.klutz;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -9,22 +7,12 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
-import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
 import com.duckwarlocks.klutz.adapters.DrawerAdapter;
-import com.duckwarlocks.klutz.constants.CommonConstants;
-import com.duckwarlocks.klutz.daos.LocationsDAO;
-import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
-import com.duckwarlocks.klutz.utilities.FileHelper;
-import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
-import com.duckwarlocks.klutz.vo.LocationVO;
+
 
 import java.sql.SQLException;
 
@@ -43,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
 
+
     ActionBarDrawerToggle mDrawerToggle;
 
 
@@ -50,6 +39,7 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);

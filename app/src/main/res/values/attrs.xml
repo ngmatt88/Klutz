@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="PrettyButtonView">
+        <attr name="speechbubble" format="string" />
+        <attr name="btnimage" format="reference"/>
+    </declare-styleable>
+</resources>
