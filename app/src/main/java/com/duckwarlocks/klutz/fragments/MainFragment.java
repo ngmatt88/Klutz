@@ -3,14 +3,11 @@ package com.duckwarlocks.klutz.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,16 +17,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
-import com.duckwarlocks.klutz.MainActivity;
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
 import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
-import com.duckwarlocks.klutz.utilities.FileHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.vo.LocationVO;
 import com.easyandroidanimations.library.BounceAnimation;
+
 
 import java.sql.SQLException;
 
@@ -37,6 +32,7 @@ import java.sql.SQLException;
 /**
  */
 public class MainFragment extends Fragment implements View.OnClickListener{
+
     private GpsCoordinatesHelper gps;
     private String mCityName;
     private double mLatitude;
@@ -51,8 +47,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     ImageView car_keys;
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                                ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mRootView = inflater.inflate(R.layout.fragment_main,container,false);
