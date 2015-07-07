@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
 import com.duckwarlocks.klutz.utilities.FileHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.vo.LocationVO;
+import com.easyandroidanimations.library.BounceAnimation;
 
 import java.sql.SQLException;
 
@@ -45,6 +47,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     private TextView mCurCoordinateTxtView;
     private LocationsDAO mLocationDAO;
     private Context mContext;
+    ImageView pinapple;
+    ImageView car_keys;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -57,6 +61,12 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         mGetCoordinates = (Button)mRootView.findViewById(R.id.grabCoordinatesBtn);
         mSaveCoordinates = (Button)mRootView.findViewById(R.id.saveCoordinatesBtn);
         mCurCoordinateTxtView = (TextView)mRootView.findViewById(R.id.currentCoordinates);
+        pinapple = (ImageView)mRootView.findViewById(R.id.pine);
+        car_keys = (ImageView)mRootView.findViewById(R.id.cark);
+
+
+        new BounceAnimation(pinapple).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
+        new BounceAnimation(car_keys).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
 
         mGetCoordinates.setOnClickListener(this);
         mSaveCoordinates.setOnClickListener(this);

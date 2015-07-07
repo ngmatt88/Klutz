@@ -45,8 +45,7 @@ public class MainActivity extends ActionBarActivity {
     RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
-    ImageView pinapple;
-    ImageView car_keys;
+
 
     ActionBarDrawerToggle mDrawerToggle;
 
@@ -55,12 +54,6 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        pinapple = (ImageView)findViewById(R.id.pine);
-        car_keys = (ImageView)findViewById(R.id.cark);
-
-
-        new BounceAnimation(pinapple).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
-        new BounceAnimation(car_keys).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
 
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
