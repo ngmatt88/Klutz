@@ -43,15 +43,16 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     private double mLatitude;
     private double mLongitude;
     private View mRootView;
-    private ImageView mGetCoordinates;
-    private ImageView mSaveCoordinates;
     private TextView mCurCoordinateTxtView;
     private LocationsDAO mLocationDAO;
     private Context mContext;
 
+    //==============Update the buttons you want added below======================
     private String[] BUTTON_NAMES = {"Grab Coordinates","Save Location"};
     private int[] BUTTON_RES = {R.id.grabCoordinatesBtn,R.id.saveCoordinatesBtn};
     private int[] BUTTON_IMAGES= {R.drawable.pineapple,R.drawable.car_keys_icon};
+    //============================================================================
+
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -84,6 +85,10 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         }
     }
 
+    /**
+     * MUST Add the appropriate method/action to be called when adding a new button to the screen
+     * @param v
+     */
     @Override
     public void onClick(View v){
         switch (v.getId()){
