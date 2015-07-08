@@ -127,8 +127,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
         this.context = passedContext;
         //in adapter
 
-
-
     }
 
 
