@@ -6,8 +6,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,23 +17,8 @@ import com.duckwarlocks.klutz.fragments.NavigationDrawerFragment;
 public class MainActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
-
-    String TITLES[] = {"Home","Saved Locations","Recent"};
-    int ICONS[] = {R.drawable.home_icon,R.drawable.fish_bowl,R.drawable.ic_star24dp};
-
-    String NAME = "User";
-    String EMAIL = "email";
-    int PROFILE = R.drawable.user;
-    RecyclerView mRecyclerView;                           // Declaring RecyclerView
-    RecyclerView.Adapter mAdapter;                        // Declaring Adapter For Recycler View
-    RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
-    DrawerLayout Drawer;                                  // Declaring DrawerLayout
     private ShareActionProvider mShareActionProvider;
     private NavigationDrawerFragment mNavigationDrawerFragment;
-
-
-    ActionBarDrawerToggle mDrawerToggle;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
