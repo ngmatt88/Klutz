@@ -1,6 +1,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?android:windowBackground"
@@ -39,32 +40,23 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/titleBreak"
                 >
-                <Button
+
+                <view
+                    class="com.duckwarlocks.klutz.views.PrettyButtonView"
                     android:id="@+id/grabCoordinatesBtn"
-                    android:text="@string/grabCoordinatesBtnTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/mainMenuBtnMargins"
                     android:onClick="getCoordinates"
                     />
-
-                <Button
+                <view
+                    class="com.duckwarlocks.klutz.views.PrettyButtonView"
                     android:id="@+id/saveCoordinatesBtn"
-                    android:text="@string/saveCoordinatesBtnTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/mainMenuBtnMargins"
-                    android:onClick="promptCoordinateName"/>
-                <ImageView
-                    android:id="@+id/pine"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:src="@drawable/pineapple"/>
-                <ImageView
-                    android:id="@+id/cark"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:src="@drawable/car_keys_icon"/>
+                    android:onClick="promptCoordinateName"
+                    />
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

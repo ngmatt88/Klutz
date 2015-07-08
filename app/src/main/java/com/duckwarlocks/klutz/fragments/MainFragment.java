@@ -22,6 +22,7 @@ import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
 import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
+import com.duckwarlocks.klutz.views.PrettyButtonView;
 import com.duckwarlocks.klutz.vo.LocationVO;
 import com.easyandroidanimations.library.BounceAnimation;
 
@@ -38,23 +39,26 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     private double mLatitude;
     private double mLongitude;
     private View mRootView;
-    private Button mGetCoordinates;
-    private Button mSaveCoordinates;
     private TextView mCurCoordinateTxtView;
     private LocationsDAO mLocationDAO;
     private Context mContext;
     ImageView pinapple;
     ImageView car_keys;
 
+    //==============Update the buttons you want added below======================
+    private String[] BUTTON_NAMES = {"Grab Coordinates","Save Location"};
+    private int[] BUTTON_RES = {R.id.grabCoordinatesBtn,R.id.saveCoordinatesBtn};
+    private int[] BUTTON_IMAGES= {R.drawable.pineapple,R.drawable.car_keys_icon};
+    //============================================================================
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mRootView = inflater.inflate(R.layout.fragment_main,container,false);
+        mRootView = inflater.inflate(R.layout.fragment_main, container, false);
         mContext = mRootView.getContext().getApplicationContext();
 
-        mGetCoordinates = (Button)mRootView.findViewById(R.id.grabCoordinatesBtn);
-        mSaveCoordinates = (Button)mRootView.findViewById(R.id.saveCoordinatesBtn);
         mCurCoordinateTxtView = (TextView)mRootView.findViewById(R.id.currentCoordinates);
         pinapple = (ImageView)mRootView.findViewById(R.id.pine);
         car_keys = (ImageView)mRootView.findViewById(R.id.cark);
@@ -63,13 +67,31 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         new BounceAnimation(pinapple).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
         new BounceAnimation(car_keys).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
 
-        mGetCoordinates.setOnClickListener(this);
-        mSaveCoordinates.setOnClickListener(this);
-
         mLocationDAO = new LocationsDAO(mContext);
+
+        setUpButtons();
+
         return mRootView;
     }
 
+    /**
+     * Sets up buttons to be used in the fragment.  Adds animation, onclicklistener, speech bubble
+     * text, and image.
+     */
+    private void setUpButtons(){
+        for(int i = 0 ; i < BUTTON_RES.length;i++){
+            PrettyButtonView prettyBtn = (PrettyButtonView)mRootView.findViewById(BUTTON_RES[i]);
+            prettyBtn.setSpeechTxt(BUTTON_NAMES[i]);
+            prettyBtn.setmBtnImage(BUTTON_IMAGES[i]);
+            prettyBtn.setOnClickListener(this);
+            new BounceAnimation(prettyBtn).setBounceDistance(25).setNumOfBounces(3).setDuration(1000).animate();
+        }
+    }
+
+    /**
+     * MUST Add the appropriate method/action to be called when adding a new button to the screen
+     * @param v
+     */
     @Override
     public void onClick(View v){
         switch (v.getId()){
