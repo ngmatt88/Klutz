@@ -46,8 +46,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     private TextView mCurCoordinateTxtView;
     private LocationsDAO mLocationDAO;
     private Context mContext;
-    ImageView pinapple;
-    ImageView car_keys;
 
     //==============Update the buttons you want added below======================
     private String[] BUTTON_NAMES = {"Grab Coordinates","Save Location"};
@@ -65,12 +63,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         mContext = mRootView.getContext().getApplicationContext();
 
         mCurCoordinateTxtView = (TextView)mRootView.findViewById(R.id.currentCoordinates);
-        pinapple = (ImageView)mRootView.findViewById(R.id.pine);
-        car_keys = (ImageView)mRootView.findViewById(R.id.cark);
-
-
-        new BounceAnimation(pinapple).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
-        new BounceAnimation(car_keys).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
 
         mLocationDAO = new LocationsDAO(mContext);
 
