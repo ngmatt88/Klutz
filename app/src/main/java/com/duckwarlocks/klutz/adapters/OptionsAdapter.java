@@ -5,9 +5,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.duckwarlocks.klutz.vo.RowItem;
 import com.duckwarlocks.klutz.R;
@@ -29,6 +31,7 @@ public class OptionsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
         if (convertView == null) {
             LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.drawer_list_item, null);
@@ -57,5 +60,4 @@ public class OptionsAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return rowItem.indexOf(getItem(position));
     }
-
 }

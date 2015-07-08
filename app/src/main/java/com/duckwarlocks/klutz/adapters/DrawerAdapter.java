@@ -72,7 +72,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
         @Override
         public void onClick(View v) {
-
+/*
             Toast.makeText(context,"The Item Clicked is: " + getAdapterPosition(),Toast.LENGTH_SHORT).show();
 
 //            setCorrectOnClick(getAdapterPosition());
@@ -92,7 +92,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
                 DrawerLayout drawer = (DrawerLayout)(((Activity) context).findViewById(R.id.myDrawerLayout));
                 drawer.closeDrawers();
-            }
+            }*/
         }
 
 

@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.app.Fragment;
+//import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -60,12 +60,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         mContext = mRootView.getContext().getApplicationContext();
 
         mCurCoordinateTxtView = (TextView)mRootView.findViewById(R.id.currentCoordinates);
-        pinapple = (ImageView)mRootView.findViewById(R.id.pine);
-        car_keys = (ImageView)mRootView.findViewById(R.id.cark);
-
-
-        new BounceAnimation(pinapple).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
-        new BounceAnimation(car_keys).setBounceDistance(25).setNumOfBounces(1).setDuration(1000).animate();
 
         mLocationDAO = new LocationsDAO(mContext);
 

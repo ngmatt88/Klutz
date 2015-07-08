@@ -47,7 +47,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/mainMenuBtnMargins"
-                    android:onClick="getCoordinates"
                     />
                 <view
                     class="com.duckwarlocks.klutz.views.PrettyButtonView"
@@ -55,7 +54,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/mainMenuBtnMargins"
-                    android:onClick="promptCoordinateName"
                     />
             </LinearLayout>
         </RelativeLayout>

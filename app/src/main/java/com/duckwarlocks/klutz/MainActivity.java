@@ -2,28 +2,21 @@ package com.duckwarlocks.klutz;
 
 
 import android.content.Intent;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 import android.support.v7.widget.ShareActionProvider;
-import com.duckwarlocks.klutz.adapters.DrawerAdapter;
 import com.duckwarlocks.klutz.fragments.NavigationDrawerFragment;
-import com.duckwarlocks.klutz.holders.OptionsHolderFragment;
 
 
-import java.sql.SQLException;
-
-public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
 
@@ -49,53 +42,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.mainDrawerView); // Assigning the RecyclerView Object to the xml View
-
-        mRecyclerView.setHasFixedSize(true);                            // Letting the system know that the list objects are of fixed size
-
-        mAdapter = new DrawerAdapter(TITLES,ICONS,NAME,EMAIL,PROFILE, this);       // Creating the Adapter of MyAdapter class(which we are going to see in a bit)
-        // And passing the titles,icons,drawer_header view name, drawer_header view email,
-        // and drawer_header view profile picture
-
-        mRecyclerView.setAdapter(mAdapter);                              // Setting the adapter to RecyclerView
-        mLayoutManager = new LinearLayoutManager(this);                 // Creating a layout Manager
-        mRecyclerView.setLayoutManager(mLayoutManager);                 // Setting the layout Manager
-        Drawer = (DrawerLayout) findViewById(R.id.myDrawerLayout);        // Drawer object Assigned to the view
-        mDrawerToggle = new ActionBarDrawerToggle(this,Drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close){
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                // code here will execute once the drawer is opened( As I dont want anything happened whe drawer is
-                // open I am not going to put anything here)
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                // Code here will execute once drawer is closed
-            }
-
-        }; // Drawer Toggle Object Made
-        Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
-        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.myDrawerLayout));
 
-    }
-
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.container, OptionsHolderFragment.newInstance(position + 1)).commit();
     }
 
     @Override
