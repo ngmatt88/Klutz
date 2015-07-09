@@ -5,11 +5,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.duckwarlocks.klutz.vo.RowItem;
 import com.duckwarlocks.klutz.R;
@@ -17,7 +15,7 @@ import com.duckwarlocks.klutz.R;
 import java.util.List;
 
 /**
- * Created by raf0c on 16/06/15.
+ * Created by raf0c on 08/07/15.
  */
 public class OptionsAdapter extends BaseAdapter {
 
