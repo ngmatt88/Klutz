@@ -12,13 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 import com.duckwarlocks.klutz.adapters.DrawerAdapter;
 import com.duckwarlocks.klutz.fragments.MainFragment;
 
-
-import java.sql.SQLException;
 
 public class MainActivity extends ActionBarActivity {
 

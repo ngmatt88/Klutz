@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -80,7 +79,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
             Toast.makeText(context,"The Item Clicked is: " + getAdapterPosition(),Toast.LENGTH_SHORT).show();
 
-//            setCorrectOnClick(getAdapterPosition());
             Fragment fragment=null;
             switch(getAdapterPosition()){
                 case 1: fragment = new MainFragment();
