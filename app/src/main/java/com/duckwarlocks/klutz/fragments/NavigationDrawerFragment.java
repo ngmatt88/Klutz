@@ -9,6 +9,9 @@ import android.app.Activity;
 //import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 //import android.app.FragmentTransaction;
 import android.support.v4.app.FragmentTransaction;
@@ -35,8 +38,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duckwarlocks.klutz.MainActivity;
@@ -50,6 +55,7 @@ import com.google.android.gms.plus.Plus;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.plus.model.people.Person;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,13 +83,11 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     private OptionsAdapter adapter;
     private Toolbar toolbar;
     public Fragment fragment;
+    private ImageView imgProfilePic;
+
 
     //private Button btnRevokeAccess;
 
-    /**
-     * A flag indicating that a PendingIntent is in progress and prevents us
-     * from starting further intents.
-     */
     public static final int RC_SIGN_IN = 0;
 
     private static final String TAG = "MainActivity";
@@ -104,6 +108,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     private Context mContext;
     private Activity mActivity;
 
+    private TextView txtName, txtEmail;
 
 
     public NavigationDrawerFragment() {
@@ -149,6 +154,9 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         mDrawerListView = (ListView)      myLayout.findViewById(R.id.categories);
         btnSignIn       = (SignInButton) myLayout.findViewById(R.id.btn_sign_in);
         btnSignOut      = (Button)        myLayout.findViewById(R.id.btn_sign_out);
+        txtName         = (TextView)      myLayout.findViewById(R.id.txtName);
+        txtEmail        = (TextView)      myLayout.findViewById(R.id.txtEmail);
+        imgProfilePic   = (ImageView)     myLayout.findViewById(R.id.imgProfilePic);
         //btnRevokeAccess = (Button)        myLayout.findViewById(R.id.btn_revoke_access);
         mDrawerListView.setAdapter(adapter);
 
@@ -504,21 +512,46 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 
                 System.out.println("Name: " + personName + ", plusProfile: " + personGooglePlusProfile + ", email: " + email );
 
-               // txtName.setText(personName);
-                //txtEmail.setText(email);
+                txtName.setText(personName);
+                txtEmail.setText(email);
 
                 // by default the profile url gives 50x50 px image only
                 // we can replace the value with whatever dimension we want by
                 // replacing sz=X
-               // personPhotoUrl = personPhotoUrl.substring(0, personPhotoUrl.length() - 2) + PROFILE_PIC_SIZE;
+                personPhotoUrl = personPhotoUrl.substring(0, personPhotoUrl.length() - 2) + PROFILE_PIC_SIZE;
 
-               // new LoadProfileImage(imgProfilePic).execute(personPhotoUrl);
+                new LoadProfileImage(imgProfilePic).execute(personPhotoUrl);
 
             } else {
                 Toast.makeText(super.getActivity().getApplicationContext(), "Person information is null", Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private class LoadProfileImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public LoadProfileImage(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
         }
     }
 }

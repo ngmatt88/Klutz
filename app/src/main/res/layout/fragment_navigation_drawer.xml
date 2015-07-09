@@ -12,19 +12,63 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/btn_sign_in"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"/>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_sign_out"
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btn_logout_from_google"
-        android:visibility="gone"
-        android:layout_marginBottom="10dp"/>
+        android:adjustViewBounds="true"
+        android:src="@drawable/bg_2"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/btn_sign_in"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_alignParentEnd="true"
+                />
+            <ImageView
+                android:id="@+id/imgProfilePic"
+                android:layout_width="80dp"
+                android:adjustViewBounds="true"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                />
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgProfilePic"
+                android:padding="5dp"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtName"
+                android:padding="5dp"
+                android:textSize="18dp" />
+            <Button
+                android:id="@+id/btn_sign_out"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_logout_from_google"
+                android:visibility="gone"
+                android:layout_below="@id/txtEmail"
+                android:layout_alignParentEnd="true"
+                android:layout_marginBottom="10dp"/>
+        </RelativeLayout>
+
+    </FrameLayout>
+
 </LinearLayout>
 
     <ListView
