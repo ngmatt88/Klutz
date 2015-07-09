@@ -26,12 +26,16 @@
         tools:mContext=".MainActivity">
 
 
-        <fragment
-            android:id="@+id/fragment_place"
+        <FrameLayout
+            android:id="@+id/emptyFrameForFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="com.duckwarlocks.klutz.fragments.MainFragment"
-            tools:layout="@layout/fragment_main" />
+            android:layout_height="match_parent"></FrameLayout>
+        <!--<fragment-->
+            <!--android:id="@+id/fragment_place"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:name="com.duckwarlocks.klutz.fragments.MainFragment"-->
+            <!--tools:layout="@layout/fragment_main" />-->
 
     </RelativeLayout>
         <android.support.v7.widget.RecyclerView

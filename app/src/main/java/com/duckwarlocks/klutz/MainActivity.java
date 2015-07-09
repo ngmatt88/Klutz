@@ -1,5 +1,7 @@
 package com.duckwarlocks.klutz;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,8 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 import com.duckwarlocks.klutz.adapters.DrawerAdapter;
+import com.duckwarlocks.klutz.fragments.MainFragment;
 
 
 import java.sql.SQLException;
@@ -31,8 +35,10 @@ public class MainActivity extends ActionBarActivity {
     RecyclerView.LayoutManager mLayoutManager;            // Declaring Layout Manager as a linear layout manager
     DrawerLayout Drawer;                                  // Declaring DrawerLayout
 
-
     ActionBarDrawerToggle mDrawerToggle;
+
+    static Fragment mCurrentFragment = new MainFragment();
+    FragmentTransaction mFragTransaction;
 
 
     @Override
@@ -75,6 +81,18 @@ public class MainActivity extends ActionBarActivity {
         Drawer.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
         mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
 
+
+//        FrameLayout fragmentFrame = (FrameLayout)findViewById(R.id.emptyFrameForFragment);
+
+        mFragTransaction = getSupportFragmentManager().beginTransaction();
+    }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        mFragTransaction.replace(R.id.emptyFrameForFragment, mCurrentFragment);
+        mFragTransaction.commit();
     }
 
     @Override
@@ -102,5 +120,9 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void  setmCurrentFragment(Fragment newFrag){
+        mCurrentFragment = newFrag;
     }
 }
