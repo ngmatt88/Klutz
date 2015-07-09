@@ -321,6 +321,9 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         } else {
             btnSignIn.setVisibility(View.VISIBLE);
             btnSignOut.setVisibility(View.GONE);
+            imgProfilePic.setVisibility(View.GONE);
+            txtName.setVisibility(View.GONE);
+            txtEmail.setVisibility(View.GONE);
            // btnRevokeAccess.setVisibility(View.GONE);
             //llProfileLayout.setVisibility(View.GONE);
         }
