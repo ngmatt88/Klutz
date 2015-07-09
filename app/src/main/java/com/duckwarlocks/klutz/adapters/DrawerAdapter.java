@@ -1,9 +1,10 @@
 package com.duckwarlocks.klutz.adapters;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.duckwarlocks.klutz.MainActivity;
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.fragments.MainFragment;
 import com.duckwarlocks.klutz.fragments.SavedLocationsFragment;
@@ -75,7 +77,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 /*
             Toast.makeText(context,"The Item Clicked is: " + getAdapterPosition(),Toast.LENGTH_SHORT).show();
 
-//            setCorrectOnClick(getAdapterPosition());
             Fragment fragment=null;
             switch(getAdapterPosition()){
                 case 1: fragment = new MainFragment();
@@ -85,9 +86,11 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
             }
 
             if(fragment!=null){
-                FragmentManager fragmentManager = ((Activity) context).getFragmentManager();
+                MainActivity.setmCurrentFragment(fragment);
+
+                FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment_place, fragment );
+                fragmentTransaction.replace(R.id.emptyFrameForFragment, fragment );
                 fragmentTransaction.commit();
 
                 DrawerLayout drawer = (DrawerLayout)(((Activity) context).findViewById(R.id.myDrawerLayout));

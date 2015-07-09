@@ -4,6 +4,8 @@ package com.duckwarlocks.klutz;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -14,6 +16,8 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import android.support.v7.widget.ShareActionProvider;
 import com.duckwarlocks.klutz.fragments.NavigationDrawerFragment;
+import com.duckwarlocks.klutz.adapters.DrawerAdapter;
+import com.duckwarlocks.klutz.fragments.MainFragment;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -21,6 +25,10 @@ public class MainActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private ShareActionProvider mShareActionProvider;
     private NavigationDrawerFragment mNavigationDrawerFragment;
+
+    static Fragment mCurrentFragment = new MainFragment();
+    FragmentTransaction mFragTransaction;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +67,15 @@ public class MainActivity extends ActionBarActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+//        mFragTransaction = getSupportFragmentManager().beginTransaction();
+    }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        mFragTransaction.replace(R.id.emptyFrameForFragment, mCurrentFragment);
+        mFragTransaction.commit();
     }
 
     @Override
@@ -98,5 +115,9 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void  setmCurrentFragment(Fragment newFrag){
+        mCurrentFragment = newFrag;
     }
 }

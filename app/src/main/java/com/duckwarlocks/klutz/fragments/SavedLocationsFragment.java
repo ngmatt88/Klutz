@@ -1,8 +1,6 @@
 package com.duckwarlocks.klutz.fragments;
 
-import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 //import android.app.Fragment;
 import android.support.v4.app.Fragment;
@@ -15,17 +13,15 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.adapters.LocationAdapter;
 import com.duckwarlocks.klutz.callbacks.SimpleItemTouchHelperCallback;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
-import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.vo.LocationVO;
 
 import java.sql.SQLException;
@@ -70,6 +66,7 @@ public class SavedLocationsFragment extends Fragment
             //TODO do something later
             Log.e(getClass().getName(), e.toString());
             e.printStackTrace();
+            System.exit(1);
         }
 
         adapter.setLocationVOList(mLocationList);
