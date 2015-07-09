@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -64,8 +63,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
                 Holderid = 1;                                               // setting holder id as 1 as the object being populated are of type item row
             }
             else{
-
-
                 Name = (TextView) itemView.findViewById(R.id.name);         // Creating Text View object from drawer_header.xmlder.xml for name
                 email = (TextView) itemView.findViewById(R.id.email);       // Creating Text View object from drawer_header_header.xml for email
                 profile = (ImageView) itemView.findViewById(R.id.circleView);// Creating Image view object from drawer_header.xmlder.xml for profile pic
@@ -75,7 +72,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
         @Override
         public void onClick(View v) {
-
+/*
             Toast.makeText(context,"The Item Clicked is: " + getAdapterPosition(),Toast.LENGTH_SHORT).show();
 
 //            setCorrectOnClick(getAdapterPosition());
@@ -95,7 +92,7 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
 
                 DrawerLayout drawer = (DrawerLayout)(((Activity) context).findViewById(R.id.myDrawerLayout));
                 drawer.closeDrawers();
-            }
+            }*/
         }
 
 
@@ -129,8 +126,6 @@ public class DrawerAdapter extends RecyclerView.Adapter<DrawerAdapter.ViewHolder
         profile = Profile;//here we assign those passed values to the values we declared here
         this.context = passedContext;
         //in adapter
-
-
 
     }
 

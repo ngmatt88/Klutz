@@ -18,30 +18,32 @@
         android:layout_height="match_parent"
         android:elevation="7dp">
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:mContext=".MainActivity">
-
-
-        <fragment
-            android:id="@+id/fragment_place"
+        <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.duckwarlocks.klutz.fragments.MainFragment"
-            tools:layout="@layout/fragment_main" />
+            android:id="@+id/container"
+            tools:mContext=".MainActivity">
 
-    </RelativeLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mainDrawerView"
-            android:layout_width="320dp"
+            <fragment
+                android:id="@+id/fragment_place"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.duckwarlocks.klutz.fragments.MainFragment"
+                tools:layout="@layout/fragment_main" />
+
+        </RelativeLayout>
+
+        <fragment
+            android:id="@+id/navigation_drawer"
+            android:layout_width="240dp"
             android:layout_height="match_parent"
-            android:layout_gravity="left|start"
-            android:background="#ffffff"
-            android:scrollbars="vertical">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_gravity="start"
+            android:name="com.duckwarlocks.klutz.fragments.NavigationDrawerFragment"
+            tools:layout="@layout/fragment_navigation_drawer">
+        </fragment>
 
     </android.support.v4.widget.DrawerLayout>
+
 </LinearLayout>
