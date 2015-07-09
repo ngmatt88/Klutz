@@ -3,31 +3,26 @@ package com.duckwarlocks.klutz.fragments;
 /**
  * Created by raf0c on 07/07/15.
  */
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.Status;
+
 import android.app.Activity;
-//import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
-//import android.app.FragmentTransaction;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v4.app.ActionBarDrawerToggle;
-//import android.app.Fragment;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -43,8 +38,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.duckwarlocks.klutz.MainActivity;
 import com.duckwarlocks.klutz.adapters.OptionsAdapter;
 import com.duckwarlocks.klutz.vo.RowItem;
 import com.duckwarlocks.klutz.R;
@@ -54,6 +47,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.plus.model.people.Person;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.Status;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -62,21 +57,14 @@ import java.util.List;
 
 public class NavigationDrawerFragment extends Fragment implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
-    /**
-     * Remember the position of the selected item.
-     */
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
-
-    private ActionBarDrawerToggle mDrawerToggle;
-
+    public ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
     public ListView mDrawerListView;
     private LinearLayout myLayout;
     public View mFragmentContainerView;
-
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
-
     String[] menutitles;
     TypedArray menuIcons;
     private List<RowItem> rowItems;
@@ -84,30 +72,18 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     private Toolbar toolbar;
     public Fragment fragment;
     private ImageView imgProfilePic;
-
-
     //private Button btnRevokeAccess;
-
     public static final int RC_SIGN_IN = 0;
-
     private static final String TAG = "MainActivity";
-
     private static final int PROFILE_PIC_SIZE = 800;
-
     private GoogleApiClient mGoogleApiClient;
-
     private boolean mIntentInProgress;
-
     private boolean mSignInClicked;
-
     private ConnectionResult mConnectionResult;
-
     private SignInButton btnSignIn;
     private Button btnSignOut;
-
     private Context mContext;
     private Activity mActivity;
-
     private TextView txtName, txtEmail;
 
 
@@ -121,12 +97,9 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         menutitles      = getResources().getStringArray(R.array.titles);
         menuIcons       = getResources().obtainTypedArray(R.array.icons);
         toolbar         = (Toolbar) super.getActivity().findViewById(R.id.tool_bar);
-
-
-
         rowItems        = new ArrayList<>();
-        mContext =      getActivity().getApplicationContext();
-        mActivity = getActivity();
+        mContext        = getActivity().getApplicationContext();
+        mActivity       = getActivity();
 
         for (int i = 0; i < menutitles.length; i++) {
             RowItem items = new RowItem(menutitles[i], menuIcons.getResourceId(i, -1));
@@ -142,13 +115,52 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);
 
+    }
 
+
+    public void setUp(int fragmentId, DrawerLayout drawerLayout) {
+
+        mFragmentContainerView = getActivity().findViewById(fragmentId);
+        mDrawerLayout = drawerLayout;
+
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+
+        // ActionBarDrawerToggle ties together the the proper interactions
+        // between the navigation drawer and the action bar app icon.
+        mDrawerToggle = new ActionBarDrawerToggle(
+                super.getActivity(),
+                mDrawerLayout,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close){
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+
+                super.onDrawerOpened(drawerView);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+
+        }; // Drawer Toggle Object Made
+        mDrawerLayout.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
+        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
+/*        if (!mFromSavedInstanceState) {
+            mDrawerLayout.openDrawer(mFragmentContainerView);
+        }*/
+        mDrawerLayout.closeDrawers();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // mDrawerListView = (ListView) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
         myLayout = (LinearLayout) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
         mDrawerListView = (ListView)      myLayout.findViewById(R.id.categories);
@@ -160,11 +172,9 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         //btnRevokeAccess = (Button)        myLayout.findViewById(R.id.btn_revoke_access);
         mDrawerListView.setAdapter(adapter);
 
-
         btnSignIn.setOnClickListener(this);
         btnSignOut.setOnClickListener(this);
         //btnRevokeAccess.setOnClickListener(this);
-
         // Initializing google plus api client
         mGoogleApiClient = new GoogleApiClient.Builder(mContext)
                 .addConnectionCallbacks(this)
@@ -176,26 +186,29 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(getActivity().getApplicationContext(),"The Item Clicked is: " + position,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "The Item Clicked is: " + position, Toast.LENGTH_SHORT).show();
 
                 fragment = null;
 
-                switch(position){
-                    case 0: fragment =  new MainFragment();
+                switch (position) {
+                    case 0:
+                        fragment = new MainFragment();
                         mDrawerLayout.closeDrawers();
                         break;
-                    case 1: fragment = new SavedLocationsFragment();
+                    case 1:
+                        fragment = new SavedLocationsFragment();
                         mDrawerLayout.closeDrawers();
                         break;
                 }
 
-                if(fragment!=null){
+                if (fragment != null) {
 
                     FragmentManager fragmentManager = getFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_place, fragment );
+                    fragmentTransaction.replace(R.id.fragment_place, fragment);
                     fragmentTransaction.commit();
                 }
+                mDrawerLayout.closeDrawers();
             }
         });
 
@@ -207,15 +220,12 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_sign_in:
-                // Signin button clicked
                 signInWithGplus();
                 break;
             case R.id.btn_sign_out:
-                // Signout button clicked
                 signOutFromGplus();
                 break;
             case R.id.btn_revoke_access:
-                // Revoke access button clicked
                 revokeGplusAccess();
                 break;
         }
@@ -245,14 +255,10 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 
             if (!mGoogleApiClient.isConnecting()) {
                 mGoogleApiClient.connect();
-
             }
         }
     }
 
-    /**
-     * Sign-in into google
-     * */
     private void signInWithGplus() {
         if (!mGoogleApiClient.isConnecting()) {
             mSignInClicked = true;
@@ -260,9 +266,6 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    /**
-     * Method to resolve any signin errors
-     * */
     private void resolveSignInError() {
         if(mConnectionResult!=null){
             if (mConnectionResult.hasResolution()) {
@@ -279,9 +282,6 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    /**
-     * Sign-out from google
-     * */
     private void signOutFromGplus() {
         if (mGoogleApiClient.isConnected()) {
             updateUI(false);
@@ -291,9 +291,6 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    /**
-     * Revoking access from google
-     * */
     private void revokeGplusAccess() {
         if (mGoogleApiClient.isConnected()) {
             Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
@@ -309,23 +306,16 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         }
     }
 
-    /**
-     * Updating the UI, showing/hiding buttons and profile layout
-     * */
     private void updateUI(boolean isSignedIn) {
         if (isSignedIn) {
             btnSignIn.setVisibility(View.GONE);
             btnSignOut.setVisibility(View.VISIBLE);
-            //btnRevokeAccess.setVisibility(View.VISIBLE);
-            //llProfileLayout.setVisibility(View.VISIBLE);
         } else {
             btnSignIn.setVisibility(View.VISIBLE);
             btnSignOut.setVisibility(View.GONE);
             imgProfilePic.setVisibility(View.GONE);
             txtName.setVisibility(View.GONE);
             txtEmail.setVisibility(View.GONE);
-           // btnRevokeAccess.setVisibility(View.GONE);
-            //llProfileLayout.setVisibility(View.GONE);
         }
     }
     @Override
@@ -334,54 +324,10 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         setHasOptionsMenu(true);
     }
 
-
-
-
-
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }
 
-    public void setUp(int fragmentId, DrawerLayout drawerLayout) {
-
-        mFragmentContainerView = getActivity().findViewById(fragmentId);
-        mDrawerLayout = drawerLayout;
-
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the navigation drawer and the action bar app icon.
-        mDrawerToggle = new ActionBarDrawerToggle(
-                        super.getActivity(),
-                        mDrawerLayout,
-                        R.drawable.ic_drawer,
-                        R.string.navigation_drawer_open,
-                        R.string.navigation_drawer_close){
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-
-                super.onDrawerOpened(drawerView);
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-            }
-
-        }; // Drawer Toggle Object Made
-        mDrawerLayout.setDrawerListener(mDrawerToggle); // Drawer Listener set to the Drawer toggle
-        mDrawerToggle.syncState();               // Finally we set the drawer toggle sync State
-
-        if (!mFromSavedInstanceState) {
-            mDrawerLayout.openDrawer(mFragmentContainerView);
-        }
-
-    }
 
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
@@ -449,6 +395,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
      * Per the navigation drawer design guidelines, updates the action bar to show the global app
      * 'context', rather than just what's in the current screen.
      */
+
     private void showGlobalContextActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
@@ -458,6 +405,9 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 
     private ActionBar getActionBar() {
         return ((ActionBarActivity) getActivity()).getSupportActionBar();
+    }
+    private void  setSupportToolbar(Toolbar tb){
+         ((AppCompatActivity) getActivity()).setSupportActionBar(tb);
     }
 
     @Override
@@ -511,16 +461,10 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
                 String personGooglePlusProfile = currentPerson.getUrl();
                 String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
 
-               // Log.e(TAG, "Name: " + personName + ", plusProfile: " + personGooglePlusProfile + ", email: " + email + ", Image: " + personPhotoUrl);
-
                 System.out.println("Name: " + personName + ", plusProfile: " + personGooglePlusProfile + ", email: " + email );
 
                 txtName.setText(personName);
                 txtEmail.setText(email);
-
-                // by default the profile url gives 50x50 px image only
-                // we can replace the value with whatever dimension we want by
-                // replacing sz=X
                 personPhotoUrl = personPhotoUrl.substring(0, personPhotoUrl.length() - 2) + PROFILE_PIC_SIZE;
 
                 new LoadProfileImage(imgProfilePic).execute(personPhotoUrl);

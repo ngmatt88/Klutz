@@ -36,13 +36,13 @@
     <string-array name="titles">
         <item>Home</item>
         <item>Saved Locations</item>
-        <item>Favorites</item>
+        <!--<item>Favorites</item>-->
     </string-array>
 
 
     <array name="icons">
         <item>@drawable/home_icon</item>
         <item>@drawable/fish_bowl</item>
-        <item>@drawable/ic_star24dp</item>
+      <!--  <item>@drawable/ic_star24dp</item>-->
     </array>
 </resources>
