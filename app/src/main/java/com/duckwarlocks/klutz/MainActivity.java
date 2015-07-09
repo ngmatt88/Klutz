@@ -27,7 +27,6 @@ public class MainActivity extends ActionBarActivity {
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     static Fragment mCurrentFragment = new MainFragment();
-    FragmentTransaction mFragTransaction;
 
 
     @Override
@@ -67,15 +66,16 @@ public class MainActivity extends ActionBarActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-//        mFragTransaction = getSupportFragmentManager().beginTransaction();
+
     }
 
 
     @Override
-    public void onResume(){
-        super.onResume();
-        mFragTransaction.replace(R.id.emptyFrameForFragment, mCurrentFragment);
-        mFragTransaction.commit();
+    public void onStart(){
+        super.onStart();
+        FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
+        fragTransaction.replace(R.id.emptyFrameForFragment, mCurrentFragment);
+        fragTransaction.commit();
     }
 
     @Override

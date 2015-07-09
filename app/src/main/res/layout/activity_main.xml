@@ -26,7 +26,10 @@
             android:id="@+id/container"
             tools:mContext=".MainActivity">
 
-
+            <FrameLayout
+                android:id="@+id/emptyFrameForFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
         </RelativeLayout>
 
         <fragment
@@ -37,10 +40,7 @@
             android:name="com.duckwarlocks.klutz.fragments.NavigationDrawerFragment"
             tools:layout="@layout/fragment_navigation_drawer">
         </fragment>
-        <FrameLayout
-            android:id="@+id/emptyFrameForFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></FrameLayout>
+
         <!--<fragment-->
             <!--android:id="@+id/fragment_place"-->
             <!--android:layout_width="match_parent"-->

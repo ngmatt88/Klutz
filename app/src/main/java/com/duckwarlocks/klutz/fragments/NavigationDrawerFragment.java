@@ -10,6 +10,7 @@ import android.content.IntentSender;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
@@ -38,6 +39,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.duckwarlocks.klutz.MainActivity;
 import com.duckwarlocks.klutz.adapters.OptionsAdapter;
 import com.duckwarlocks.klutz.vo.RowItem;
 import com.duckwarlocks.klutz.R;
@@ -86,6 +89,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     private Activity mActivity;
     private TextView txtName, txtEmail;
 
+    private Context mLittleContext;
 
     public NavigationDrawerFragment() {
     }
@@ -99,6 +103,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         toolbar         = (Toolbar) super.getActivity().findViewById(R.id.tool_bar);
         rowItems        = new ArrayList<>();
         mContext        = getActivity().getApplicationContext();
+        mLittleContext  = getActivity();
         mActivity       = getActivity();
 
         for (int i = 0; i < menutitles.length; i++) {
@@ -202,10 +207,11 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
                 }
 
                 if (fragment != null) {
+                    MainActivity.setmCurrentFragment(fragment);
 
-                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentManager fragmentManager = ((FragmentActivity) mLittleContext).getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.fragment_place, fragment);
+                    fragmentTransaction.replace(R.id.emptyFrameForFragment, fragment );
                     fragmentTransaction.commit();
                 }
                 mDrawerLayout.closeDrawers();
