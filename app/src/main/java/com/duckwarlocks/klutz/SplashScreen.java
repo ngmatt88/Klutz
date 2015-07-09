@@ -19,7 +19,7 @@ public class SplashScreen extends Activity {
         setContentView(R.layout.splash_screen);
 
         GifMovieView gifView = (GifMovieView)findViewById(R.id.splashGif);
-        gifView.setMovieResource(R.drawable.water_splash_screen_company_test);
+        gifView.setMovieResource(R.drawable.water_splash_screen_company);
 
         Thread timerThread = new Thread(){
             public void run(){
