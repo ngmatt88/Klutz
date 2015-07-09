@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -103,7 +104,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
      * @param view
      * @return
      */
-    public void promptCoordinateName(View view){
+    public void promptCoordinateName(final View view){
         String defaultStr = mCurCoordinateTxtView.getText().toString();
         String subTitleStr = getResources().getString(R.string.subTitle);
         if(defaultStr.equals(subTitleStr)){
@@ -143,6 +144,10 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             theAlert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
+                    InputMethodManager imm = (InputMethodManager)mContext.getSystemService(
+                            Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+
                     dialog.cancel();
                 }
             });
