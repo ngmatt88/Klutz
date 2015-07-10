@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.duckwarlocks.klutz"
-        minSdkVersion 21
+        minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -27,5 +27,4 @@ dependencies {
     compile 'com.android.support:cardview-v7:21.0.+'
     compile files('src/main/libs/easyandroidanimationslibrary-v0.5.jar')
     compile 'com.google.android.gms:play-services:7.5.0'
-    compile files('D:/Projects/Klutz/libs/easyandroidanimationslibrary-v0.5.jar')
 }
