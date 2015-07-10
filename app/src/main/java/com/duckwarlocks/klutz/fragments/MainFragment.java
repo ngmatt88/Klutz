@@ -132,9 +132,11 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
                         saveToDB(createLocationVO(title));
 
-                        Toast.makeText(mContext, "Your location is - Latitude : " + mLatitude +
-                                "and Longitude : " + mLongitude, Toast.LENGTH_LONG).show();
+                        InputMethodManager imm = (InputMethodManager)mContext.getSystemService(
+                                Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
                     }
+
                 }
             });
 
