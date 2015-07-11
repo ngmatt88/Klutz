@@ -88,7 +88,6 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     private Context mContext;
     private Activity mActivity;
     private TextView txtName, txtEmail;
-
     private Context mLittleContext;
 
     public NavigationDrawerFragment() {
@@ -116,9 +115,10 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
+            System.out.println("soy onCreate navigation framget");
         }
         // Select either the default item (0) or the last selected item.
-        selectItem(mCurrentSelectedPosition);
+       // selectItem(mCurrentSelectedPosition);
 
     }
 
