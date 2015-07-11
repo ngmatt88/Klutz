@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v7.widget.ShareActionProvider;
 
-import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.fragments.NavigationDrawerFragment;
 import com.duckwarlocks.klutz.fragments.MainFragment;
 
@@ -26,9 +25,6 @@ public class MainActivity extends ActionBarActivity {
     private Toolbar toolbar;
     private ShareActionProvider mShareActionProvider;
     private NavigationDrawerFragment mNavigationDrawerFragment;
-    private MainFragment mainf = new MainFragment();
-    private TextView txt;
-
     static Fragment mCurrentFragment = new MainFragment();
 
 
@@ -42,33 +38,12 @@ public class MainActivity extends ActionBarActivity {
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 
-
-        if(savedInstanceState!=null){
-            txt = mainf.mCurCoordinateTxtView;
-        }
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.myDrawerLayout));
 
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle state) {
-        super.onSaveInstanceState(state);
-        state.putString(mainf.STATE_LAT, String.valueOf(mainf.mLatitude));
-        state.putString(mainf.STATE_LONG, String.valueOf(mainf.mLongitude));
-    }
 
-    @Override
-    public void onRestoreInstanceState(Bundle state) {
-        super.onRestoreInstanceState(state);
-        if (state != null) {
-            txt = (TextView) findViewById(R.id.currentCoordinates);
-            txt = mainf.mCurCoordinateTxtView;
-            String lat = state.getString(mainf.STATE_LAT);
-            String longitud = state.getString(mainf.STATE_LONG);
-            txt.setText(CommonConstants.LATITUDE_ABBREV + " : " + lat + " " + CommonConstants.LONGITUDE_ABBREV + " : " + longitud);
-        }
-    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

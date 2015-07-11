@@ -36,16 +36,12 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
     private GpsCoordinatesHelper gps;
     private String mCityName;
-    public static double mLatitude;
-    public static double mLongitude;
+    private  double mLatitude;
+    private  double mLongitude;
     private View mRootView;
-    public static TextView mCurCoordinateTxtView;
+    private  TextView mCurCoordinateTxtView;
     private LocationsDAO mLocationDAO;
     private Context mContext;
-    public static final String STATE_LAT = "current_lat";
-    public static final String STATE_LONG = "current_long";
-    public int count = 0;
-
 
     //==============Update the buttons you want added below======================
     private String[] BUTTON_NAMES = {"Grab Coordinates","Save Location"};
@@ -65,40 +61,10 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         mLocationDAO = new LocationsDAO(mContext);
 
         setUpButtons();
-        System.out.println("soy onCreate main framget");
 
         return mRootView;
     }
-    @Override
-    public void onViewStateRestored (Bundle savedInstanceState){
-        super.onViewStateRestored(savedInstanceState);
-        if (savedInstanceState != null) {
-            System.out.println("soy onviewsateterestored main framget");
-            String lat = savedInstanceState.getString(STATE_LAT);
-            String longitud = savedInstanceState.getString(STATE_LONG);
-            mCurCoordinateTxtView.setText(CommonConstants.LATITUDE_ABBREV + " : " + lat + " " + CommonConstants.LONGITUDE_ABBREV + " : " + longitud);
-        }
-    }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        setHasOptionsMenu(true);
-
-        if (savedInstanceState != null) {
-            System.out.println("soy onActivityCreated main framget");
-
-            String lat = savedInstanceState.getString(STATE_LAT);
-            String longitud = savedInstanceState.getString(STATE_LONG);
-            mCurCoordinateTxtView.setText(CommonConstants.LATITUDE_ABBREV + " : " + lat + " " + CommonConstants.LONGITUDE_ABBREV + " : " + longitud);
-        }
-    }
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(STATE_LAT, String.valueOf(mLatitude));
-        outState.putString(STATE_LONG, String.valueOf(mLongitude));
-    }
     /**
      * Sets up buttons to be used in the fragment.  Adds animation, onclicklistener, speech bubble
      * text, and image.
