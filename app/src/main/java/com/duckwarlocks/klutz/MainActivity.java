@@ -45,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
 
         if(savedInstanceState!=null){
             txt = mainf.mCurCoordinateTxtView;
+            mCurrentFragment = getSupportFragmentManager().getFragment(savedInstanceState,"mCurrentFragment");
         }
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.myDrawerLayout));
@@ -56,6 +57,8 @@ public class MainActivity extends ActionBarActivity {
         super.onSaveInstanceState(state);
         state.putString(mainf.STATE_LAT, String.valueOf(mainf.mLatitude));
         state.putString(mainf.STATE_LONG, String.valueOf(mainf.mLongitude));
+
+        getSupportFragmentManager().putFragment(state,"mCurrentFragment",mCurrentFragment);
     }
 
     @Override
