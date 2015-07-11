@@ -44,6 +44,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     private Context mContext;
     public static final String STATE_LAT = "current_lat";
     public static final String STATE_LONG = "current_long";
+    public int count = 0;
 
 
     //==============Update the buttons you want added below======================
