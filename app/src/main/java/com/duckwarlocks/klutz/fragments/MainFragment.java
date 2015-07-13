@@ -106,7 +106,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
             PrettyButtonView prettyBtn = (PrettyButtonView)mRootView.findViewById(BUTTON_RES[i]);
             prettyBtn.setSpeechTxt(BUTTON_NAMES[i]);
             prettyBtn.setmBtnImage(BUTTON_IMAGES[i]);
-            prettyBtn.setOnClickListener(this);
+//            prettyBtn.setOnClickListener(this);
+            prettyBtn.setBtnOnClick(this);
             new BounceAnimation(prettyBtn).setBounceDistance(25).setNumOfBounces(3).setDuration(1000).animate();
         }
     }
@@ -117,7 +118,8 @@ public class MainFragment extends Fragment implements View.OnClickListener{
      */
     @Override
     public void onClick(View v){
-        switch (v.getId()){
+        int view =((View)v.getParent().getParent()).getId();
+        switch (view){
             case R.id.grabCoordinatesBtn: getCoordinates(v);
                 break;
             case R.id.saveCoordinatesBtn: promptCoordinateName(v);

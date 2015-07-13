@@ -4,23 +4,33 @@
     android:layout_height="wrap_content"
     >
 
+
+
+    <Button
+        android:id="@+id/prettyBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello!"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+     />
+
     <ImageView
         android:id="@+id/prettyBtnImg"
         android:layout_width="120dp"
         android:layout_height="120dp"
-        android:layout_centerHorizontal="true"
+        android:layout_toLeftOf="@id/prettyBtn"
         android:adjustViewBounds="true"
         android:src="@drawable/pineapple"/>
-
-    <TextView
-        android:id="@+id/prettyBtnSpeech"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test!"
-        android:gravity="center"
-        android:background="@drawable/speechbubble"
-        android:layout_alignTop="@+id/prettyBtnImg"
-        android:layout_toRightOf="@id/prettyBtnImg"
-        android:layout_toEndOf="@+id/prettyBtnImg" />
+    <!--<TextView-->
+        <!--android:id="@+id/prettyBtnSpeech"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Test!"-->
+        <!--android:gravity="center"-->
+        <!--android:background="@drawable/speechbubble"-->
+        <!--android:layout_alignTop="@+id/prettyBtnImg"-->
+        <!--android:layout_toRightOf="@id/prettyBtnImg"-->
+        <!--android:layout_toEndOf="@+id/prettyBtnImg" />-->
 
 </RelativeLayout>

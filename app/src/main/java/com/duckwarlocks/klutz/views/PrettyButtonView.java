@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -20,7 +21,7 @@ import com.duckwarlocks.klutz.R;
  * Created by ngmat_000 on 7/7/2015.
  */
 public class PrettyButtonView extends RelativeLayout {
-    private TextView mSpeechBubble;
+    private Button mBtn;
     private ImageView mBtnImage;
 
     public PrettyButtonView(Context context){
@@ -30,7 +31,7 @@ public class PrettyButtonView extends RelativeLayout {
         inflater.inflate(R.layout.prettybuton_compoundview, this);
 
         mBtnImage = (ImageView)findViewById(R.id.prettyBtnImg);
-        mSpeechBubble = (TextView)findViewById(R.id.prettyBtnSpeech);
+        mBtn = (Button)findViewById(R.id.prettyBtn);
     }
 
 
@@ -40,18 +41,22 @@ public class PrettyButtonView extends RelativeLayout {
                 (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.prettybuton_compoundview, this);
         mBtnImage = (ImageView)findViewById(R.id.prettyBtnImg);
-        mSpeechBubble = (TextView)findViewById(R.id.prettyBtnSpeech);
+        mBtn = (Button)findViewById(R.id.prettyBtn);
+    }
+
+    public void setBtnOnClick(OnClickListener listen){
+        mBtn.setOnClickListener(listen);
     }
 
     public void setmBtnImage(int resourceId){
         mBtnImage.setImageResource(resourceId);
 
-        scaleImage();
+//        scaleImage();
     }
 
     public void setSpeechTxt(String speechTxt){
-        mSpeechBubble.setBackgroundResource(R.drawable.speechbubble);
-        mSpeechBubble.setText(speechTxt);
+//        mSpeechBubble.setBackgroundResource(R.drawable.speechbubble);
+        mBtn.setText(speechTxt);
     }
     private void scaleImage()
     {
