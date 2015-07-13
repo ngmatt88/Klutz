@@ -64,7 +64,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         mLocationDAO = new LocationsDAO(mContext);
 
         setUpButtons();
-        System.out.println("soy onCreate main framget");
 
         return mRootView;
     }

@@ -4,7 +4,7 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_test"
+    android:background="@drawable/main_background"
     tools:context="com.duckwarlocks.klutz.fragments.MainFragment">
     <!--android:background="?android:windowBackground"-->
     <LinearLayout
