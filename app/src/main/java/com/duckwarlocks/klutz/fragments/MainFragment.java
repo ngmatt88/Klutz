@@ -3,12 +3,17 @@ package com.duckwarlocks.klutz.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
+import android.graphics.SurfaceTexture;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 //import android.app.Fragment;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Surface;
+import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -29,14 +34,16 @@ import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.views.PrettyButtonView;
 import com.duckwarlocks.klutz.vo.LocationVO;
 import com.easyandroidanimations.library.BounceAnimation;
+import com.easyandroidanimations.library.ExplodeAnimation;
 
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 
 /**
  */
-public class MainFragment extends Fragment implements View.OnClickListener{
+public class MainFragment extends Fragment implements TextureView.SurfaceTextureListener, View.OnClickListener{
 
     private GpsCoordinatesHelper gps;
     private String mCityName;
@@ -49,7 +56,9 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     public static final String STATE_LAT = "current_lat";
     public static final String STATE_LONG = "current_long";
 
-
+    private MediaPlayer mMediaPlayer;
+    private TextureView mTextureView;
+    private final String FILE_NAME = "bg_video.mp4";
     //==============Update the buttons you want added below======================
     private String[] BUTTON_NAMES = {"Grab Coordinates","Save Location"};
     private int[] BUTTON_RES = {R.id.grabCoordinatesBtn,R.id.saveCoordinatesBtn};
@@ -65,6 +74,9 @@ public class MainFragment extends Fragment implements View.OnClickListener{
 
         mCurCoordinateTxtView = (TextView) mRootView.findViewById(R.id.currentCoordinates);
 
+        mTextureView = (TextureView) mRootView.findViewById(R.id.surface);
+        mTextureView.setSurfaceTextureListener(this);
+
         mLocationDAO = new LocationsDAO(mContext);
 
         setUpButtons();
@@ -75,7 +87,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     public void onViewStateRestored (Bundle savedInstanceState){
         super.onViewStateRestored(savedInstanceState);
         if (savedInstanceState != null) {
-            System.out.println("soy onviewsateterestored main framget");
             String lat = savedInstanceState.getString(STATE_LAT);
             String longitud = savedInstanceState.getString(STATE_LONG);
             mCurCoordinateTxtView.setText(CommonConstants.LATITUDE_ABBREV + " : " + lat + " " + CommonConstants.LONGITUDE_ABBREV + " : " + longitud);
@@ -88,8 +99,6 @@ public class MainFragment extends Fragment implements View.OnClickListener{
         setHasOptionsMenu(true);
 
         if (savedInstanceState != null) {
-            System.out.println("soy onActivityCreated main framget");
-
             String lat = savedInstanceState.getString(STATE_LAT);
             String longitud = savedInstanceState.getString(STATE_LONG);
             mCurCoordinateTxtView.setText(CommonConstants.LATITUDE_ABBREV + " : " + lat + " " + CommonConstants.LONGITUDE_ABBREV + " : " + longitud);
@@ -138,6 +147,7 @@ public class MainFragment extends Fragment implements View.OnClickListener{
                 break;
         }
         theBtn.setEnabled(true);
+
     }
 
     private void setUpImageAnimations(int viewId, int imageId){
@@ -271,5 +281,56 @@ public class MainFragment extends Fragment implements View.OnClickListener{
      */
     private void displayCurrentCoordinates(){
         mCurCoordinateTxtView.setText(CommonConstants.LATITUDE_ABBREV + " : " + mLatitude + " " + CommonConstants.LONGITUDE_ABBREV + " : " + mLongitude);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mMediaPlayer != null){
+            mMediaPlayer.stop();
+            mMediaPlayer.release();
+            mMediaPlayer = null;
+        }
+    }
+
+    @Override
+    public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
+
+        Surface s = new Surface(surface);
+
+        try {
+            AssetFileDescriptor descriptor = getResources().getAssets().openFd(FILE_NAME);
+            mMediaPlayer = new MediaPlayer();
+            mMediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
+            mMediaPlayer.setSurface(s);
+            mMediaPlayer.setLooping(true);
+            mMediaPlayer.prepareAsync();
+            mMediaPlayer.setVolume(8, 8);
+
+            mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.start();
+                }
+            });
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+
+    }
+
+    @Override
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+        return false;
+    }
+
+    @Override
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+
     }
 }
