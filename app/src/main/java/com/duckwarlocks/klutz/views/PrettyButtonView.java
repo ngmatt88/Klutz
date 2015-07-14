@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
@@ -59,7 +60,10 @@ public class PrettyButtonView extends RelativeLayout {
     public void setSpeechTxt(String speechTxt){
 //        mSpeechBubble.setBackgroundResource(R.drawable.speechbubble);
         mBtn.setText(speechTxt);
+        mBtn.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/ARNORG__.TTF"));
     }
+
+
     private void scaleImage()
     {
         // Get the ImageView and its bitmap
