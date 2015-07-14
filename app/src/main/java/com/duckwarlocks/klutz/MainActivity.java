@@ -19,6 +19,7 @@ import android.support.v7.widget.ShareActionProvider;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.fragments.NavigationDrawerFragment;
 import com.duckwarlocks.klutz.fragments.MainFragment;
+import com.easyandroidanimations.library.SlideInUnderneathAnimation;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -49,6 +50,8 @@ public class MainActivity extends ActionBarActivity {
         }
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.myDrawerLayout));
+
+
     }
 
     @Override

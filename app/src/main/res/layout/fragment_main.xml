@@ -4,66 +4,72 @@
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/main_background"
     tools:context="com.duckwarlocks.klutz.fragments.MainFragment">
     <!--android:background="?android:windowBackground"-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp">
-            <!--<TextView
-                android:id="@+id/currentCoordinates"
-                android:text="@string/subTitle"
-                android:textSize="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                />-->
-            <com.duckwarlocks.klutz.views.MyTextView
-                android:id="@+id/currentCoordinates"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="@string/subTitle"
-                android:layout_centerHorizontal="true"
-                />
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/home_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
-            <View
-                android:id="@+id/titleBreak"
-                android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:layout_below="@id/currentCoordinates"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@color/grey"/>
-            <LinearLayout
-                android:id="@+id/btnContainer"
+        <TextureView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/surface"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@id/titleBreak"
-                >
+                android:paddingTop="20dp">
 
-                <view
-                    class="com.duckwarlocks.klutz.views.PrettyButtonView"
-                    android:id="@+id/grabCoordinatesBtn"
+                <com.duckwarlocks.klutz.views.MyTextView
+                    android:id="@+id/currentCoordinates"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/mainMenuBtnMargins"
+                    android:textSize="20dp"
+                    android:text="@string/subTitle"
+                    android:layout_centerHorizontal="true"
                     />
-                <view
-                    class="com.duckwarlocks.klutz.views.PrettyButtonView"
-                    android:id="@+id/saveCoordinatesBtn"
+
+                <View
+                    android:id="@+id/titleBreak"
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@id/currentCoordinates"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@color/grey"/>
+                <LinearLayout
+                    android:id="@+id/btnContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/mainMenuBtnMargins"
-                    />
-            </LinearLayout>
-        </RelativeLayout>
-    </LinearLayout>
+                    android:orientation="vertical"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/titleBreak"
+                    >
+
+                    <view
+                        class="com.duckwarlocks.klutz.views.PrettyButtonView"
+                        android:id="@+id/grabCoordinatesBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/mainMenuBtnMargins"
+                        />
+                    <view
+                        class="com.duckwarlocks.klutz.views.PrettyButtonView"
+                        android:id="@+id/saveCoordinatesBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/mainMenuBtnMargins"
+                        />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </FrameLayout>
 </RelativeLayout>
