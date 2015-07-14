@@ -6,17 +6,18 @@
     android:layout_height="match_parent"
     tools:context="com.duckwarlocks.klutz.fragments.MainFragment">
     <!--android:background="?android:windowBackground"-->
+
+    <TextureView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/surface"
+        android:layout_centerInParent="true"/>
+
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/home_container"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <TextureView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/surface"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"/>
 
         <LinearLayout
             android:layout_width="match_parent"

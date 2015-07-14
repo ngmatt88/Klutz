@@ -25,7 +25,6 @@
             android:layout_height="match_parent"
             android:id="@+id/container"
             tools:mContext=".MainActivity">
-
             <FrameLayout
                 android:id="@+id/emptyFrameForFragment"
                 android:layout_width="match_parent"

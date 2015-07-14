@@ -38,6 +38,7 @@ import com.easyandroidanimations.library.ExplodeAnimation;
 
 
 import java.io.IOException;
+import java.io.IOException;
 import java.sql.SQLException;
 
 
@@ -58,7 +59,7 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
 
     private MediaPlayer mMediaPlayer;
     private TextureView mTextureView;
-    private final String FILE_NAME = "bg_video.mp4";
+    private final String FILE_NAME = "bg_video2.mp4";
     //==============Update the buttons you want added below======================
     private String[] BUTTON_NAMES = {"Grab Coordinates","Save Location"};
     private int[] BUTTON_RES = {R.id.grabCoordinatesBtn,R.id.saveCoordinatesBtn};
@@ -305,7 +306,7 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
             mMediaPlayer.setSurface(s);
             mMediaPlayer.setLooping(true);
             mMediaPlayer.prepareAsync();
-            mMediaPlayer.setVolume(8, 8);
+            mMediaPlayer.setVolume(0, 0);
 
             mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                 @Override
