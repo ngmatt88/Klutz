@@ -15,12 +15,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="20dp">
-            <TextView
+            <!--<TextView
                 android:id="@+id/currentCoordinates"
                 android:text="@string/subTitle"
                 android:textSize="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                />-->
+            <com.duckwarlocks.klutz.views.MyTextView
+                android:id="@+id/currentCoordinates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:text="@string/subTitle"
                 android:layout_centerHorizontal="true"
                 />
 
