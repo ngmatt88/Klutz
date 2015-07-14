@@ -50,8 +50,10 @@ public class PrettyButtonView extends RelativeLayout {
 
     public void setmBtnImage(int resourceId){
         mBtnImage.setImageResource(resourceId);
+    }
 
-//        scaleImage();
+    public ImageView getmBtnImage(){
+        return mBtnImage;
     }
 
     public void setSpeechTxt(String speechTxt){

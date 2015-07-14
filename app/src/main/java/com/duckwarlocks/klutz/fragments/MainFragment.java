@@ -11,12 +11,19 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
@@ -25,6 +32,7 @@ import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.views.PrettyButtonView;
 import com.duckwarlocks.klutz.vo.LocationVO;
 import com.easyandroidanimations.library.BounceAnimation;
+import com.easyandroidanimations.library.ExplodeAnimation;
 
 
 import java.sql.SQLException;
@@ -118,16 +126,50 @@ public class MainFragment extends Fragment implements View.OnClickListener{
      */
     @Override
     public void onClick(View v){
+        Button theBtn = (Button)v;
+        theBtn.setEnabled(false);
+
         int view =((View)v.getParent().getParent()).getId();
         switch (view){
-            case R.id.grabCoordinatesBtn: getCoordinates(v);
-                break;
-            case R.id.saveCoordinatesBtn: promptCoordinateName(v);
-                break;
+            case R.id.grabCoordinatesBtn:
+                setUpImageAnimations(view,BUTTON_IMAGES[0]);
 
+                getCoordinates(v);
+                break;
+            case R.id.saveCoordinatesBtn:
+
+                promptCoordinateName(v);
+                break;
         }
+        theBtn.setEnabled(true);
     }
 
+    private void setUpImageAnimations(int viewId, int imageId){
+        try{
+            ImageView theImg = ((PrettyButtonView)getActivity().findViewById(viewId)).getmBtnImage();
+            if(theImg != null){
+                switch (imageId){
+                    case R.drawable.pineapple:
+                        Animation animation =
+                                AnimationUtils.loadAnimation(
+                                        getActivity().getApplicationContext(), R.anim.spin);
+                        theImg.startAnimation(animation);
+//                        YoYo.with(Techniques.Tada)
+//                                .duration(100)
+//                                .playOn(theImg);
+
+                        break;
+                    case R.drawable.car_keys_icon:
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }catch(NullPointerException e){
+
+        }
+
+    }
 
     /**
      * Prompt for the name to be given to these coordinates
