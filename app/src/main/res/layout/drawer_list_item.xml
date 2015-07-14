@@ -14,7 +14,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/home_icon" />
 
-        <TextView
+        <com.duckwarlocks.klutz.views.MyTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,7 +22,8 @@
             android:gravity="center_horizontal"
             android:textColor="#FFFFFF"
             android:layout_gravity="center_vertical"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            />
 
     </LinearLayout>
 

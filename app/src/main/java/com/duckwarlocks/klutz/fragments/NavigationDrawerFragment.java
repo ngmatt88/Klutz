@@ -25,6 +25,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -42,6 +44,7 @@ import android.widget.Toast;
 
 import com.duckwarlocks.klutz.MainActivity;
 import com.duckwarlocks.klutz.adapters.OptionsAdapter;
+import com.duckwarlocks.klutz.views.TypefaceSpan;
 import com.duckwarlocks.klutz.vo.RowItem;
 import com.duckwarlocks.klutz.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -129,10 +132,13 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         mDrawerLayout = drawerLayout;
 
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+        SpannableString s = new SpannableString("KLUTZ");
+        s.setSpan(new TypefaceSpan(getActivity().getApplicationContext(), "ARNORG__.TTF"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle(s);
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
@@ -403,10 +409,10 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
      */
 
     private void showGlobalContextActionBar() {
+
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle(R.string.app_name);
     }
 
     private ActionBar getActionBar() {
