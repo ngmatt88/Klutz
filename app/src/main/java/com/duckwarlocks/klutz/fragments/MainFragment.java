@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.DecelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,8 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
@@ -32,7 +29,6 @@ import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.views.PrettyButtonView;
 import com.duckwarlocks.klutz.vo.LocationVO;
 import com.easyandroidanimations.library.BounceAnimation;
-import com.easyandroidanimations.library.ExplodeAnimation;
 
 
 import java.sql.SQLException;
@@ -147,17 +143,13 @@ public class MainFragment extends Fragment implements View.OnClickListener{
     private void setUpImageAnimations(int viewId, int imageId){
         try{
             ImageView theImg = ((PrettyButtonView)getActivity().findViewById(viewId)).getmBtnImage();
+            Animation animation;
             if(theImg != null){
                 switch (imageId){
                     case R.drawable.pineapple:
-                        Animation animation =
-                                AnimationUtils.loadAnimation(
-                                        getActivity().getApplicationContext(), R.anim.spin);
+                        animation = AnimationUtils.loadAnimation(
+                                getActivity().getApplicationContext(), R.anim.spin);
                         theImg.startAnimation(animation);
-//                        YoYo.with(Techniques.Tada)
-//                                .duration(100)
-//                                .playOn(theImg);
-
                         break;
                     case R.drawable.car_keys_icon:
                         break;

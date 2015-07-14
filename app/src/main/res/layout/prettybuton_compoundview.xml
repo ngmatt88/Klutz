@@ -5,15 +5,22 @@
     >
 
 
-
-    <Button
+    <info.hoang8f.widget.FButton
         android:id="@+id/prettyBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello!"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-     />
+        />
+    <!--<Button-->
+        <!--android:id="@+id/prettyBtn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Hello!"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+     <!--/>-->
 
     <ImageView
         android:id="@+id/prettyBtnImg"
