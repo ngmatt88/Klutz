@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@android:color/black"
     android:id="@+id/lista">
 
 <LinearLayout
@@ -75,8 +76,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="30dp"
         tools:context=".NavigationDrawerFragment" />
 </LinearLayout>
 
