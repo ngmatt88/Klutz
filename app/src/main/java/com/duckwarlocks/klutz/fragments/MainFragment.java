@@ -59,7 +59,7 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
 
     private MediaPlayer mMediaPlayer;
     private TextureView mTextureView;
-    private final String FILE_NAME = "bg_video2.mp4";
+    private final String FILE_NAME = "video_bg3.mp4";
     //==============Update the buttons you want added below======================
     private String[] BUTTON_NAMES = {"Grab Coordinates","Save Location"};
     private int[] BUTTON_RES = {R.id.grabCoordinatesBtn,R.id.saveCoordinatesBtn};
