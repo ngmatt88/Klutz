@@ -19,7 +19,6 @@ import android.support.v7.widget.ShareActionProvider;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.fragments.NavigationDrawerFragment;
 import com.duckwarlocks.klutz.fragments.MainFragment;
-import com.easyandroidanimations.library.SlideInUnderneathAnimation;
 
 
 public class MainActivity extends ActionBarActivity {

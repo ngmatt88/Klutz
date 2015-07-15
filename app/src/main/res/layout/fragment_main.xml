@@ -68,22 +68,50 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_above="@id/btnContainer"
+                        android:layout_marginTop="10dp"
                         android:weightSum="2"
                         >
 
-                        <ImageView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/pineapple"
-                            android:layout_margin="10dp"
-                            android:layout_weight="1"/>
-                        <ImageView
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/pineapple"
-                            android:layout_margin="10dp"
+                        <LinearLayout
+                            android:id="@+id/step1Set"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
                             android:layout_weight="1"
-                            />
+                            >
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Step 1"
+                                />
+                            <ImageView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_arrow"
+                                />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/step2Set"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:visibility="invisible"
+                            >
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Step 2"
+                                />
+                            <ImageView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_arrow"
+                                />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <com.duckwarlocks.klutz.views.MyTextView

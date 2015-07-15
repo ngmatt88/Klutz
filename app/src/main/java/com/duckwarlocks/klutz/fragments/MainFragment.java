@@ -131,17 +131,19 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
     public void onClick(View v){
         Button theBtn = (Button)v;
         theBtn.setEnabled(false);
-
         switch (v.getId()){
             case R.id.grabCoordinatesBtn:
                 getCoordinates(v);
+                getActivity().findViewById(R.id.step1Set).setVisibility(View.INVISIBLE);
+                (getActivity().findViewById(R.id.step2Set)).setVisibility(View.VISIBLE);
                 break;
             case R.id.saveCoordinatesBtn:
                 promptCoordinateName(v);
+                getActivity().findViewById(R.id.step2Set).setVisibility(View.INVISIBLE);
+                (getActivity().findViewById(R.id.step1Set)).setVisibility(View.VISIBLE);
                 break;
         }
         theBtn.setEnabled(true);
-
     }
 
     private void setUpImageAnimations(int viewId, int imageId){
