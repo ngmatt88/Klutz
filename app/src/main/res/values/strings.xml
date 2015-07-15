@@ -26,7 +26,7 @@
     <string name="title_section1">Grab Coordinates !</string>
     <string name="title_section2">List of locations</string>
 
-    <string name="btn_logout_from_google">Logout from Google</string>
+    <string name="btn_logout_from_google">Logout</string>
     <string name="btn_revoke_access">Revoke Access</string>
 
 <!-- TODO: Remove or change this placeholder text -->

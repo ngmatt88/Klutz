@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.SurfaceTexture;
+import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 //import android.app.Fragment;
@@ -120,6 +121,7 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
             Button prettyBtn = (Button)mRootView.findViewById(BUTTON_RES[i]);
 //            prettyBtn.setSpeechTxt(BUTTON_NAMES[i]);
 //            prettyBtn.setmBtnImage(BUTTON_IMAGES[i]);
+            prettyBtn.setTypeface(Typeface.createFromAsset(mContext.getAssets(), "fonts/Roboto-Bold.ttf"));
             prettyBtn.setOnClickListener(this);
 //            prettyBtn.setBtnOnClick(this);
 //            new BounceAnimation(prettyBtn).setBounceDistance(25).setNumOfBounces(3).setDuration(1000).animate();

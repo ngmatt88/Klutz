@@ -133,7 +133,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         SpannableString s = new SpannableString("KLUTZ");
-        s.setSpan(new TypefaceSpan(getActivity().getApplicationContext(), "ARNORG__.TTF"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        s.setSpan(new TypefaceSpan(getActivity().getApplicationContext(), "Roboto-Regular.ttf"), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

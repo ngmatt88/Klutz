@@ -23,7 +23,7 @@ public class MyTextView extends TextView {
 
     public void setTypeface(Typeface tf) {
 
-            super.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/ARNORG__.TTF"));
+            super.setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/Roboto-Regular.ttf"));
 
     }
 }
