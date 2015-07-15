@@ -7,91 +7,93 @@
     tools:context="com.duckwarlocks.klutz.fragments.MainFragment">
     <!--android:background="?android:windowBackground"-->
 
-    <TextureView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/surface"
-        android:layout_centerInParent="true"/>
+    <com.duckwarlocks.klutz.views.MyTextView
+        android:id="@+id/currentCoordinates"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:text="@string/subTitle"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        />
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/home_container"
+    <View
+        android:id="@+id/titleBreak"
         android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey"
+        android:layout_below="@+id/currentCoordinates"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_below="@id/titleBreak"
         android:layout_height="fill_parent">
 
-
-        <LinearLayout
+        <View
+            android:id="@+id/fadeBackground"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layerType="hardware"
+            android:alpha="0.5"
+            android:background="@android:color/black"/>
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="20dp">
+        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/home_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextureView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/surface"
+                android:layout_centerInParent="true"/>
 
-                <com.duckwarlocks.klutz.views.MyTextView
-                    android:id="@+id/currentCoordinates"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:text="@string/subTitle"
-                    android:layout_centerHorizontal="true"
-                    />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <View
-                    android:id="@+id/titleBreak"
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_below="@id/currentCoordinates"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@color/grey"/>
-                <LinearLayout
-                    android:id="@+id/btnContainer"
+
+
+                <RelativeLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_alignParentBottom="true"
-                    android:weightSum="2"
-                    >
+                    android:paddingTop="20dp">
 
-                    <info.hoang8f.widget.FButton
-                        android:id="@+id/grabCoordinatesBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="@string/grabCoordinatesBtnTxt"
-                        app:shadowEnabled="true"
-                        app:buttonColor="#969696"
-                        android:layout_centerHorizontal="true"
-                        android:layout_weight="1"
-                        android:layout_margin="10dp"
-                        />
-                    <info.hoang8f.widget.FButton
-                        android:id="@+id/saveCoordinatesBtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="100dp"
-                        android:text="@string/saveCoordinatesBtnTxt"
-                        app:shadowEnabled="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_weight="1"
-                        android:layout_margin="10dp"
-                        />
-                    <!--<view-->
-                        <!--class="com.duckwarlocks.klutz.views.PrettyButtonView"-->
-                        <!--android:id="@+id/grabCoordinatesBtn"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_margin="@dimen/mainMenuBtnMargins"-->
-                        <!--/>-->
-                    <!--<view-->
-                        <!--class="com.duckwarlocks.klutz.views.PrettyButtonView"-->
-                        <!--android:id="@+id/saveCoordinatesBtn"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_margin="@dimen/mainMenuBtnMargins"-->
-                        <!--/>-->
-                </LinearLayout>
-            </RelativeLayout>
-        </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/btnContainer"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_alignParentBottom="true"
+                        android:weightSum="2"
+                        >
+
+                        <info.hoang8f.widget.FButton
+                            android:id="@+id/grabCoordinatesBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
+                            android:text="@string/grabCoordinatesBtnTxt"
+                            app:shadowEnabled="true"
+                            app:buttonColor="#969696"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            />
+                        <info.hoang8f.widget.FButton
+                            android:id="@+id/saveCoordinatesBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="100dp"
+                            android:text="@string/saveCoordinatesBtnTxt"
+                            app:shadowEnabled="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_weight="1"
+                            android:layout_margin="10dp"
+                            />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+        </FrameLayout>
     </FrameLayout>
 </RelativeLayout>
