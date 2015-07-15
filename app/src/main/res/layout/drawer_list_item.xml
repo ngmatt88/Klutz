@@ -12,7 +12,7 @@
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/home_icon" />
+            android:src="@drawable/ic_home" />
 
         <com.duckwarlocks.klutz.views.MyTextView
             android:id="@+id/title"

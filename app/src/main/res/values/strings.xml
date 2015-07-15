@@ -41,8 +41,8 @@
 
 
     <array name="icons">
-        <item>@drawable/home_icon</item>
-        <item>@drawable/fish_bowl</item>
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_park</item>
       <!--  <item>@drawable/ic_star24dp</item>-->
     </array>
 </resources>
