@@ -42,7 +42,7 @@
                         <info.hoang8f.widget.FButton
                             android:id="@+id/grabCoordinatesBtn"
                             android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_height="wrap_content"
                             android:text="@string/grabCoordinatesBtnTxt"
                             app:shadowEnabled="true"
                             app:buttonColor="#969696"
@@ -53,7 +53,7 @@
                         <info.hoang8f.widget.FButton
                             android:id="@+id/saveCoordinatesBtn"
                             android:layout_width="wrap_content"
-                            android:layout_height="100dp"
+                            android:layout_height="wrap_content"
                             android:text="@string/saveCoordinatesBtnTxt"
                             app:shadowEnabled="true"
                             android:layout_centerHorizontal="true"

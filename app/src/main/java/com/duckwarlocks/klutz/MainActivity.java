@@ -28,6 +28,7 @@ public class MainActivity extends ActionBarActivity {
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private MainFragment mainf = new MainFragment();
     private TextView txt;
+    private MenuItem shareItem;
 
     static Fragment mCurrentFragment = new MainFragment();
 
@@ -59,7 +60,7 @@ public class MainActivity extends ActionBarActivity {
 
         state.putString(mainf.STATE_LAT, String.valueOf(mainf.mLatitude));
         state.putString(mainf.STATE_LONG, String.valueOf(mainf.mLongitude));
-        getSupportFragmentManager().putFragment(state,"mCurrentFragment",mCurrentFragment);
+        getSupportFragmentManager().putFragment(state, "mCurrentFragment", mCurrentFragment);
     }
 
     @Override
@@ -113,17 +114,22 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        shareItem = menu.findItem(R.id.action_example);
 
-        MenuItem shareItem = menu.findItem(R.id.action_example);
         mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
         mShareActionProvider.setShareIntent(getDefaultIntent());
+
 
         return true;
     }
 
+
+
     private Intent getDefaultIntent() {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("image/*");
+        //intent.setType("text/plain");
+
         return intent;
     }
 
@@ -151,4 +157,5 @@ public class MainActivity extends ActionBarActivity {
     public static void  setmCurrentFragment(Fragment newFrag){
         mCurrentFragment = newFrag;
     }
+
 }
