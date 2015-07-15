@@ -4,7 +4,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="mainTitle">Klutz</string>
-    <string name="subTitle">Location Reminder</string>
+    <string name="subTitle">Grab your coordinates</string>
 
     <string name="grabCoordinatesBtnTxt">Grab Coordinates</string>
     <string name="saveCoordinatesBtnTxt">Save Coordinates</string>

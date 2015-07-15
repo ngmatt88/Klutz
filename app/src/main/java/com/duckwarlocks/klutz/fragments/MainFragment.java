@@ -33,9 +33,6 @@ import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.views.PrettyButtonView;
 import com.duckwarlocks.klutz.vo.LocationVO;
-import com.easyandroidanimations.library.BounceAnimation;
-import com.easyandroidanimations.library.ExplodeAnimation;
-
 
 import java.io.IOException;
 import java.io.IOException;
@@ -135,14 +132,11 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
         Button theBtn = (Button)v;
         theBtn.setEnabled(false);
 
-//        int view =((View)v.getParent().getParent()).getId();
         switch (v.getId()){
             case R.id.grabCoordinatesBtn:
-//                setUpImageAnimations(view,BUTTON_IMAGES[0]);
                 getCoordinates(v);
                 break;
             case R.id.saveCoordinatesBtn:
-
                 promptCoordinateName(v);
                 break;
         }
