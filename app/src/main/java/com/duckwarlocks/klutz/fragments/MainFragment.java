@@ -61,9 +61,9 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
     private TextureView mTextureView;
     private final String FILE_NAME = "bg_video2.mp4";
     //==============Update the buttons you want added below======================
-    private String[] BUTTON_NAMES = {"Grab Coordinates","Save Location"};
+//    private String[] BUTTON_NAMES = {"Grab Coordinates","Save Location"};
     private int[] BUTTON_RES = {R.id.grabCoordinatesBtn,R.id.saveCoordinatesBtn};
-    private int[] BUTTON_IMAGES= {R.drawable.pineapple,R.drawable.car_keys_icon};
+//    private int[] BUTTON_IMAGES= {R.drawable.pineapple,R.drawable.car_keys_icon};
     //============================================================================
 
     @Override
@@ -117,12 +117,12 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
      */
     private void setUpButtons(){
         for(int i = 0 ; i < BUTTON_RES.length;i++){
-            PrettyButtonView prettyBtn = (PrettyButtonView)mRootView.findViewById(BUTTON_RES[i]);
-            prettyBtn.setSpeechTxt(BUTTON_NAMES[i]);
-            prettyBtn.setmBtnImage(BUTTON_IMAGES[i]);
-//            prettyBtn.setOnClickListener(this);
-            prettyBtn.setBtnOnClick(this);
-            new BounceAnimation(prettyBtn).setBounceDistance(25).setNumOfBounces(3).setDuration(1000).animate();
+            Button prettyBtn = (Button)mRootView.findViewById(BUTTON_RES[i]);
+//            prettyBtn.setSpeechTxt(BUTTON_NAMES[i]);
+//            prettyBtn.setmBtnImage(BUTTON_IMAGES[i]);
+            prettyBtn.setOnClickListener(this);
+//            prettyBtn.setBtnOnClick(this);
+//            new BounceAnimation(prettyBtn).setBounceDistance(25).setNumOfBounces(3).setDuration(1000).animate();
         }
     }
 
@@ -135,11 +135,10 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
         Button theBtn = (Button)v;
         theBtn.setEnabled(false);
 
-        int view =((View)v.getParent().getParent()).getId();
-        switch (view){
+//        int view =((View)v.getParent().getParent()).getId();
+        switch (v.getId()){
             case R.id.grabCoordinatesBtn:
-                setUpImageAnimations(view,BUTTON_IMAGES[0]);
-
+//                setUpImageAnimations(view,BUTTON_IMAGES[0]);
                 getCoordinates(v);
                 break;
             case R.id.saveCoordinatesBtn:
