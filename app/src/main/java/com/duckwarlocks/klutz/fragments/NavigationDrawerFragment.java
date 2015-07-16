@@ -40,7 +40,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.duckwarlocks.klutz.MainActivity;
 import com.duckwarlocks.klutz.adapters.OptionsAdapter;
@@ -196,8 +195,6 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                Toast.makeText(getActivity().getApplicationContext(), "The Item Clicked is: " + position, Toast.LENGTH_SHORT).show();
 
                 fragment = null;
 
@@ -396,7 +393,6 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         }
 
         if (item.getItemId() == R.id.action_example) {
-            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -425,8 +421,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     @Override
     public void onConnected(Bundle bundle) {
         mSignInClicked = false;
-        Toast.makeText(super.getActivity(), "User is connected!", Toast.LENGTH_LONG).show();
-
+        Log.e("INFO : ","User is connected!");
         // Get user's information
         getProfileInformation();
 
@@ -482,7 +477,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
                 new LoadProfileImage(imgProfilePic).execute(personPhotoUrl);
 
             } else {
-                Toast.makeText(super.getActivity().getApplicationContext(), "Person information is null", Toast.LENGTH_LONG).show();
+                Log.e("ERROR","Person information is null");
             }
         } catch (Exception e) {
             e.printStackTrace();
