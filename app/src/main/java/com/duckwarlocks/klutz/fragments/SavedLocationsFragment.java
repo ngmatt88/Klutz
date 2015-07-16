@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.duckwarlocks.klutz.Exceptions.StopProcessingException;
@@ -99,6 +100,13 @@ public class SavedLocationsFragment extends Fragment
         return rootView;
     }
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        InputMethodManager imm = (InputMethodManager)mContext.getSystemService(
+                Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(mInputSearch.getWindowToken(), 0);
+    }
 
     @Override
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
