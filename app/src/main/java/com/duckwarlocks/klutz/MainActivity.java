@@ -24,11 +24,9 @@ import com.duckwarlocks.klutz.fragments.MainFragment;
 public class MainActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
-    private ShareActionProvider mShareActionProvider;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private MainFragment mainf = new MainFragment();
     private TextView txt;
-    private MenuItem shareItem;
 
     static Fragment mCurrentFragment = new MainFragment();
 
@@ -90,19 +88,6 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (requestCode == NavigationDrawerFragment.RC_SIGN_IN) {
-            NavigationDrawerFragment fragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-            fragment.onActivityResult(requestCode, resultCode, data);
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-
-    }
-
-
-    @Override
     public void onStart(){
         super.onStart();
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
@@ -114,44 +99,7 @@ public class MainActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        shareItem = menu.findItem(R.id.action_example);
-
-        mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
-        mShareActionProvider.setShareIntent(getDefaultIntent());
-
-
         return true;
-    }
-
-
-
-    private Intent getDefaultIntent() {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("image/*");
-        //intent.setType("text/plain");
-
-        return intent;
-    }
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_example) {
-            Toast.makeText(this, "Agregame Google+.", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (id == R.id.action_settings) {
-                Toast.makeText(this, "Example settings.", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 
     public static void  setmCurrentFragment(Fragment newFrag){
