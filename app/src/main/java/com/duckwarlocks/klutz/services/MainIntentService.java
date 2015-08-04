@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.Context;
 
 import com.duckwarlocks.klutz.constants.CommonConstants;
+import com.duckwarlocks.klutz.fragments.MainFragment;
 import com.duckwarlocks.klutz.receivers.ResponseReceiver;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 
@@ -42,15 +43,20 @@ public class MainIntentService extends IntentService {
             GpsCoordinatesHelper gps = new GpsCoordinatesHelper(getApplicationContext());
 
             if (gps.ismCanGetLocation()) {
-                String mLatitude = Double.toString(gps.getmLatitude());
-                String mLongitude = Double.toString(gps.getmLongitude());
+                Double mLatitude = gps.getmLatitude();
+                Double mLongitude = gps.getmLongitude();
                 String mCityName = gps.getmCityName();
+
+
+                MainFragment.mLatitude = mLatitude;
+                MainFragment.mLongitude = mLongitude;
+                MainFragment.mCityName = mCityName;
 
                 Intent broadcastIntent = new Intent();
                 broadcastIntent.setAction(ResponseReceiver.ACTION_RESP);
                 broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-                broadcastIntent.putExtra(OUT_LAT, mLatitude);
-                broadcastIntent.putExtra(OUT_LON, mLongitude);
+                broadcastIntent.putExtra(OUT_LAT, Double.toString(mLatitude));
+                broadcastIntent.putExtra(OUT_LON, Double.toString(mLongitude));
                 broadcastIntent.putExtra(OUT_CITY, mCityName);
                 sendBroadcast(broadcastIntent);
             } else {
