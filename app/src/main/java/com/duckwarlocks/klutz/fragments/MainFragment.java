@@ -3,6 +3,7 @@ package com.duckwarlocks.klutz.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Color;
 import android.graphics.SurfaceTexture;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
+import com.duckwarlocks.klutz.services.MainIntentService;
 import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.views.PrettyButtonView;
@@ -45,7 +47,7 @@ import java.sql.SQLException;
 public class MainFragment extends Fragment implements TextureView.SurfaceTextureListener, View.OnClickListener{
 
     private GpsCoordinatesHelper gps;
-    private String mCityName;
+    public static  String mCityName;
     public static double mLatitude;
     public static double mLongitude;
     private View mRootView;
@@ -116,12 +118,8 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
     private void setUpButtons(){
         for(int i = 0 ; i < BUTTON_RES.length;i++){
             Button prettyBtn = (Button)mRootView.findViewById(BUTTON_RES[i]);
-//            prettyBtn.setSpeechTxt(BUTTON_NAMES[i]);
-//            prettyBtn.setmBtnImage(BUTTON_IMAGES[i]);
             prettyBtn.setTypeface(Typeface.createFromAsset(mContext.getAssets(), "fonts/Roboto-Bold.ttf"));
             prettyBtn.setOnClickListener(this);
-//            prettyBtn.setBtnOnClick(this);
-//            new BounceAnimation(prettyBtn).setBounceDistance(25).setNumOfBounces(3).setDuration(1000).animate();
         }
     }
 
@@ -261,17 +259,20 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
      * @param view
      */
     public void getCoordinates(View view){
-        gps = new GpsCoordinatesHelper(view.getContext().getApplicationContext());
-
-        if(gps.ismCanGetLocation()){
-            mLatitude = gps.getmLatitude();
-            mLongitude = gps.getmLongitude();
-            mCityName = gps.getmCityName();
-
-            displayCurrentCoordinates();
-        }else{
-            gps.showSettingsAlert();
-        }
+        Intent getCoordinatesIntent = new Intent(getActivity(), MainIntentService.class);
+        getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_MSG,"");
+        getActivity().startService(getCoordinatesIntent);
+//        gps = new GpsCoordinatesHelper(view.getContext().getApplicationContext());
+//
+//        if(gps.ismCanGetLocation()){
+//            mLatitude = gps.getmLatitude();
+//            mLongitude = gps.getmLongitude();
+//            mCityName = gps.getmCityName();
+//
+//            displayCurrentCoordinates();
+//        }else{
+//            gps.showSettingsAlert();
+//        }
     }
 
     /**

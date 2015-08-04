@@ -2,6 +2,7 @@ package com.duckwarlocks.klutz;
 
 
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.app.Fragment;
@@ -19,6 +20,7 @@ import android.support.v7.widget.ShareActionProvider;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.fragments.NavigationDrawerFragment;
 import com.duckwarlocks.klutz.fragments.MainFragment;
+import com.duckwarlocks.klutz.receivers.ResponseReceiver;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -29,6 +31,7 @@ public class MainActivity extends ActionBarActivity {
     private TextView txt;
 
     static Fragment mCurrentFragment = new MainFragment();
+    private  ResponseReceiver receiver;
 
 
     @Override
@@ -49,7 +52,10 @@ public class MainActivity extends ActionBarActivity {
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.myDrawerLayout));
 
-
+        IntentFilter filter = new IntentFilter(ResponseReceiver.ACTION_RESP);
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        receiver = new ResponseReceiver();
+        registerReceiver(receiver, filter);
     }
 
     @Override
