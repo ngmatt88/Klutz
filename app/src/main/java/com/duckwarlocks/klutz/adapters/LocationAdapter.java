@@ -110,23 +110,6 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder>
     }
 
 
-    public  void removeItemByPosition(int position){
-        locationDAO.deleteLocation(mLocationList.get(position));
-        mLocationList.remove(position);
-        notifyDataSetChanged();
-        //don't think the below be too accurate
-//                mOriginalList.remove(position);
-    }
-
-    public void removeItem(LocationVO locationItem){
-        mLocationList.remove(locationItem);
-        mOriginalList.remove(locationItem);
-
-        locationDAO.deleteLocation(locationItem);
-        notifyDataSetChanged();
-    }
-
-
     @Override
     public void onItemDismiss(int position){
         locationDAO.deleteLocation(mLocationList.get(position));

@@ -1,13 +1,9 @@
 package com.duckwarlocks.klutz;
 
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ServiceConnection;
 import android.content.res.Configuration;
-import android.os.IBinder;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
@@ -15,16 +11,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.support.v7.widget.ShareActionProvider;
 
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.fragments.NavigationDrawerFragment;
 import com.duckwarlocks.klutz.fragments.MainFragment;
 import com.duckwarlocks.klutz.receivers.ResponseReceiver;
-import com.duckwarlocks.klutz.services.MainIntentService;
 
 
 public class MainActivity extends ActionBarActivity {

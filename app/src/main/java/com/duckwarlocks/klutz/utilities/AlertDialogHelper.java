@@ -36,7 +36,6 @@ public class AlertDialogHelper {
         alertDialogBuilder.setTitle(title);
         alertDialogBuilder.setMessage(message);
         alertDialogBuilder.setCancelable(cancelable);
-//        AlertDialog alertDialog = alertDialogBuilder.create();
 
         return alertDialogBuilder;
     }

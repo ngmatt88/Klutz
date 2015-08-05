@@ -96,7 +96,6 @@ public class SavedLocationsFragment extends Fragment
         mItemTouchHelper = new ItemTouchHelper(callback);
         mItemTouchHelper.attachToRecyclerView(mLocationView);
 
-//       return inflater.inflate(R.layout.fragment_saved_locations,container,false);
         return rootView;
     }
 

@@ -46,7 +46,6 @@ import java.sql.SQLException;
  */
 public class MainFragment extends Fragment implements TextureView.SurfaceTextureListener, View.OnClickListener{
 
-    private GpsCoordinatesHelper gps;
     public static  String mCityName;
     public static double mLatitude;
     public static double mLongitude;
@@ -61,9 +60,7 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
     private TextureView mTextureView;
     private final String FILE_NAME = "video_bg3.mp4";
     //==============Update the buttons you want added below======================
-//    private String[] BUTTON_NAMES = {"Grab Coordinates","Save Location"};
     private int[] BUTTON_RES = {R.id.grabCoordinatesBtn,R.id.saveCoordinatesBtn};
-//    private int[] BUTTON_IMAGES= {R.drawable.pineapple,R.drawable.car_keys_icon};
     //============================================================================
 
     @Override
@@ -144,29 +141,6 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
                 break;
         }
         theBtn.setEnabled(true);
-    }
-
-    private void setUpImageAnimations(int viewId, int imageId){
-        try{
-            ImageView theImg = ((PrettyButtonView)getActivity().findViewById(viewId)).getmBtnImage();
-            Animation animation;
-            if(theImg != null){
-                switch (imageId){
-                    case R.drawable.pineapple:
-                        animation = AnimationUtils.loadAnimation(
-                                getActivity().getApplicationContext(), R.anim.spin);
-                        theImg.startAnimation(animation);
-                        break;
-                    case R.drawable.car_keys_icon:
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }catch(NullPointerException e){
-
-        }
-
     }
 
     /**
@@ -262,24 +236,6 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
         Intent getCoordinatesIntent = new Intent(getActivity(), MainIntentService.class);
         getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_MSG,"");
         getActivity().startService(getCoordinatesIntent);
-//        gps = new GpsCoordinatesHelper(view.getContext().getApplicationContext());
-//
-//        if(gps.ismCanGetLocation()){
-//            mLatitude = gps.getmLatitude();
-//            mLongitude = gps.getmLongitude();
-//            mCityName = gps.getmCityName();
-//
-//            displayCurrentCoordinates();
-//        }else{
-//            gps.showSettingsAlert();
-//        }
-    }
-
-    /**
-     * Displays Coordinates in the sub-title textview
-     */
-    private void displayCurrentCoordinates(){
-        mCurCoordinateTxtView.setText(CommonConstants.LATITUDE_ABBREV + " : " + mLatitude + " " + CommonConstants.LONGITUDE_ABBREV + " : " + mLongitude);
     }
 
     @Override

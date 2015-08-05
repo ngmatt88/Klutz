@@ -22,7 +22,6 @@ public class ResponseReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Fragment main = new MainFragment();
         TextView result = (TextView) (((MainActivity)context).findViewById(R.id.currentCoordinates));
         String lat = intent.getStringExtra(MainIntentService.OUT_LAT);
         String lon = intent.getStringExtra(MainIntentService.OUT_LON);

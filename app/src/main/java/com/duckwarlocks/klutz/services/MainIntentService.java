@@ -17,14 +17,6 @@ import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
  * helper methods.
  */
 public class MainIntentService extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
-    // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
-    private static final String ACTION_FOO = "com.duckwarlocks.klutz.services.action.FOO";
-    private static final String ACTION_BAZ = "com.duckwarlocks.klutz.services.action.BAZ";
-
-    // TODO: Rename parameters
-    private static final String EXTRA_PARAM1 = "com.duckwarlocks.klutz.services.extra.PARAM1";
-    private static final String EXTRA_PARAM2 = "com.duckwarlocks.klutz.services.extra.PARAM2";
 
     public static final String PARAM_IN_MSG = "inmsg";
     public static final String PARAM_OUT_MSG = "outmsg";
