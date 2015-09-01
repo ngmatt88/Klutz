@@ -90,6 +90,12 @@ public class MainActivity extends ActionBarActivity {
     }
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(receiver);
+    }
+
+    @Override
     public void onStart(){
         super.onStart();
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();

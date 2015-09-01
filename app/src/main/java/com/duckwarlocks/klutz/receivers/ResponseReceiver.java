@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.duckwarlocks.klutz.MainActivity;
@@ -27,6 +28,8 @@ public class ResponseReceiver extends BroadcastReceiver {
         String lon = intent.getStringExtra(MainIntentService.OUT_LON);
         MainFragment.mCityName = intent.getStringExtra(MainIntentService.OUT_CITY);
         result.setText(CommonConstants.LATITUDE_ABBREV + " : " + lat + " " + CommonConstants.LONGITUDE_ABBREV + " : " + lon);
+        Button btn = (Button) ((MainActivity)context).findViewById(R.id.saveCoordinatesBtn);
+        btn.setEnabled(true);
     }
 
 }

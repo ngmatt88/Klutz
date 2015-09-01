@@ -46,7 +46,6 @@
                             android:text="@string/grabCoordinatesBtnTxt"
                             app:shadowEnabled="true"
                             app:buttonColor="#969696"
-                            android:layout_centerHorizontal="true"
                             android:layout_weight="1"
                             android:layout_margin="10dp"
                             />
@@ -56,9 +55,9 @@
                             android:layout_height="wrap_content"
                             android:text="@string/saveCoordinatesBtnTxt"
                             app:shadowEnabled="true"
-                            android:layout_centerHorizontal="true"
                             android:layout_weight="1"
                             android:layout_margin="10dp"
+                            android:enabled="false"
                             />
                     </LinearLayout>
 
@@ -118,7 +117,7 @@
                         android:id="@+id/currentCoordinates"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:text="@string/subTitle"
                         android:alpha="1"
                         android:layout_gravity="center"

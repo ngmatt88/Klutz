@@ -114,10 +114,11 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
      */
     private void setUpButtons(){
         for(int i = 0 ; i < BUTTON_RES.length;i++){
-            Button prettyBtn = (Button)mRootView.findViewById(BUTTON_RES[i]);
+            Button prettyBtn = (Button) mRootView.findViewById(BUTTON_RES[i]);
             prettyBtn.setTypeface(Typeface.createFromAsset(mContext.getAssets(), "fonts/Roboto-Bold.ttf"));
             prettyBtn.setOnClickListener(this);
         }
+
     }
 
     /**
