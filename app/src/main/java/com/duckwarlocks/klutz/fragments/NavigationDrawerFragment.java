@@ -161,7 +161,7 @@ public class NavigationDrawerFragment extends Fragment {
                     MainActivity.setmCurrentFragment(fragment);
                     FragmentManager fragmentManager = ((FragmentActivity) mLittleContext).getSupportFragmentManager();
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.emptyFrameForFragment, fragment );
+                    fragmentTransaction.replace(R.id.emptyFrameForFragment, fragment);
                     fragmentTransaction.commit();
                 }
                 mDrawerLayout.closeDrawers();
@@ -190,15 +190,6 @@ public class NavigationDrawerFragment extends Fragment {
         }
         if (mDrawerLayout != null) {
             mDrawerLayout.closeDrawer(mFragmentContainerView);
-        }
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-        } catch (ClassCastException e) {
-            throw new ClassCastException("Activity must implement NavigationDrawerCallbacks.");
         }
     }
 
@@ -233,10 +224,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return mDrawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     /**

@@ -133,11 +133,10 @@ public class FileHelper {
 
         ArrayList<LocationVO> mLocationVOList = XmlHelper.parseListOfLocations(mRoot.getAbsolutePath());
 
-        nameCheckLoop:
         for(LocationVO mLocation : mLocationVOList){
             if(mLocation.getmName().equalsIgnoreCase(locationName)){
                 mLocationVOList.remove(mLocation);
-                break nameCheckLoop;
+                break;
             }
         }
         updateFileWithNewList(mLocationVOList,mRoot);

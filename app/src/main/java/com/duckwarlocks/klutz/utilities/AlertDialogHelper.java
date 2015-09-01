@@ -25,9 +25,8 @@ public class AlertDialogHelper {
                 dialog.cancel();
             }
         });
-        AlertDialog alertDialog = alertDialogBuilder.create();
 
-        return alertDialog;
+        return alertDialogBuilder.create();
     }
 
     public static AlertDialog.Builder buildAlert(Context context, String title, String message, boolean cancelable){

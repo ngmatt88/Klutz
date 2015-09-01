@@ -31,9 +31,7 @@ public class MainIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
-            final String action = intent.getAction();
             GpsCoordinatesHelper gps = new GpsCoordinatesHelper(getApplicationContext());
-
             if (gps.ismCanGetLocation()) {
                 Double mLatitude = gps.getmLatitude();
                 Double mLongitude = gps.getmLongitude();

@@ -79,12 +79,8 @@ public class LocationsDAO {
 
 
     public void deleteLocationById(long dbId) {
-        long id = dbId;
-        System.out.println("Location deleted with id: " + id);
-        database.delete(
-                SQLiteHelper.TABLE_SAVED_LOCATIONS,
-                SQLiteHelper.COLUMN_ID
-                        + " = " + id, null);
+        System.out.println("Location deleted with id: " + dbId);
+        database.delete(SQLiteHelper.TABLE_SAVED_LOCATIONS, SQLiteHelper.COLUMN_ID + " = " + dbId, null);
     }
 
     public void deleteLocation(LocationVO locationVO) {
