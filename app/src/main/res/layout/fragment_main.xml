@@ -1,130 +1,119 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.duckwarlocks.klutz.fragments.MainFragment">
-    <!--android:background="?android:windowBackground"-->
+    android:id="@+id/home_container"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-        <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/home_container"
+    <TextureView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/surface"
+        android:alpha="0.5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-            <TextureView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/surface"
-                android:layout_centerInParent="true"
-                android:alpha="0.5"/>
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:id="@+id/btnContainer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentBottom="true"
+                android:weightSum="2"
+                >
 
-
-
-                <RelativeLayout
-                    android:layout_width="fill_parent"
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/grabCoordinatesBtn"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="20dp">
-
-                    <LinearLayout
-                        android:id="@+id/btnContainer"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_alignParentBottom="true"
-                        android:weightSum="2"
-                        >
-
-                        <info.hoang8f.widget.FButton
-                            android:id="@+id/grabCoordinatesBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/grabCoordinatesBtnTxt"
-                            app:shadowEnabled="true"
-                            app:buttonColor="#969696"
-                            android:layout_weight="1"
-                            android:layout_margin="10dp"
-                            />
-                        <info.hoang8f.widget.FButton
-                            android:id="@+id/saveCoordinatesBtn"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/saveCoordinatesBtnTxt"
-                            app:shadowEnabled="true"
-                            android:layout_weight="1"
-                            android:layout_margin="10dp"
-                            android:enabled="false"
-                            />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/arrowContainer"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_above="@id/btnContainer"
-                        android:layout_marginTop="10dp"
-                        android:weightSum="2"
-                        >
-
-                        <LinearLayout
-                            android:id="@+id/step1Set"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            >
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Step 1"
-                                />
-                            <ImageView
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_arrow"
-                                />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:id="@+id/step2Set"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_weight="1"
-                            android:visibility="invisible"
-                            >
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Step 2"
-                                />
-                            <ImageView
-                                android:layout_width="fill_parent"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_arrow"
-                                />
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <com.duckwarlocks.klutz.views.MyTextView
-                        android:id="@+id/currentCoordinates"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp"
-                        android:text="@string/subTitle"
-                        android:alpha="1"
-                        android:layout_gravity="center"
-                        android:layout_centerHorizontal="true"
-                        android:layout_above="@id/arrowContainer"
-                        />
-                </RelativeLayout>
+                    android:text="@string/grabCoordinatesBtnTxt"
+                    app:shadowEnabled="true"
+                    app:buttonColor="#969696"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    />
+                <info.hoang8f.widget.FButton
+                    android:id="@+id/saveCoordinatesBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/saveCoordinatesBtnTxt"
+                    app:shadowEnabled="true"
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:enabled="false"
+                    />
             </LinearLayout>
-        </FrameLayout>
-</RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/arrowContainer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_above="@id/btnContainer"
+                android:layout_marginTop="10dp"
+                android:weightSum="2"
+                >
+
+                <LinearLayout
+                    android:id="@+id/step1Set"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/step_one"
+                        />
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/step2Set"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/step_two"
+                        />
+                    <ImageView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.duckwarlocks.klutz.views.MyTextView
+                android:id="@+id/currentCoordinates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="@string/subTitle"
+                android:alpha="1"
+                android:layout_gravity="center"
+                android:layout_centerHorizontal="true"
+                android:layout_above="@id/arrowContainer"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+</FrameLayout>

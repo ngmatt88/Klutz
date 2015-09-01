@@ -4,10 +4,6 @@
     android:layout_height="match_parent"
     >
 
-    <!--<ImageView-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:scaleType="fitXY"/>-->
     <com.duckwarlocks.klutz.widgets.GifMovieView
         android:id="@+id/splashGif"
         android:background="@drawable/ic_fav24dp"

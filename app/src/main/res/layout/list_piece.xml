@@ -22,7 +22,7 @@
             android:layout_height="60dp"
             android:textSize="@dimen/savedListItemNameFontSize"
             android:textStyle="bold"
-            android:layout_marginLeft="@dimen/savedListLeftMargin"
+            android:layout_marginStart="@dimen/savedListLeftMargin"
             />
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="60dp"
             android:textSize="@dimen/savedListLatLongFontSize"
             android:layout_below="@id/locationListItem"
-            android:layout_marginLeft="@dimen/savedListLeftMargin"
+            android:layout_marginStart="@dimen/savedListLeftMargin"
             />
         <TextView
             android:id="@+id/locationListLongitude"
@@ -39,8 +39,8 @@
             android:layout_height="60dp"
             android:textSize="@dimen/savedListLatLongFontSize"
             android:layout_below="@id/locationListItem"
-            android:layout_marginLeft="@dimen/savedListLeftMargin"
-            android:layout_toRightOf="@id/locationListLatitude"
+            android:layout_marginStart="@dimen/savedListLeftMargin"
+            android:layout_toEndOf="@id/locationListLatitude"
             />
         <TextView
             android:id="@+id/locationListCityName"
@@ -48,7 +48,7 @@
             android:layout_height="60dp"
             android:textSize="@dimen/savedListCityNameFontSize"
             android:textColor="@color/grey"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             />
     </RelativeLayout>
 </android.support.v7.widget.CardView>
