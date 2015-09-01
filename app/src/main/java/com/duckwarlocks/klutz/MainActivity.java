@@ -21,7 +21,6 @@ import com.duckwarlocks.klutz.receivers.ResponseReceiver;
 
 public class MainActivity extends ActionBarActivity {
 
-    private Toolbar toolbar;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private MainFragment mainf = new MainFragment();
     private TextView txt;
@@ -35,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         setSupportActionBar(toolbar);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);

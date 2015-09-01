@@ -18,7 +18,7 @@
     <string name="coordinateNameMsg">"Enter a name for this location"</string>
     <string name="title_activity_saved_locations">SavedLocationsActivity</string>
 
-    <string name="searchHint">Search...</string>
+    <string name="searchHint">Search…</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -31,20 +31,19 @@
     <string name="step_one">Step 1</string>
     <string name="step_two">Step 2</string>
 
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
     <string-array name="titles">
         <item>Home</item>
         <item>Saved Locations</item>
-        <!--<item>Favorites</item>-->
+        <item>Start Trip!</item>
     </string-array>
 
 
     <array name="icons">
         <item>@drawable/ic_home</item>
         <item>@drawable/ic_park</item>
-      <!--  <item>@drawable/ic_star24dp</item>-->
+        <item>@drawable/ic_trip</item>
     </array>
 </resources>
