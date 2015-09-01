@@ -32,7 +32,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder>
         implements Filterable,ItemTouchHelperAdapter{
 
     private LayoutInflater mInflater;
-    private static List<LocationVO> mLocationList = new ArrayList<LocationVO>();
+    private static List<LocationVO> mLocationList = new ArrayList<>();
     private static List<LocationVO> mOriginalList;
     private int theLayout;
     private static LocationsDAO locationDAO;
@@ -63,8 +63,8 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder>
 
 
     public void setLocationVOList(List<LocationVO> mLocationList){
-        this.mLocationList.addAll(mLocationList);
-        this.mOriginalList = mLocationList;
+        LocationAdapter.mLocationList.addAll(mLocationList);
+        mOriginalList = mLocationList;
     }
 
 
@@ -141,7 +141,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder>
                 }
                 else
                 {
-                    ArrayList<LocationVO> filterResultsData = new ArrayList<LocationVO>();
+                    ArrayList<LocationVO> filterResultsData = new ArrayList<>();
 
                     for(LocationVO data : mLocationList)
                     {

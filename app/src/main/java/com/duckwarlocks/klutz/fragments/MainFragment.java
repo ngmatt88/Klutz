@@ -67,12 +67,6 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
 
     }
 
-    public static MainFragment newInstance(Context context) {
-        MainFragment f = new MainFragment();
-        return f;
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,8 +117,8 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
      * text, and image.
      */
     private void setUpButtons(){
-        for(int i = 0 ; i < BUTTON_RES.length;i++){
-            Button prettyBtn = (Button) mRootView.findViewById(BUTTON_RES[i]);
+        for (int BUTTON_RE : BUTTON_RES) {
+            Button prettyBtn = (Button) mRootView.findViewById(BUTTON_RE);
             prettyBtn.setTypeface(Typeface.createFromAsset(mContext.getAssets(), "fonts/Roboto-Bold.ttf"));
             prettyBtn.setOnClickListener(this);
         }
@@ -133,7 +127,7 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
 
     /**
      * MUST Add the appropriate method/action to be called when adding a new button to the screen
-     * @param v
+     * @param v, the view of the button
      */
     @Override
     public void onClick(View v){
@@ -156,8 +150,7 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
 
     /**
      * Prompt for the name to be given to these coordinates
-     * @param view
-     * @return
+     * @param view view
      */
     public void promptCoordinateName(final View view){
         String defaultStr = mCurCoordinateTxtView.getText().toString();
@@ -186,7 +179,7 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
                 public void onClick(DialogInterface dialog, int which) {
                     String title = input.getText().toString();
 
-                    if (title != null && !title.equals("")) {
+                    if (!title.equals("")) {
 
                         saveToDB(createLocationVO(title));
 
@@ -241,7 +234,7 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
 
     /**
      * Grabs the current GPS coordinates and saves them to external file.
-     * @param view
+     * @param view the button
      */
     public void getCoordinates(View view){
         Intent getCoordinatesIntent = new Intent(getActivity(), MainIntentService.class);
