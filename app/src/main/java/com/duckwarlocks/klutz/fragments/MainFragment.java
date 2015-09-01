@@ -63,6 +63,16 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
     private int[] BUTTON_RES = {R.id.grabCoordinatesBtn,R.id.saveCoordinatesBtn};
     //============================================================================
 
+    public MainFragment(){
+
+    }
+
+    public static MainFragment newInstance(Context context) {
+        MainFragment f = new MainFragment();
+        return f;
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

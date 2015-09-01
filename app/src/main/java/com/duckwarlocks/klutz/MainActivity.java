@@ -22,9 +22,7 @@ import com.duckwarlocks.klutz.receivers.ResponseReceiver;
 public class MainActivity extends ActionBarActivity {
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
-    private MainFragment mainf = new MainFragment();
     private TextView txt;
-
     static Fragment mCurrentFragment = new MainFragment();
     private  ResponseReceiver receiver;
 
@@ -41,7 +39,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         if(savedInstanceState!=null){
-            txt = mainf.mCurCoordinateTxtView;
+            txt = MainFragment.mCurCoordinateTxtView;
             mCurrentFragment = getSupportFragmentManager().getFragment(savedInstanceState,"mCurrentFragment");
         }
         // Set up the drawer.
@@ -57,21 +55,21 @@ public class MainActivity extends ActionBarActivity {
     public void onSaveInstanceState(Bundle state) {
         super.onSaveInstanceState(state);
 
-        state.putString(mainf.STATE_LAT, String.valueOf(mainf.mLatitude));
-        state.putString(mainf.STATE_LONG, String.valueOf(mainf.mLongitude));
+        state.putString(MainFragment.STATE_LAT, String.valueOf(MainFragment.mLatitude));
+        state.putString(MainFragment.STATE_LONG, String.valueOf(MainFragment.mLongitude));
         getSupportFragmentManager().putFragment(state, "mCurrentFragment", mCurrentFragment);
     }
 
     @Override
     public void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
-        if (state != null) {
+
             txt = (TextView) findViewById(R.id.currentCoordinates);
-            txt = mainf.mCurCoordinateTxtView;
-            String lat = state.getString(mainf.STATE_LAT);
-            String longitud = state.getString(mainf.STATE_LONG);
+            txt = MainFragment.mCurCoordinateTxtView;
+            String lat = state.getString(MainFragment.STATE_LAT);
+            String longitud = state.getString(MainFragment.STATE_LONG);
             txt.setText(CommonConstants.LATITUDE_ABBREV + " : " + lat + " " + CommonConstants.LONGITUDE_ABBREV + " : " + longitud);
-        }
+
     }
 
     @Override

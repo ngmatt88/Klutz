@@ -52,7 +52,7 @@ public class GpsCoordinatesHelper extends Service implements LocationListener {
             mIsNetworkEnabled = mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if(!mIsGpsEnabled && !mIsNetworkEnabled){
-                Toast.makeText(mContext,"GPS and Network is turned off!",Toast.LENGTH_LONG);
+                Toast.makeText(mContext,"GPS and Network is turned off!",Toast.LENGTH_LONG).show();
             }else{
                 mCanGetLocation = true;
 
@@ -154,7 +154,7 @@ public class GpsCoordinatesHelper extends Service implements LocationListener {
         alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
             @Override
         public void onClick(DialogInterface dialog, int which){
-                dialog.cancel();;
+                dialog.cancel();
             }
         });
     }

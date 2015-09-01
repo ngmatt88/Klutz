@@ -32,7 +32,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationViewHolder>
         implements Filterable,ItemTouchHelperAdapter{
 
     private LayoutInflater mInflater;
-    private static List<LocationVO> mLocationList = new ArrayList<LocationVO>();;
+    private static List<LocationVO> mLocationList = new ArrayList<LocationVO>();
     private static List<LocationVO> mOriginalList;
     private int theLayout;
     private static LocationsDAO locationDAO;

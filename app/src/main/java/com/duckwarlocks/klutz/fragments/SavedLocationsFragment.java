@@ -45,6 +45,10 @@ public class SavedLocationsFragment extends Fragment
     private View rootView;
     private Context mContext;
 
+    public SavedLocationsFragment(){
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                 ViewGroup container, Bundle savedInstanceState) {
