@@ -4,7 +4,6 @@ package com.duckwarlocks.klutz.fragments;
  * Created by raf0c on 07/07/15.
  */
 
-import android.app.Activity;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;

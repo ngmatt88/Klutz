@@ -25,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
     private TextView txt;
     static Fragment mCurrentFragment = new MainFragment();
     private  ResponseReceiver receiver;
-
+    private IntentFilter filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.myDrawerLayout));
 
-        IntentFilter filter = new IntentFilter(ResponseReceiver.ACTION_RESP);
+        filter = new IntentFilter(ResponseReceiver.ACTION_RESP);
         filter.addCategory(Intent.CATEGORY_DEFAULT);
         receiver = new ResponseReceiver();
         registerReceiver(receiver, filter);
@@ -95,6 +95,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public void onStart(){
         super.onStart();
+        registerReceiver(receiver, filter);
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
         fragTransaction.replace(R.id.emptyFrameForFragment, mCurrentFragment);
         fragTransaction.commit();
