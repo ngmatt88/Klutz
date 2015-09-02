@@ -136,7 +136,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         myLayout = (LinearLayout) inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
 
-        mDrawerListView = (ListView)      myLayout.findViewById(R.id.categories);
+        mDrawerListView = (ListView) myLayout.findViewById(R.id.categories);
         mDrawerListView.setAdapter(adapter);
 
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -152,6 +152,10 @@ public class NavigationDrawerFragment extends Fragment {
                         break;
                     case 1:
                         fragment = new SavedLocationsFragment();
+                        mDrawerLayout.closeDrawers();
+                        break;
+                    case 2:
+                        fragment = TripFragment.newInstance();
                         mDrawerLayout.closeDrawers();
                         break;
                 }

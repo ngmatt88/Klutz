@@ -18,8 +18,8 @@ import com.duckwarlocks.klutz.services.MainIntentService;
  * Created by ngmat_000 on 8/3/2015.
  */
 public class ResponseReceiver extends BroadcastReceiver {
-    public static final String ACTION_RESP =
-            "com.mamlambo.intent.action.MESSAGE_PROCESSED";
+
+    public static final String ACTION_RESP = "com.mamlambo.intent.action.MESSAGE_PROCESSED";
 
     @Override
     public void onReceive(Context context, Intent intent) {

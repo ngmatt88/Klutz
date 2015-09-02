@@ -135,7 +135,7 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
         theBtn.setEnabled(false);
         switch (v.getId()){
             case R.id.grabCoordinatesBtn:
-                getCoordinates(v);
+                getCoordinates();
                 getActivity().findViewById(R.id.step1Set).setVisibility(View.INVISIBLE);
                 (getActivity().findViewById(R.id.step2Set)).setVisibility(View.VISIBLE);
                 break;
@@ -234,9 +234,8 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
 
     /**
      * Grabs the current GPS coordinates and saves them to external file.
-     * @param view the button
      */
-    public void getCoordinates(View view){
+    public void getCoordinates(){
         Intent getCoordinatesIntent = new Intent(getActivity(), MainIntentService.class);
         getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_MSG,"");
         getActivity().startService(getCoordinatesIntent);
