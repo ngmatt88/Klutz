@@ -105,8 +105,7 @@ public class SavedLocationsFragment extends Fragment
     @Override
     public void onStop(){
         super.onStop();
-        InputMethodManager imm = (InputMethodManager)mContext.getSystemService(
-                Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager)mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(mInputSearch.getWindowToken(), 0);
     }
 

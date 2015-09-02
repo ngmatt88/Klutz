@@ -40,8 +40,7 @@ public class LocationsDAO {
         dbHelper.close();
     }
 
-    public LocationVO createLocationVO(
-            String title,String latitude,String longitude, String city){
+    public LocationVO createLocationVO(String title, String latitude, String longitude, String city){
         ContentValues values = new ContentValues();
 
         values.put(SQLiteHelper.COLUMN_LOC_TITLE,title);

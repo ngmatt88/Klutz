@@ -26,6 +26,7 @@ public class MainActivity extends ActionBarActivity {
     static Fragment mCurrentFragment = new MainFragment();
     private  ResponseReceiver receiver;
     private IntentFilter filter;
+    public static boolean mImOnTrip = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,8 +98,15 @@ public class MainActivity extends ActionBarActivity {
         super.onStart();
         registerReceiver(receiver, filter);
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
-        fragTransaction.replace(R.id.emptyFrameForFragment, mCurrentFragment);
-        fragTransaction.commit();
+
+        if(mImOnTrip){
+            fragTransaction.replace(R.id.fragContainer, mCurrentFragment);
+            fragTransaction.commit();
+        }else{
+            fragTransaction.replace(R.id.emptyFrameForFragment, mCurrentFragment);
+            fragTransaction.commit();
+        }
+
     }
 
     @Override

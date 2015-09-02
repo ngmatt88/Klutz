@@ -161,18 +161,21 @@ public class NavigationDrawerFragment extends Fragment {
                         fragment = new MainFragment();
                         mDrawerLayout.closeDrawers();
                         currentFragmentTag = "mainFragment";
+                        MainActivity.mImOnTrip = false;
                         break;
                     case 1:
                         mImTrip = false;
                         fragment = new SavedLocationsFragment();
                         mDrawerLayout.closeDrawers();
                         currentFragmentTag = "savedLocationsFragment";
+                        MainActivity.mImOnTrip = false;
                         break;
                     case 2:
                         fragment = TripFragment.newInstance();
                         mDrawerLayout.closeDrawers();
                         currentFragmentTag = "tripFragment";
                         mImTrip = true;
+                        MainActivity.mImOnTrip = true;
                         break;
                 }
 
@@ -182,7 +185,7 @@ public class NavigationDrawerFragment extends Fragment {
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.emptyFrameForFragment, fragment);
                     fragmentTransaction.commit();
-                    if(mImTrip){
+                    if (mImTrip) {
                         promptStartTripDialog();
                     }
                 }
@@ -196,8 +199,8 @@ public class NavigationDrawerFragment extends Fragment {
 
     public void getCoordinates(){
         Intent getCoordinatesIntent = new Intent(getActivity(), MainIntentService.class);
-        getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_MSG,"");
-        getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_TRIP,true);
+        getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_MSG, "");
+        getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_TRIP, true);
         getActivity().startService(getCoordinatesIntent);
     }
 

@@ -44,9 +44,6 @@ public class MainIntentService extends IntentService {
                 Double mLongitude = gps.getmLongitude();
                 String mCityName = gps.getmCityName();
 
-
-
-
                 MainFragment.mLatitude = mLatitude;
                 MainFragment.mLongitude = mLongitude;
                 MainFragment.mCityName = mCityName;
