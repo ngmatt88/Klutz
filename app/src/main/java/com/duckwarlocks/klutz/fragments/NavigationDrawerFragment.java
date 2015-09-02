@@ -4,6 +4,8 @@ package com.duckwarlocks.klutz.fragments;
  * Created by raf0c on 07/07/15.
  */
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +19,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -29,8 +32,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.duckwarlocks.klutz.MainActivity;
 import com.duckwarlocks.klutz.adapters.OptionsAdapter;
+import com.duckwarlocks.klutz.services.MainIntentService;
 import com.duckwarlocks.klutz.views.TypefaceSpan;
 import com.duckwarlocks.klutz.vo.RowItem;
 import com.duckwarlocks.klutz.R;
@@ -56,6 +62,10 @@ public class NavigationDrawerFragment extends Fragment {
     public Fragment fragment;
     private Context mContext;
     private Context mLittleContext;
+    private MainFragment mMainFragment = new MainFragment();
+    private String currentFragmentTag = "";
+    private boolean mImTrip = false;
+
 
     public NavigationDrawerFragment() {
     }
@@ -147,16 +157,22 @@ public class NavigationDrawerFragment extends Fragment {
 
                 switch (position) {
                     case 0:
+                        mImTrip = false;
                         fragment = new MainFragment();
                         mDrawerLayout.closeDrawers();
+                        currentFragmentTag = "mainFragment";
                         break;
                     case 1:
+                        mImTrip = false;
                         fragment = new SavedLocationsFragment();
                         mDrawerLayout.closeDrawers();
+                        currentFragmentTag = "savedLocationsFragment";
                         break;
                     case 2:
                         fragment = TripFragment.newInstance();
                         mDrawerLayout.closeDrawers();
+                        currentFragmentTag = "tripFragment";
+                        mImTrip = true;
                         break;
                 }
 
@@ -166,6 +182,9 @@ public class NavigationDrawerFragment extends Fragment {
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     fragmentTransaction.replace(R.id.emptyFrameForFragment, fragment);
                     fragmentTransaction.commit();
+                    if(mImTrip){
+                        promptStartTripDialog();
+                    }
                 }
                 mDrawerLayout.closeDrawers();
             }
@@ -173,6 +192,37 @@ public class NavigationDrawerFragment extends Fragment {
 
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return myLayout;
+    }
+
+    public void getCoordinates(){
+        Intent getCoordinatesIntent = new Intent(getActivity(), MainIntentService.class);
+        getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_MSG,"");
+        getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_TRIP,true);
+        getActivity().startService(getCoordinatesIntent);
+    }
+
+    public void promptStartTripDialog(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setMessage("Start trip from this current position?");
+
+        alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                getCoordinates();
+                Toast.makeText(getActivity().getApplicationContext(), "Awesome!, lets roll", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity().getApplicationContext(), "Ok then", Toast.LENGTH_LONG).show();
+
+            }
+        });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     @Override

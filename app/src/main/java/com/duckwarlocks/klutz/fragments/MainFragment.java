@@ -236,9 +236,11 @@ public class MainFragment extends Fragment implements TextureView.SurfaceTexture
      * Grabs the current GPS coordinates and saves them to external file.
      */
     public void getCoordinates(){
+
         Intent getCoordinatesIntent = new Intent(getActivity(), MainIntentService.class);
         getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_MSG,"");
         getActivity().startService(getCoordinatesIntent);
+
     }
 
     @Override

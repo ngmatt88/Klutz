@@ -3,6 +3,7 @@ package com.duckwarlocks.klutz.services;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
+import android.os.Bundle;
 
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.fragments.MainFragment;
@@ -19,10 +20,12 @@ import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 public class MainIntentService extends IntentService {
 
     public static final String PARAM_IN_MSG = "inmsg";
+    public static final String PARAM_IN_TRIP = "intrip";
     public static final String PARAM_OUT_MSG = "outmsg";
     public static final String OUT_LAT = "outlat";
     public static final String OUT_LON = "outlon";
     public static final String OUT_CITY = "outcity";
+    public static  final String OUT_TRIP = "outtrip";
 
     public MainIntentService() {
         super("MainIntentService");
@@ -31,11 +34,17 @@ public class MainIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
+
+            Bundle extras = intent.getExtras();
+            Boolean trip  = extras.getBoolean(MainIntentService.PARAM_IN_TRIP);
+
             GpsCoordinatesHelper gps = new GpsCoordinatesHelper(getApplicationContext());
             if (gps.ismCanGetLocation()) {
                 Double mLatitude = gps.getmLatitude();
                 Double mLongitude = gps.getmLongitude();
                 String mCityName = gps.getmCityName();
+
+
 
 
                 MainFragment.mLatitude = mLatitude;
@@ -48,6 +57,8 @@ public class MainIntentService extends IntentService {
                 broadcastIntent.putExtra(OUT_LAT, Double.toString(mLatitude));
                 broadcastIntent.putExtra(OUT_LON, Double.toString(mLongitude));
                 broadcastIntent.putExtra(OUT_CITY, mCityName);
+                broadcastIntent.putExtra(OUT_TRIP,trip);
+
                 sendBroadcast(broadcastIntent);
             } else {
                 gps.showSettingsAlert();
