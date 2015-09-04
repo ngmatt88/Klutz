@@ -48,10 +48,7 @@ public class MainActivity extends ActionBarActivity {
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.myDrawerLayout));
 
-        IntentFilter filter = new IntentFilter(ResponseReceiver.ACTION_RESP);
-        filter.addCategory(Intent.CATEGORY_DEFAULT);
         receiver = new ResponseReceiver();
-        registerReceiver(receiver, filter);
     }
 
     @Override
@@ -95,6 +92,16 @@ public class MainActivity extends ActionBarActivity {
         FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
         fragTransaction.replace(R.id.emptyFrameForFragment, mCurrentFragment);
         fragTransaction.commit();
+
+        IntentFilter filter = new IntentFilter(ResponseReceiver.ACTION_RESP);
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        registerReceiver(receiver, filter);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        unregisterReceiver(receiver);
     }
 
     @Override
