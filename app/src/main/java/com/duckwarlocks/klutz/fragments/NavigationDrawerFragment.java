@@ -30,16 +30,20 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import com.duckwarlocks.klutz.KlutzApplication;
 import com.duckwarlocks.klutz.MainActivity;
 import com.duckwarlocks.klutz.adapters.OptionsAdapter;
 import com.duckwarlocks.klutz.views.TypefaceSpan;
 import com.duckwarlocks.klutz.vo.RowItem;
 import com.duckwarlocks.klutz.R;
+import com.hartsolution.bedrock.AbstractBaseFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends AbstractBaseFragment {
 
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
     public ActionBarDrawerToggle mDrawerToggle;
@@ -67,7 +71,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         menutitles      = getResources().getStringArray(R.array.titles);
         menuIcons       = getResources().obtainTypedArray(R.array.icons);
-        toolbar         = (Toolbar) super.getActivity().findViewById(R.id.tool_bar);
+//        toolbar         = (Toolbar) super.getActivity().findViewById(R.id.tool_bar);
         rowItems        = new ArrayList<>();
         mContext        = getActivity().getApplicationContext();
         mLittleContext  = getActivity();
@@ -150,21 +154,23 @@ public class NavigationDrawerFragment extends Fragment {
                 switch (position) {
                     case 0:
                         fragment = new MainFragment();
+                        KlutzApplication.MAIN_SCREEN.execute(getAbstractBaseActivity(),null);
                         mDrawerLayout.closeDrawers();
                         break;
                     case 1:
                         fragment = new SavedLocationsFragment();
+                        KlutzApplication.SAVED_LOCATIONS.execute(getAbstractBaseActivity(),null);
                         mDrawerLayout.closeDrawers();
                         break;
                 }
 
-                if (fragment != null) {
-                    MainActivity.setmCurrentFragment(fragment);
-                    FragmentManager fragmentManager = ((FragmentActivity) mLittleContext).getSupportFragmentManager();
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                    fragmentTransaction.replace(R.id.emptyFrameForFragment, fragment );
-                    fragmentTransaction.commit();
-                }
+//                if (fragment != null) {
+//                    MainActivity.setmCurrentFragment(fragment);
+//                    FragmentManager fragmentManager = ((FragmentActivity) mLittleContext).getSupportFragmentManager();
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                    fragmentTransaction.replace(R.id.emptyFrameForFragment, fragment );
+//                    fragmentTransaction.commit();
+//                }
                 mDrawerLayout.closeDrawers();
             }
         });

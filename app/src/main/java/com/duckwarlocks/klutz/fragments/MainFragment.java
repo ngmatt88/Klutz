@@ -28,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.duckwarlocks.klutz.KlutzApplication;
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
@@ -36,6 +37,7 @@ import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.views.PrettyButtonView;
 import com.duckwarlocks.klutz.vo.LocationVO;
+import com.hartsolution.bedrock.AbstractBaseFragment;
 
 import java.io.IOException;
 import java.io.IOException;
@@ -44,7 +46,7 @@ import java.sql.SQLException;
 
 /**
  */
-public class MainFragment extends Fragment implements TextureView.SurfaceTextureListener, View.OnClickListener{
+public class MainFragment extends AbstractBaseFragment implements TextureView.SurfaceTextureListener, View.OnClickListener{
 
     public static  String mCityName;
     public static double mLatitude;

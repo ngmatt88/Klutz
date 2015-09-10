@@ -24,6 +24,7 @@ import com.duckwarlocks.klutz.adapters.LocationAdapter;
 import com.duckwarlocks.klutz.callbacks.SimpleItemTouchHelperCallback;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
 import com.duckwarlocks.klutz.vo.LocationVO;
+import com.hartsolution.bedrock.AbstractBaseFragment;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -33,7 +34,7 @@ import java.util.List;
  * Activities that contain this fragment must implement the
  * create an instance of this fragment.
  */
-public class SavedLocationsFragment extends Fragment
+public class SavedLocationsFragment extends AbstractBaseFragment
         implements LocationAdapter.OnStartDragListener{
     private RecyclerView mLocationView;
     private EditText mInputSearch;

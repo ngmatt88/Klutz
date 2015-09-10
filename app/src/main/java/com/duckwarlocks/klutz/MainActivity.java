@@ -17,12 +17,13 @@ import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.fragments.NavigationDrawerFragment;
 import com.duckwarlocks.klutz.fragments.MainFragment;
 import com.duckwarlocks.klutz.receivers.ResponseReceiver;
+import com.hartsolution.bedrock.AbstractBaseActivity;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AbstractBaseActivity {
 
     private Toolbar toolbar;
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+//    private NavigationDrawerFragment mNavigationDrawerFragment;
     private MainFragment mainf = new MainFragment();
     private TextView txt;
 
@@ -33,12 +34,12 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
-        setSupportActionBar(toolbar);
+//        toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+//        setSupportActionBar(toolbar);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+//        mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 
 
         if(savedInstanceState!=null){
@@ -46,7 +47,7 @@ public class MainActivity extends ActionBarActivity {
             mCurrentFragment = getSupportFragmentManager().getFragment(savedInstanceState,"mCurrentFragment");
         }
         // Set up the drawer.
-        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.myDrawerLayout));
+//        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.myDrawerLayout));
 
         receiver = new ResponseReceiver();
     }
@@ -76,22 +77,23 @@ public class MainActivity extends ActionBarActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        mNavigationDrawerFragment.mDrawerToggle.syncState();
+//        mNavigationDrawerFragment.mDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
-        mNavigationDrawerFragment.mDrawerToggle.onConfigurationChanged(newConfig);
+//        mNavigationDrawerFragment.mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
     public void onStart(){
         super.onStart();
-        FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
-        fragTransaction.replace(R.id.emptyFrameForFragment, mCurrentFragment);
-        fragTransaction.commit();
+//        FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
+//        fragTransaction.replace(R.id.emptyFrameForFragment, mCurrentFragment);
+//        fragTransaction.commit();
+        KlutzApplication.MAIN_SCREEN.execute(this,null);
 
         IntentFilter filter = new IntentFilter(ResponseReceiver.ACTION_RESP);
         filter.addCategory(Intent.CATEGORY_DEFAULT);
@@ -102,6 +104,11 @@ public class MainActivity extends ActionBarActivity {
     public void onStop(){
         super.onStop();
         unregisterReceiver(receiver);
+    }
+
+    protected ContentViewIds getContentViewId(){
+        ContentViewIds contentViewIds = new ContentViewIds();
+        return contentViewIds;
     }
 
     @Override
