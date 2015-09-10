@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../...iml" filepath="$PROJECT_DIR$/../...iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Bedrock/Bedrock.iml" filepath="$PROJECT_DIR$/../Bedrock/Bedrock.iml" />
       <module fileurl="file://$PROJECT_DIR$/Klutz.iml" filepath="$PROJECT_DIR$/Klutz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Stone/Stone.iml" filepath="$PROJECT_DIR$/../Stone/Stone.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Bedrock/bedrock/bedrock.iml" filepath="$PROJECT_DIR$/../Bedrock/bedrock/bedrock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Stone/library/library.iml" filepath="$PROJECT_DIR$/../Stone/library/library.iml" />
     </modules>
   </component>
 </project>
