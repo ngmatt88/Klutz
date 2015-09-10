@@ -106,6 +106,7 @@ public class MainActivity extends AbstractBaseActivity {
         unregisterReceiver(receiver);
     }
 
+    //required for bedrock
     protected ContentViewIds getContentViewId(){
         ContentViewIds contentViewIds = new ContentViewIds();
         return contentViewIds;

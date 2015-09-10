@@ -6,10 +6,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- set android:name to your application name for bedrock navdrawer to work-->
     <application
         android:allowBackup="true"
         android:icon="@drawable/klutzv1"
         android:label="@string/app_name"
+        android:name=".KlutzApplication"
         >
         <meta-data
             android:name="com.google.android.gms.version"

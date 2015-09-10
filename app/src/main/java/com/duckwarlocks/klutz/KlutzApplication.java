@@ -20,6 +20,7 @@ public class KlutzApplication extends BedrockApplication{
             .setActionBarTitleId(R.string.home_title)
             .addToNavigationDrawer()
             .setNavigationDrawerIconId(R.drawable.ic_home)
+            .setNavigationDrawerTextId(R.string.home_title)
             .addDefaultFor(MainActivity.class)
             .build();
 
@@ -28,5 +29,6 @@ public class KlutzApplication extends BedrockApplication{
                 .setActionBarTitleId(R.string.saved_locations_title)
                 .addToNavigationDrawer()
                 .setNavigationDrawerIconId(R.drawable.ic_park)
+                .setNavigationDrawerTextId(R.string.saved_locations_title)
                 .build();
 }
