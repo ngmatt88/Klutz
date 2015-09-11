@@ -58,7 +58,7 @@ public class MainActivity extends AbstractBaseActivity {
 
         state.putString(mainf.STATE_LAT, String.valueOf(mainf.mLatitude));
         state.putString(mainf.STATE_LONG, String.valueOf(mainf.mLongitude));
-        getSupportFragmentManager().putFragment(state, "mCurrentFragment", mCurrentFragment);
+//        getSupportFragmentManager().putFragment(state, "mCurrentFragment", mCurrentFragment);
     }
 
     @Override

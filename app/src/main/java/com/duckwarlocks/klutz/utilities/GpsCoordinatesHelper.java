@@ -52,18 +52,20 @@ public class GpsCoordinatesHelper extends Service implements LocationListener {
             mIsNetworkEnabled = mLocationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if(!mIsGpsEnabled && !mIsNetworkEnabled){
-                Toast.makeText(mContext,"GPS and Network is turned off!",Toast.LENGTH_LONG);
+                Toast.makeText(mContext,"GPS and Network is turned off!",Toast.LENGTH_LONG).show();
             }else{
                 mCanGetLocation = true;
 
-                if(mIsNetworkEnabled){
+
+
+                if(mIsGpsEnabled){
                     mLocationManager.requestLocationUpdates(
-                            LocationManager.NETWORK_PROVIDER,
-                           CommonConstants.MIN_TIME_BTWN_UPDATES,
+                            LocationManager.GPS_PROVIDER,
+                            CommonConstants.MIN_TIME_BTWN_UPDATES,
                             CommonConstants.MIN_DISTANCE_CHANGE_FOR_UPDATES,this);
 
                     if(mLocationManager != null){
-                        mLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        mLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
                         if(mLocation != null){
                             mLatitude = mLocation.getLatitude();
@@ -76,16 +78,14 @@ public class GpsCoordinatesHelper extends Service implements LocationListener {
                             mCityName = addresses.get(0).getLocality();
                         }
                     }
-                }
-
-                if(mIsGpsEnabled){
+                }else if(mIsNetworkEnabled){
                     mLocationManager.requestLocationUpdates(
-                            LocationManager.GPS_PROVIDER,
+                            LocationManager.NETWORK_PROVIDER,
                             CommonConstants.MIN_TIME_BTWN_UPDATES,
                             CommonConstants.MIN_DISTANCE_CHANGE_FOR_UPDATES,this);
 
                     if(mLocationManager != null){
-                        mLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        mLocation = mLocationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
                         if(mLocation != null){
                             mLatitude = mLocation.getLatitude();
