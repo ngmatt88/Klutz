@@ -32,12 +32,15 @@ import com.duckwarlocks.klutz.KlutzApplication;
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
+import com.duckwarlocks.klutz.events.GrabGpsEvent;
+import com.duckwarlocks.klutz.events.SaveCoordinatesEvent;
 import com.duckwarlocks.klutz.services.MainIntentService;
 import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
 import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
 import com.duckwarlocks.klutz.views.PrettyButtonView;
 import com.duckwarlocks.klutz.vo.LocationVO;
 import com.hartsolution.bedrock.AbstractBaseFragment;
+import com.hartsolution.bedrock.Events;
 
 import java.io.IOException;
 import java.io.IOException;
@@ -133,13 +136,14 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
         switch (v.getId()){
             case R.id.grabCoordinatesBtn:
                 getCoordinates(v);
-                getActivity().findViewById(R.id.step1Set).setVisibility(View.INVISIBLE);
-                (getActivity().findViewById(R.id.step2Set)).setVisibility(View.VISIBLE);
+//                getActivity().findViewById(R.id.step1Set).setVisibility(View.INVISIBLE);
+//                (getActivity().findViewById(R.id.step2Set)).setVisibility(View.VISIBLE);
+                Events.getEventBus().post(new GrabGpsEvent());
                 break;
             case R.id.saveCoordinatesBtn:
                 promptCoordinateName(v);
-                getActivity().findViewById(R.id.step2Set).setVisibility(View.INVISIBLE);
-                (getActivity().findViewById(R.id.step1Set)).setVisibility(View.VISIBLE);
+//                getActivity().findViewById(R.id.step2Set).setVisibility(View.INVISIBLE);
+//                (getActivity().findViewById(R.id.step1Set)).setVisibility(View.VISIBLE);
                 break;
         }
         theBtn.setEnabled(true);
@@ -184,6 +188,7 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
                         InputMethodManager imm = (InputMethodManager)mContext.getSystemService(
                                 Context.INPUT_METHOD_SERVICE);
                         imm.hideSoftInputFromWindow(input.getWindowToken(), 0);
+                        Events.getEventBus().post(new SaveCoordinatesEvent());
                     }
 
                 }

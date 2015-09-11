@@ -11,13 +11,17 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
 import android.widget.TextView;
 
 import com.duckwarlocks.klutz.constants.CommonConstants;
+import com.duckwarlocks.klutz.events.GrabGpsEvent;
+import com.duckwarlocks.klutz.events.SaveCoordinatesEvent;
 import com.duckwarlocks.klutz.fragments.NavigationDrawerFragment;
 import com.duckwarlocks.klutz.fragments.MainFragment;
 import com.duckwarlocks.klutz.receivers.ResponseReceiver;
 import com.hartsolution.bedrock.AbstractBaseActivity;
+import com.squareup.otto.Subscribe;
 
 
 public class MainActivity extends AbstractBaseActivity {
@@ -119,7 +123,15 @@ public class MainActivity extends AbstractBaseActivity {
         return true;
     }
 
-    public static void  setmCurrentFragment(Fragment newFrag){
-        mCurrentFragment = newFrag;
+    @Subscribe
+    public void grabCoordinatesEvent(GrabGpsEvent event){
+        findViewById(R.id.step1Set).setVisibility(View.INVISIBLE);
+        findViewById(R.id.step2Set).setVisibility(View.VISIBLE);
+    }
+
+    @Subscribe
+    public void saveCoordinatesEvent(SaveCoordinatesEvent event){
+        findViewById(R.id.step2Set).setVisibility(View.INVISIBLE);
+        findViewById(R.id.step1Set).setVisibility(View.VISIBLE);
     }
 }

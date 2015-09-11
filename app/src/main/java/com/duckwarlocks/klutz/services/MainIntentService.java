@@ -1,9 +1,12 @@
 package com.duckwarlocks.klutz.services;
 
+import android.app.Activity;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.Context;
+import android.view.View;
 
+import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.fragments.MainFragment;
 import com.duckwarlocks.klutz.receivers.ResponseReceiver;
