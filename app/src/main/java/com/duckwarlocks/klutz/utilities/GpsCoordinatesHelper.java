@@ -56,8 +56,6 @@ public class GpsCoordinatesHelper extends Service implements LocationListener {
             }else{
                 mCanGetLocation = true;
 
-
-
                 if(mIsGpsEnabled){
                     mLocationManager.requestLocationUpdates(
                             LocationManager.GPS_PROVIDER,
