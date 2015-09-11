@@ -5,35 +5,20 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.View;
 import android.widget.TextView;
 
-import com.duckwarlocks.klutz.constants.CommonConstants;
-import com.duckwarlocks.klutz.events.GrabGpsEvent;
-import com.duckwarlocks.klutz.events.SaveCoordinatesEvent;
-import com.duckwarlocks.klutz.fragments.NavigationDrawerFragment;
 import com.duckwarlocks.klutz.fragments.MainFragment;
 import com.duckwarlocks.klutz.receivers.ResponseReceiver;
 import com.hartsolution.bedrock.AbstractBaseActivity;
-import com.squareup.otto.Subscribe;
-
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 
 
 public class MainActivity extends AbstractBaseActivity {
 
     private Toolbar toolbar;
-//    private NavigationDrawerFragment mNavigationDrawerFragment;
     private MainFragment mainf = new MainFragment();
-    private TextView txt;
     static Fragment mCurrentFragment = new MainFragment();
     private  ResponseReceiver receiver;
 
@@ -117,15 +102,4 @@ public class MainActivity extends AbstractBaseActivity {
         return true;
     }
 
-//    @Subscribe
-//    public void grabCoordinatesEvent(GrabGpsEvent event){
-//        findViewById(R.id.step1Set).setVisibility(View.INVISIBLE);
-//        findViewById(R.id.step2Set).setVisibility(View.VISIBLE);
-//    }
-//
-//    @Subscribe
-//    public void saveCoordinatesEvent(SaveCoordinatesEvent event){
-//        findViewById(R.id.step2Set).setVisibility(View.INVISIBLE);
-//        findViewById(R.id.step1Set).setVisibility(View.VISIBLE);
-//    }
 }

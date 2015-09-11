@@ -29,6 +29,9 @@ import com.hartsolution.bedrock.AbstractBaseFragment;
 import java.sql.SQLException;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -36,8 +39,10 @@ import java.util.List;
  */
 public class SavedLocationsFragment extends AbstractBaseFragment
         implements LocationAdapter.OnStartDragListener{
-    private RecyclerView mLocationView;
-    private EditText mInputSearch;
+    @InjectView(R.id.recordList)
+    RecyclerView mLocationView;
+    @InjectView(R.id.inputSearch)
+    EditText mInputSearch;
     private LocationAdapter adapter;
     private List<LocationVO> mLocationList;
     private LocationsDAO mLocationDAO;
@@ -51,8 +56,9 @@ public class SavedLocationsFragment extends AbstractBaseFragment
                 ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rootView = inflater.inflate(R.layout.fragment_saved_locations,container,false);
+        ButterKnife.inject(this,rootView);
         mContext = rootView.getContext().getApplicationContext();
-        mLocationView = (RecyclerView) rootView.findViewById(R.id.recordList);
+//        mLocationView = (RecyclerView) rootView.findViewById(R.id.recordList);
 
         adapter = new LocationAdapter(mContext,R.layout.list_piece);
 
@@ -77,7 +83,7 @@ public class SavedLocationsFragment extends AbstractBaseFragment
         mLocationView.setLayoutManager(new LinearLayoutManager(mContext));
         mLocationView.setItemAnimator(new DefaultItemAnimator());
 
-        mInputSearch = (EditText)rootView.findViewById(R.id.inputSearch);
+//        mInputSearch = (EditText)rootView.findViewById(R.id.inputSearch);
         //Add search functionality to editText
         mInputSearch.addTextChangedListener(new TextWatcher() {
             @Override

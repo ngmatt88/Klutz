@@ -67,7 +67,8 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
     public static final String STATE_LONG = "current_long";
 
     private MediaPlayer mMediaPlayer;
-    private TextureView mTextureView;
+    @InjectView(R.id.surface)
+    TextureView mTextureView;
     private final String FILE_NAME = "video_bg3.mp4";
     //==============Update the buttons you want added below======================
     private int[] BUTTON_RES = {R.id.grabCoordinatesBtn,R.id.saveCoordinatesBtn};
@@ -82,9 +83,9 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
 
         mContext = mRootView.getContext().getApplicationContext();
 
-        mCurCoordinateTxtView = (TextView) mRootView.findViewById(R.id.currentCoordinates);
+//        mCurCoordinateTxtView = (TextView) mRootView.findViewById(R.id.currentCoordinates);
 
-        mTextureView = (TextureView) mRootView.findViewById(R.id.surface);
+//        mTextureView = (TextureView) mRootView.findViewById(R.id.surface);
         mTextureView.setSurfaceTextureListener(this);
 
         mLocationDAO = new LocationsDAO(mContext);
@@ -143,14 +144,10 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
         switch (v.getId()){
             case R.id.grabCoordinatesBtn:
                 getCoordinates(v);
-//                getActivity().findViewById(R.id.step1Set).setVisibility(View.INVISIBLE);
-//                (getActivity().findViewById(R.id.step2Set)).setVisibility(View.VISIBLE);
                 Events.getEventBus().post(new GrabGpsEvent());
                 break;
             case R.id.saveCoordinatesBtn:
                 promptCoordinateName(v);
-//                getActivity().findViewById(R.id.step2Set).setVisibility(View.INVISIBLE);
-//                (getActivity().findViewById(R.id.step1Set)).setVisibility(View.VISIBLE);
                 break;
         }
         theBtn.setEnabled(true);
