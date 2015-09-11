@@ -41,10 +41,14 @@ import com.duckwarlocks.klutz.views.PrettyButtonView;
 import com.duckwarlocks.klutz.vo.LocationVO;
 import com.hartsolution.bedrock.AbstractBaseFragment;
 import com.hartsolution.bedrock.Events;
+import com.squareup.otto.Subscribe;
 
 import java.io.IOException;
 import java.io.IOException;
 import java.sql.SQLException;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 /**
@@ -55,7 +59,8 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
     public static double mLatitude;
     public static double mLongitude;
     private View mRootView;
-    public static TextView mCurCoordinateTxtView;
+    @InjectView(R.id.currentCoordinates)
+    TextView mCurCoordinateTxtView;
     private LocationsDAO mLocationDAO;
     private Context mContext;
     public static final String STATE_LAT = "current_lat";
@@ -71,8 +76,10 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mRootView = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.inject(this,mRootView);
+
+
         mContext = mRootView.getContext().getApplicationContext();
 
         mCurCoordinateTxtView = (TextView) mRootView.findViewById(R.id.currentCoordinates);
@@ -241,7 +248,7 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
      */
     public void getCoordinates(View view){
         Intent getCoordinatesIntent = new Intent(getActivity(), MainIntentService.class);
-        getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_MSG,"");
+        getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_MSG, "");
         getActivity().startService(getCoordinatesIntent);
     }
 
@@ -294,5 +301,18 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
     @Override
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
 
+    }
+
+    @Subscribe
+    public void grabCoordinatesEvent(GrabGpsEvent event){
+        getActivity().findViewById(R.id.step1Set).setVisibility(View.INVISIBLE);
+        getActivity().findViewById(R.id.step2Set).setVisibility(View.VISIBLE);
+    }
+
+    @Subscribe
+    public void saveCoordinatesEvent(SaveCoordinatesEvent event){
+        getActivity().findViewById(R.id.step2Set).setVisibility(View.INVISIBLE);
+        getActivity().findViewById(R.id.step1Set).setVisibility(View.VISIBLE);
+        mCurCoordinateTxtView.setText(R.string.subTitle);
     }
 }

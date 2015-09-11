@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -23,6 +24,9 @@ import com.duckwarlocks.klutz.receivers.ResponseReceiver;
 import com.hartsolution.bedrock.AbstractBaseActivity;
 import com.squareup.otto.Subscribe;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 
 public class MainActivity extends AbstractBaseActivity {
 
@@ -30,7 +34,6 @@ public class MainActivity extends AbstractBaseActivity {
 //    private NavigationDrawerFragment mNavigationDrawerFragment;
     private MainFragment mainf = new MainFragment();
     private TextView txt;
-
     static Fragment mCurrentFragment = new MainFragment();
     private  ResponseReceiver receiver;
 
@@ -38,20 +41,11 @@ public class MainActivity extends AbstractBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-
-//        toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
-//        setSupportActionBar(toolbar);
-
-//        mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-
 
         if(savedInstanceState!=null){
-            txt = mainf.mCurCoordinateTxtView;
-            mCurrentFragment = getSupportFragmentManager().getFragment(savedInstanceState,"mCurrentFragment");
+//            txt = mainf.mCurCoordinateTxtView;
+//            mCurrentFragment = getSupportFragmentManager().getFragment(savedInstanceState,"mCurrentFragment");
         }
-        // Set up the drawer.
-//        mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.myDrawerLayout));
 
         receiver = new ResponseReceiver();
     }
@@ -69,11 +63,11 @@ public class MainActivity extends AbstractBaseActivity {
     public void onRestoreInstanceState(Bundle state) {
         super.onRestoreInstanceState(state);
         if (state != null) {
-            txt = (TextView) findViewById(R.id.currentCoordinates);
-            txt = mainf.mCurCoordinateTxtView;
+//            txt = (TextView) findViewById(R.id.currentCoordinates);
+//            txt = mainf.mCurCoordinateTxtView;
             String lat = state.getString(mainf.STATE_LAT);
             String longitud = state.getString(mainf.STATE_LONG);
-            txt.setText(CommonConstants.LATITUDE_ABBREV + " : " + lat + " " + CommonConstants.LONGITUDE_ABBREV + " : " + longitud);
+//            txt.setText(CommonConstants.LATITUDE_ABBREV + " : " + lat + " " + CommonConstants.LONGITUDE_ABBREV + " : " + longitud);
         }
     }
 
@@ -123,15 +117,15 @@ public class MainActivity extends AbstractBaseActivity {
         return true;
     }
 
-    @Subscribe
-    public void grabCoordinatesEvent(GrabGpsEvent event){
-        findViewById(R.id.step1Set).setVisibility(View.INVISIBLE);
-        findViewById(R.id.step2Set).setVisibility(View.VISIBLE);
-    }
-
-    @Subscribe
-    public void saveCoordinatesEvent(SaveCoordinatesEvent event){
-        findViewById(R.id.step2Set).setVisibility(View.INVISIBLE);
-        findViewById(R.id.step1Set).setVisibility(View.VISIBLE);
-    }
+//    @Subscribe
+//    public void grabCoordinatesEvent(GrabGpsEvent event){
+//        findViewById(R.id.step1Set).setVisibility(View.INVISIBLE);
+//        findViewById(R.id.step2Set).setVisibility(View.VISIBLE);
+//    }
+//
+//    @Subscribe
+//    public void saveCoordinatesEvent(SaveCoordinatesEvent event){
+//        findViewById(R.id.step2Set).setVisibility(View.INVISIBLE);
+//        findViewById(R.id.step1Set).setVisibility(View.VISIBLE);
+//    }
 }
