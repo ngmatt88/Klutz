@@ -75,9 +75,6 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
 
         mContext = mRootView.getContext().getApplicationContext();
 
-//        mCurCoordinateTxtView = (TextView) mRootView.findViewById(R.id.currentCoordinates);
-
-//        mTextureView = (TextureView) mRootView.findViewById(R.id.surface);
         mTextureView.setSurfaceTextureListener(this);
 
         mLocationDAO = new LocationsDAO(mContext);
@@ -135,7 +132,6 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
         theBtn.setEnabled(false);
         switch (v.getId()){
             case R.id.grabCoordinatesBtn:
-//                getCoordinates(v);
                 Events.getEventBus().post(new GrabGpsEvent(v));
                 break;
             case R.id.saveCoordinatesBtn:

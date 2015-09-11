@@ -17,7 +17,6 @@ public class KlutzApplication extends BedrockApplication{
 
         public static final NavigationAction MAIN_SCREEN = new NavigationAction.Builder()
             .replaceFragment(MainFragment.class)
-            .setActionBarTitleId(R.string.home_title)
             .addToNavigationDrawer()
             .setNavigationDrawerIconId(R.drawable.ic_home)
             .setNavigationDrawerTextId(R.string.home_title)
@@ -25,10 +24,10 @@ public class KlutzApplication extends BedrockApplication{
             .build();
 
         public static final NavigationAction SAVED_LOCATIONS = new NavigationAction.Builder()
-                .replaceFragment(SavedLocationsFragment.class)
-                .setActionBarTitleId(R.string.saved_locations_title)
-                .addToNavigationDrawer()
-                .setNavigationDrawerIconId(R.drawable.ic_park)
-                .setNavigationDrawerTextId(R.string.saved_locations_title)
-                .build();
+            .replaceFragment(SavedLocationsFragment.class)
+            .setActionBarTitleId(R.string.saved_locations_title)
+            .addToNavigationDrawer()
+            .setNavigationDrawerIconId(R.drawable.ic_park)
+            .setNavigationDrawerTextId(R.string.saved_locations_title)
+            .build();
 }

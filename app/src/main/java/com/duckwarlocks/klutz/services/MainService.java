@@ -30,9 +30,6 @@ public class MainService extends Service {
     public static final String OUT_CITY = "outcity";
     public boolean isRunning = false;
 
-//    public MainService() {
-//        super("MainService");
-//    }
 
     @Override
     public void onCreate(){
@@ -42,34 +39,29 @@ public class MainService extends Service {
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId){
         if (intent != null) {
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-                    final String action = intent.getAction();
-                    GpsCoordinatesHelper gps = new GpsCoordinatesHelper(getApplicationContext());
+            final String action = intent.getAction();
+            GpsCoordinatesHelper gps = new GpsCoordinatesHelper(getApplicationContext());
 
-                    if (gps.ismCanGetLocation()) {
-                        Double mLatitude = gps.getmLatitude();
-                        Double mLongitude = gps.getmLongitude();
-                        String mCityName = gps.getmCityName();
+            if (gps.ismCanGetLocation()) {
+                Double mLatitude = gps.getmLatitude();
+                Double mLongitude = gps.getmLongitude();
+                String mCityName = gps.getmCityName();
 
 
-                        MainFragment.mLatitude = mLatitude;
-                        MainFragment.mLongitude = mLongitude;
-                        MainFragment.mCityName = mCityName;
+                MainFragment.mLatitude = mLatitude;
+                MainFragment.mLongitude = mLongitude;
+                MainFragment.mCityName = mCityName;
 
-                        Intent broadcastIntent = new Intent();
-                        broadcastIntent.setAction(ResponseReceiver.ACTION_RESP);
-                        broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-                        broadcastIntent.putExtra(OUT_LAT, Double.toString(mLatitude));
-                        broadcastIntent.putExtra(OUT_LON, Double.toString(mLongitude));
-                        broadcastIntent.putExtra(OUT_CITY, mCityName);
-                        sendBroadcast(broadcastIntent);
-                    } else {
-                        gps.showSettingsAlert();
-                    }
-//                }
-//            }).start();
+                Intent broadcastIntent = new Intent();
+                broadcastIntent.setAction(ResponseReceiver.ACTION_RESP);
+                broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
+                broadcastIntent.putExtra(OUT_LAT, Double.toString(mLatitude));
+                broadcastIntent.putExtra(OUT_LON, Double.toString(mLongitude));
+                broadcastIntent.putExtra(OUT_CITY, mCityName);
+                sendBroadcast(broadcastIntent);
+            } else {
+                gps.showSettingsAlert();
+            }
             stopSelf();
         }
         return Service.START_STICKY;
@@ -85,50 +77,4 @@ public class MainService extends Service {
         isRunning =false;
     }
 
-//    @Override
-//    protected void onHandleIntent(Intent intent) {
-//        if (intent != null) {
-//            final String action = intent.getAction();
-//            GpsCoordinatesHelper gps = new GpsCoordinatesHelper(getApplicationContext());
-//
-//            if (gps.ismCanGetLocation()) {
-//                Double mLatitude = gps.getmLatitude();
-//                Double mLongitude = gps.getmLongitude();
-//                String mCityName = gps.getmCityName();
-//
-//
-//                MainFragment.mLatitude = mLatitude;
-//                MainFragment.mLongitude = mLongitude;
-//                MainFragment.mCityName = mCityName;
-//
-//                Intent broadcastIntent = new Intent();
-//                broadcastIntent.setAction(ResponseReceiver.ACTION_RESP);
-//                broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
-//                broadcastIntent.putExtra(OUT_LAT, Double.toString(mLatitude));
-//                broadcastIntent.putExtra(OUT_LON, Double.toString(mLongitude));
-//                broadcastIntent.putExtra(OUT_CITY, mCityName);
-//                sendBroadcast(broadcastIntent);
-//            } else {
-//                gps.showSettingsAlert();
-//            }
-//        }
-//    }
-
-    /**
-     * Handle action Foo in the provided background thread with the provided
-     * parameters.
-     */
-    private void handleActionFoo(String param1, String param2) {
-        // TODO: Handle action Foo
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
-
-    /**
-     * Handle action Baz in the provided background thread with the provided
-     * parameters.
-     */
-    private void handleActionBaz(String param1, String param2) {
-        // TODO: Handle action Baz
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
 }

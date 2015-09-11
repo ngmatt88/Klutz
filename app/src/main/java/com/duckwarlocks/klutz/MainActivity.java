@@ -4,11 +4,8 @@ package com.duckwarlocks.klutz;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.TextView;
 
 import com.duckwarlocks.klutz.fragments.MainFragment;
 import com.duckwarlocks.klutz.receivers.ResponseReceiver;
@@ -17,9 +14,7 @@ import com.hartsolution.bedrock.AbstractBaseActivity;
 
 public class MainActivity extends AbstractBaseActivity {
 
-    private Toolbar toolbar;
     private MainFragment mainf = new MainFragment();
-    static Fragment mCurrentFragment = new MainFragment();
     private  ResponseReceiver receiver;
 
 
@@ -29,7 +24,6 @@ public class MainActivity extends AbstractBaseActivity {
 
         if(savedInstanceState!=null){
 //            txt = mainf.mCurCoordinateTxtView;
-//            mCurrentFragment = getSupportFragmentManager().getFragment(savedInstanceState,"mCurrentFragment");
         }
 
         receiver = new ResponseReceiver();
@@ -41,7 +35,6 @@ public class MainActivity extends AbstractBaseActivity {
 
         state.putString(mainf.STATE_LAT, String.valueOf(mainf.mLatitude));
         state.putString(mainf.STATE_LONG, String.valueOf(mainf.mLongitude));
-//        getSupportFragmentManager().putFragment(state, "mCurrentFragment", mCurrentFragment);
     }
 
     @Override
@@ -59,23 +52,16 @@ public class MainActivity extends AbstractBaseActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-//        mNavigationDrawerFragment.mDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
-//        mNavigationDrawerFragment.mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
     public void onStart(){
         super.onStart();
-//        FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
-//        fragTransaction.replace(R.id.emptyFrameForFragment, mCurrentFragment);
-//        fragTransaction.commit();
         KlutzApplication.MAIN_SCREEN.execute(this,null);
 
         IntentFilter filter = new IntentFilter(ResponseReceiver.ACTION_RESP);

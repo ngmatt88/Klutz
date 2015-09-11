@@ -58,7 +58,6 @@ public class SavedLocationsFragment extends AbstractBaseFragment
         rootView = inflater.inflate(R.layout.fragment_saved_locations,container,false);
         ButterKnife.inject(this,rootView);
         mContext = rootView.getContext().getApplicationContext();
-//        mLocationView = (RecyclerView) rootView.findViewById(R.id.recordList);
 
         adapter = new LocationAdapter(mContext,R.layout.list_piece);
 
@@ -83,7 +82,6 @@ public class SavedLocationsFragment extends AbstractBaseFragment
         mLocationView.setLayoutManager(new LinearLayoutManager(mContext));
         mLocationView.setItemAnimator(new DefaultItemAnimator());
 
-//        mInputSearch = (EditText)rootView.findViewById(R.id.inputSearch);
         //Add search functionality to editText
         mInputSearch.addTextChangedListener(new TextWatcher() {
             @Override

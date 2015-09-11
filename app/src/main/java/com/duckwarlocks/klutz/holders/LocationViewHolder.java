@@ -25,28 +25,31 @@ import com.duckwarlocks.klutz.vo.LocationVO;
 
 import org.w3c.dom.Text;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 /**
  * Created by ngmat_000 on 6/8/2015.
  */
 public class LocationViewHolder extends RecyclerView.ViewHolder
         implements View.OnClickListener,ItemTouchHelperViewHolder{
+    @InjectView(R.id.locationListItem)
     public TextView name;
+    @InjectView(R.id.locationListLatitude)
     public TextView latitude;
+    @InjectView(R.id.locationListLongitude)
     public TextView longitude;
+    @InjectView(R.id.locationListCityName)
     public TextView cityName;
     public Context context;
+    @InjectView(R.id.pieceView)
     public CardView individualItem;
 
 
     public LocationViewHolder(View view){
         super(view);
         this.context = view.getContext().getApplicationContext();
-
-        name = (TextView) view.findViewById(R.id.locationListItem);
-        latitude = (TextView) view.findViewById(R.id.locationListLatitude);
-        longitude = (TextView) view.findViewById(R.id.locationListLongitude);
-        cityName = (TextView) view.findViewById(R.id.locationListCityName);
-        individualItem = (CardView)view.findViewById(R.id.pieceView);
+        ButterKnife.inject(this,view);
 
         view.setOnClickListener(this);
     }
