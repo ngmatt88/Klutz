@@ -11,39 +11,31 @@ import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 //import android.app.Fragment;
-import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.duckwarlocks.klutz.KlutzApplication;
 import com.duckwarlocks.klutz.R;
 import com.duckwarlocks.klutz.constants.CommonConstants;
 import com.duckwarlocks.klutz.daos.LocationsDAO;
 import com.duckwarlocks.klutz.events.GrabGpsEvent;
 import com.duckwarlocks.klutz.events.SaveCoordinatesEvent;
-import com.duckwarlocks.klutz.services.MainIntentService;
+import com.duckwarlocks.klutz.services.MainService;
 import com.duckwarlocks.klutz.utilities.AlertDialogHelper;
-import com.duckwarlocks.klutz.utilities.GpsCoordinatesHelper;
-import com.duckwarlocks.klutz.views.PrettyButtonView;
 import com.duckwarlocks.klutz.vo.LocationVO;
 import com.hartsolution.bedrock.AbstractBaseFragment;
 import com.hartsolution.bedrock.Events;
 import com.squareup.otto.Subscribe;
 
-import java.io.IOException;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -143,8 +135,8 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
         theBtn.setEnabled(false);
         switch (v.getId()){
             case R.id.grabCoordinatesBtn:
-                getCoordinates(v);
-                Events.getEventBus().post(new GrabGpsEvent());
+//                getCoordinates(v);
+                Events.getEventBus().post(new GrabGpsEvent(v));
                 break;
             case R.id.saveCoordinatesBtn:
                 promptCoordinateName(v);
@@ -244,8 +236,8 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
      * @param view
      */
     public void getCoordinates(View view){
-        Intent getCoordinatesIntent = new Intent(getActivity(), MainIntentService.class);
-        getCoordinatesIntent.putExtra(MainIntentService.PARAM_IN_MSG, "");
+        Intent getCoordinatesIntent = new Intent(getActivity(), MainService.class);
+        getCoordinatesIntent.putExtra(MainService.PARAM_IN_MSG, "");
         getActivity().startService(getCoordinatesIntent);
     }
 
@@ -302,6 +294,7 @@ public class MainFragment extends AbstractBaseFragment implements TextureView.Su
 
     @Subscribe
     public void grabCoordinatesEvent(GrabGpsEvent event){
+        getCoordinates(event.getView());
         getActivity().findViewById(R.id.step1Set).setVisibility(View.INVISIBLE);
         getActivity().findViewById(R.id.step2Set).setVisibility(View.VISIBLE);
     }

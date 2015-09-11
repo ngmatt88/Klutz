@@ -38,7 +38,7 @@
         </activity>
 
         <service
-            android:name=".services.MainIntentService"
+            android:name=".services.MainService"
             android:exported="false" >
         </service>
     </application>
