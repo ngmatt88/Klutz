@@ -1,23 +1,18 @@
 package com.duckwarlocks.klutz.fragments;
 
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.duckwarlocks.klutz.MainActivity;
 import com.duckwarlocks.klutz.R;
 
-import org.w3c.dom.Text;
 
 public class TripFragment extends Fragment {
 
