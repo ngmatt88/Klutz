@@ -20,7 +20,6 @@ public class TripFragment extends Fragment {
     private TextView mTextViewCoordinates;
     private Fragment fragment;
 
-
     public static TripFragment newInstance() {
         TripFragment fragment = new TripFragment();
         return fragment;
